@@ -1,7 +1,8 @@
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import Main from './screen/Main';
+import Main from './screen/portal/Main';
+import Benefits from './screen/portal/Benefits';
 
 const Routes = () => {
   const Stack = createNativeStackNavigator();
@@ -19,6 +20,11 @@ const Routes = () => {
         <Stack.Screen
           name="Main"
           component={Main}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Benefits"
+          component={Benefits}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
