@@ -5,29 +5,29 @@ import { FlashList } from '@shopify/flash-list';
 import TextView from 'components/TextView';
 import React from 'react';
 import { SafeAreaView, StyleSheet, View } from 'react-native';
-import Portal from 'view/main/Portal';
+import Portal from 'view/portal/Portal';
 
-const Main: React.FC<any> = () => {
+const Main: React.FC<any> = ({ navigation }) => {
   const portal = [
     {
       label: 'Vault',
       image: images.vaultLogo,
-      onPress: () => {},
+      onPress: () => navigation.navigate('Benefits'),
     },
     {
       label: 'BLOCK',
       image: images.block,
-      onPress: () => {},
+      onPress: () => navigation.navigate('Benefits'),
     },
     {
       label: 'BLOK',
       image: images.blok,
-      onPress: () => {},
+      onPress: () => navigation.navigate('Benefits'),
     },
     {
       label: 'HIGHLAND PARK',
       image: images.hightland,
-      onPress: () => {},
+      onPress: () => navigation.navigate('Benefits'),
     },
   ];
 

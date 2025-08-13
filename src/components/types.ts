@@ -1,4 +1,4 @@
-import { StyleProp, TextStyle } from "react-native";
+import { StyleProp, TextStyle, ViewStyle } from "react-native";
 
 type TFontweight =
   | 'normal'
@@ -33,6 +33,26 @@ type TFontweight =
   | 'black'
   | undefined;
 
+export interface IButton {
+  title: string;
+  color?: string;
+  image?: string;
+  transparent?: boolean;
+  onPress: any;
+  height?: number;
+  flex?: boolean;
+  icon?: any;
+  titleSize?: number;
+  titleColor?: string;
+  titleWeight?: TFontweight;
+  paddingHorizontal?: number;
+  paddingVertical?: number;
+  loading?: boolean;
+  loadingColor?: string;
+  rightIcon?: any;
+  style?: StyleProp<ViewStyle>;
+  disabled?: boolean;
+}
 
 export interface ITextView {
   fontSize?: number;
