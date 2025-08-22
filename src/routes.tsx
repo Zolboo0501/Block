@@ -1,9 +1,8 @@
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import Main from './screen/portal/Main';
-import Benefits from './screen/portal/Benefits';
-import SignIn from './screen/auth/SignIn';
+import Splash from './screen/splash/Splash';
+import Onboard from './screen/splash/Onboard';
 
 const Routes = () => {
   const Stack = createNativeStackNavigator();
@@ -17,20 +16,15 @@ const Routes = () => {
 
   return (
     <NavigationContainer theme={MyTheme}>
-      <Stack.Navigator initialRouteName="Main">
+      <Stack.Navigator initialRouteName="Onboard">
         <Stack.Screen
-          name="Main"
-          component={Main}
+          name="Splash"
+          component={Splash}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="Benefits"
-          component={Benefits}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="SignIn"
-          component={SignIn}
+          name="Onboard"
+          component={Onboard}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

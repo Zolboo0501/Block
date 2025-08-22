@@ -52,6 +52,7 @@ export interface IButton {
   rightIcon?: any;
   style?: StyleProp<ViewStyle>;
   disabled?: boolean;
+  border?:boolean;
 }
 
 export interface ITextView {

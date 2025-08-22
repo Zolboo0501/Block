@@ -16,7 +16,7 @@ const Button: React.FC<IButton> = ({
   titleSize,
   titleWeight,
   onPress,
-  height = 34,
+  height = 42,
   flex,
   icon,
   paddingHorizontal,
@@ -27,6 +27,7 @@ const Button: React.FC<IButton> = ({
   style,
   disabled = false,
   color,
+  border,
 }) => {
   return (
     <TouchableOpacity
@@ -39,7 +40,9 @@ const Button: React.FC<IButton> = ({
           height: height,
           paddingVertical: paddingVertical && paddingVertical,
           paddingHorizontal: paddingHorizontal && paddingHorizontal,
-          backgroundColor: '#272727',
+          backgroundColor: color ? color : '#272727',
+          borderWidth: border ? 1 : 0,
+          borderColor: border ? '#272727' : '',
         },
       ]}
       onPress={onPress}
@@ -74,6 +77,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 5,
+    borderRadius: 20,
   },
 });
