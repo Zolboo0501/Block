@@ -7,8 +7,16 @@ import React from 'react';
 import { SafeAreaView, StyleSheet, View } from 'react-native';
 import { useMMKVObject } from 'react-native-mmkv';
 
-const Login: React.FC<any> = () => {
+const Login: React.FC<any> = ({ navigation }) => {
   const [latestAccount] = useMMKVObject(keys.latestAccount);
+
+  const onSignIn = () => {
+    navigation.navigate('SignIn');
+  };
+
+  const onRegister = () => {
+    navigation.navigate('Register');
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -25,14 +33,14 @@ const Login: React.FC<any> = () => {
             title="SIGN IN"
             titleSize={14}
             titleWeight={'500'}
-            onPress={() => {}}
+            onPress={() => onSignIn()}
             icon={latestAccount ? <Face /> : undefined}
           />
           <Button
             title="BECOME A MEMBER"
             titleSize={14}
             titleWeight={'500'}
-            onPress={() => {}}
+            onPress={() => onRegister()}
             border
             color="#111111"
           />

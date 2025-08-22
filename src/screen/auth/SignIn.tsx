@@ -3,14 +3,24 @@ import images from '@images';
 import Button from 'components/Button';
 import Input from 'components/Input';
 import TextView from 'components/TextView';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView, StyleSheet, TouchableOpacity, View } from 'react-native';
 
-const SignIn: React.FC<any> = () => {
+const SignIn: React.FC<any> = ({ navigation }) => {
+  const [disable, setDisable] = useState(true);
+
   const [user, setUser] = useState({
     phone: '',
     password: '',
   });
+
+  useEffect(() => {
+    if (user.password.length > 0) {
+      setDisable(false);
+    } else {
+      setDisable(true);
+    }
+  }, [user]);
 
   const onChange = (text: string, type: string) => {
     if (type === 'phone') {
@@ -19,6 +29,10 @@ const SignIn: React.FC<any> = () => {
     if (type === 'password') {
       setUser(prev => ({ ...prev, password: text }));
     }
+  };
+
+  const onSave = () => {
+    navigation.navigate('OtpVerify');
   };
 
   return (
@@ -46,7 +60,12 @@ const SignIn: React.FC<any> = () => {
             </TextView>
           </TouchableOpacity>
           <View style={styles.buttonContainer}>
-            <Button title="SIGN IN" titleWeight={'500'} onPress={() => {}} />
+            <Button
+              title="SIGN IN"
+              titleWeight={'500'}
+              onPress={() => onSave()}
+              disabled={disable}
+            />
             <Button
               title="BECOME A MEMBER"
               color="#111111"

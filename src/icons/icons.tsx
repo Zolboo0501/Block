@@ -32,6 +32,19 @@ export const EyeOpen = () => {
   );
 };
 
+export const ArrowLeft = () => {
+  return (
+    <Svg width={24} height={24} viewBox="0 0 24 24" fill="none">
+      <Path
+        d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75"
+        stroke="#DEDEDE"
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+};
 export const EyeClosed = ({
   size = 20,
   color = '#DEDEDE',

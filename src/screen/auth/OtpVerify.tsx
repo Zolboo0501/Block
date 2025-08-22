@@ -10,9 +10,17 @@ import { SafeAreaView, StyleSheet, TouchableOpacity, View } from 'react-native';
 
 const OtpVerify: React.FC<any> = () => {
   const [otp, setOtp] = useState<any>([]);
+  const [disable, setDisable] = useState(true);
   const [errorMessage, setErrorMessage] = useState(false);
   const [time, setTime] = useState(120);
   const [isStop, setIsStop] = useState(false);
+
+  useEffect(() => {
+    const isOtpComplete = otp?.every(
+      (item: any) => item?.toString().trim() !== '',
+    );
+    setDisable(!isOtpComplete || otp.length !== 4);
+  }, [otp]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -71,6 +79,7 @@ const OtpVerify: React.FC<any> = () => {
               title="VERIFY"
               titleWeight={'500'}
               onPress={() => onSave()}
+              disabled={disable}
             />
             <View style={styles.reSend}>
               <TouchableOpacity>

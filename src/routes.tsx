@@ -19,7 +19,7 @@ const Routes = () => {
 
   const AuthScreens = () => {
     return (
-      <Stack.Navigator initialRouteName="OtpVerify">
+      <Stack.Navigator initialRouteName="Onboard">
         <Stack.Screen
           name="Onboard"
           component={Onboard}
