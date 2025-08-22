@@ -1,4 +1,4 @@
-import { StyleProp, TextStyle, ViewStyle } from "react-native";
+import { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 type TFontweight =
   | 'normal'
@@ -52,7 +52,8 @@ export interface IButton {
   rightIcon?: any;
   style?: StyleProp<ViewStyle>;
   disabled?: boolean;
-  border?:boolean;
+  border?: boolean;
+  leftIcon?: any;
 }
 
 export interface ITextView {
@@ -67,5 +68,5 @@ export interface ITextView {
   isError?: boolean;
   opacity?: number;
   style?: StyleProp<TextStyle>;
-  fontFamily ?:string
+  fontFamily?: string;
 }

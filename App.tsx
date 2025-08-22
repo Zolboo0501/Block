@@ -4,12 +4,26 @@
  *
  * @format
  */
-
+/* eslint-disable react-native/no-inline-styles */
+import {
+  initialWindowMetrics,
+  SafeAreaProvider,
+} from 'react-native-safe-area-context';
+import { KeyboardProvider } from 'react-native-keyboard-controller';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import React from 'react';
 import Routes from './src/routes';
 
 const App: React.FC<any> = () => {
-  return <Routes />;
+  return (
+    <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+      <GestureHandlerRootView style={{ flex: 1, height: '100%' }}>
+        <KeyboardProvider>
+          <Routes />
+        </KeyboardProvider>
+      </GestureHandlerRootView>
+    </SafeAreaProvider>
+  );
 };
 
 export default App;

@@ -23,7 +23,7 @@ const TextView: React.FC<ITextView> = ({
       style={[
         {
           textAlign: justify ? 'justify' : center ? 'center' : undefined,
-          fontFamily: fontFamily ? fontFamily : 'Optician Sans',
+          fontFamily: fontFamily ? fontFamily : 'General Sans',
           fontStyle: italic ? 'italic' : 'normal',
           fontSize: fontSize ? fontSize : 16,
           opacity: opacity ? opacity : undefined,
