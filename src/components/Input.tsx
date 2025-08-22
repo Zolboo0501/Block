@@ -3,24 +3,8 @@ import { EyeClosed, EyeOpen } from '@icons';
 import React from 'react';
 import { StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
 import TextView from './TextView';
+import { InputProps } from './types';
 
-interface InputProps {
-  value: any;
-  onChangeText: (text: string) => void;
-  label?: string;
-  placeholder?: string;
-  secureTextEntry?: boolean;
-  keyboardType?:
-    | 'default'
-    | 'numeric'
-    | 'email-address'
-    | 'phone-pad'
-    | 'url'
-    | 'decimal-pad';
-  isPhone?: boolean;
-  maxLength?: number;
-  isError?: boolean;
-}
 const Input: React.FC<InputProps> = ({
   value,
   onChangeText,
@@ -30,6 +14,8 @@ const Input: React.FC<InputProps> = ({
   keyboardType,
   isPhone,
   maxLength,
+  labelFontFamily,
+  labelColor,
   isError,
 }) => {
   const [isHide, setIsHide] = React.useState(true);
@@ -38,7 +24,11 @@ const Input: React.FC<InputProps> = ({
 
   return (
     <View style={styles.columnGap}>
-      <TextView fontSize={14} color={'#fff'}>
+      <TextView
+        fontSize={14}
+        color={labelColor ? labelColor : '#fff'}
+        fontFamily={labelFontFamily ? labelFontFamily : undefined}
+      >
         {label}
       </TextView>
       <View
@@ -60,7 +50,7 @@ const Input: React.FC<InputProps> = ({
             onChangeText(text);
           }}
           placeholder={placeholder}
-          placeholderTextColor={''}
+          placeholderTextColor={'#93939366'}
           secureTextEntry={secureTextEntry ? (isHide ? true : false) : false}
           keyboardType={isPhone ? 'decimal-pad' : keyboardType || 'default'}
           style={styles.input}

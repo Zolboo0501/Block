@@ -6,6 +6,8 @@ import Login from './screen/auth/Login';
 import Onboard from './screen/splash/Onboard';
 import SignIn from './screen/auth/SignIn';
 import OtpVerify from './screen/auth/OtpVerify';
+import RegisterProvider from 'provider/RegisterProvider';
+import ValidationForm from './screen/auth/register/ValidationForm';
 
 const Routes = () => {
   const Stack = createNativeStackNavigator();
@@ -19,7 +21,10 @@ const Routes = () => {
 
   const AuthScreens = () => {
     return (
-      <Stack.Navigator initialRouteName="Onboard">
+      <Stack.Navigator
+        initialRouteName="ValidationForm"
+        screenOptions={{ headerStyle: { backgroundColor: '#111111' } }}
+      >
         <Stack.Screen
           name="Onboard"
           component={Onboard}
@@ -37,7 +42,7 @@ const Routes = () => {
           name="SignIn"
           component={SignIn}
           options={{
-            headerShown: false,
+            headerShown: true,
             headerShadowVisible: false,
           }}
         />
@@ -45,7 +50,15 @@ const Routes = () => {
           name="OtpVerify"
           component={OtpVerify}
           options={{
-            headerShown: false,
+            headerShown: true,
+            headerShadowVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="ValidationForm"
+          component={ValidationForm}
+          options={{
+            headerShown: true,
             headerShadowVisible: false,
           }}
         />
@@ -54,7 +67,9 @@ const Routes = () => {
   };
   return (
     <NavigationContainer theme={MyTheme}>
-      <AuthScreens />
+      <RegisterProvider>
+        <AuthScreens />
+      </RegisterProvider>
     </NavigationContainer>
   );
 };

@@ -1,19 +1,24 @@
 /* eslint-disable react-native/no-inline-styles */
 import FastImage from '@d11/react-native-fast-image';
 import images from '@images';
+import { setNavigation } from '@utils';
 import Button from 'components/Button';
 import KeyboardContainer from 'components/KeyboardContainer';
 import OTPInput from 'components/OTPInput';
 import TextView from 'components/TextView';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { SafeAreaView, StyleSheet, TouchableOpacity, View } from 'react-native';
 
-const OtpVerify: React.FC<any> = () => {
+const OtpVerify: React.FC<any> = ({ navigation }) => {
   const [otp, setOtp] = useState<any>([]);
   const [disable, setDisable] = useState(true);
   const [errorMessage, setErrorMessage] = useState(false);
   const [time, setTime] = useState(120);
   const [isStop, setIsStop] = useState(false);
+
+  useLayoutEffect(() => {
+    setNavigation({ navigation, title: ' ' });
+  }, [navigation]);
 
   useEffect(() => {
     const isOtpComplete = otp?.every(

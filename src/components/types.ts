@@ -70,3 +70,37 @@ export interface ITextView {
   style?: StyleProp<TextStyle>;
   fontFamily?: string;
 }
+
+export type OTPInputProps = {
+  length: number;
+  value: string;
+  disabled: boolean;
+  onChange?(value: any): void;
+  inputError: boolean;
+};
+
+export interface InputProps {
+  value: any;
+  onChangeText: (text: string) => void;
+  label?: string;
+  placeholder?: string;
+  secureTextEntry?: boolean;
+  keyboardType?:
+    | 'default'
+    | 'numeric'
+    | 'email-address'
+    | 'phone-pad'
+    | 'url'
+    | 'decimal-pad';
+  isPhone?: boolean;
+  maxLength?: number;
+  isError?: boolean;
+  labelFontFamily?: string;
+  labelColor?: string;
+}
+
+export interface ICheckbox {
+  value: any;
+  onChange: (value: any) => void;
+  label: any;
+}

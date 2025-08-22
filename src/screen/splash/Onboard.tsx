@@ -157,16 +157,19 @@ const Screen: React.FC<any> = () => {
       image: images.member,
       name: 'PLATINUM',
       price: '‍4 years/$2,000',
+      key: 'PLATINUM',
     },
     {
       image: images.member2,
       name: 'LIFETIME',
       price: '‍∞ / $5,000',
+      key: 'LIFETIME',
     },
     {
       image: images.member3,
       name: 'ANNUAL',
       price: '‍1 year/ $1,000',
+      key: 'ANNUAL',
     },
   ];
 

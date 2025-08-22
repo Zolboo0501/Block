@@ -1,14 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useRef } from 'react';
 import { Keyboard, StyleSheet, TextInput, View } from 'react-native';
-
-type OTPInputProps = {
-  length: number;
-  value: string;
-  disabled: boolean;
-  onChange?(value: any): void;
-  inputError: boolean;
-};
+import { OTPInputProps } from './types';
 
 const OTPInput: React.FC<OTPInputProps> = ({
   length,
