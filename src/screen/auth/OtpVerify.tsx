@@ -9,7 +9,9 @@ import TextView from 'components/TextView';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { SafeAreaView, StyleSheet, TouchableOpacity, View } from 'react-native';
 
-const OtpVerify: React.FC<any> = ({ navigation }) => {
+const OtpVerify: React.FC<any> = ({ navigation, route }) => {
+  const { type } = route.params || {};
+
   const [otp, setOtp] = useState<any>([]);
   const [disable, setDisable] = useState(true);
   const [errorMessage, setErrorMessage] = useState(false);
@@ -53,7 +55,11 @@ const OtpVerify: React.FC<any> = ({ navigation }) => {
     setIsStop(false);
   };
 
-  const onSave = () => {};
+  const onSave = () => {
+    if (type === 'register') {
+      navigation.navigate('Payment');
+    }
+  };
 
   return (
     <KeyboardContainer>

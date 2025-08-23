@@ -28,6 +28,7 @@ const Button: React.FC<IButton> = ({
   disabled = false,
   color,
   border,
+  borderColor,
 }) => {
   return (
     <TouchableOpacity
@@ -42,7 +43,7 @@ const Button: React.FC<IButton> = ({
           paddingHorizontal: paddingHorizontal && paddingHorizontal,
           backgroundColor: color ? color : '#272727',
           borderWidth: border ? 1 : 0,
-          borderColor: border ? '#272727' : '',
+          borderColor: border ? (borderColor ? borderColor : '#272727') : '',
         },
       ]}
       onPress={onPress}

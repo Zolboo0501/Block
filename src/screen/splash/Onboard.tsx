@@ -110,7 +110,7 @@ const Onboard: React.FC<any> = ({ navigation }) => {
               titleSize={14}
               border={!isLast ? true : false}
               color="#111111"
-              onPress={() => {}}
+              onPress={() => navigation.navigate('Login')}
             />
           </View>
         </View>

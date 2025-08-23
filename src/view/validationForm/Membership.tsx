@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { WIDTH } from '@utils';
 import GroupCheckbox from 'components/GroupCheckbox';
 import TextView from 'components/TextView';
-import { useState } from 'react';
+import useRegister from 'hooks/useRegister';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 const Membership: React.FC<any> = () => {
@@ -13,28 +13,29 @@ const Membership: React.FC<any> = () => {
     {
       image: images.member,
       name: 'PLATINUM',
-      price: '‍4 years/$2,000',
+      price: '‍$2,000',
       key: 'PLATINUM',
+      duration: '4 years',
     },
     {
       image: images.member2,
       name: 'LIFETIME',
-      price: '‍∞ / $5,000',
+      price: '‍$5,000',
       key: 'LIFETIME',
+      duration: 'LIFETIME',
     },
     {
       image: images.member3,
       name: 'ANNUAL',
-      price: '‍1 year/ $1,000',
+      price: '$1000',
       key: 'ANNUAL',
+      duration: '1 year',
     },
   ];
 
-  const [selectedType, setSelectedType] = useState<string>('');
+  const { membership, onChange } = useRegister();
+
   const navigation = useNavigation<any>();
-  const onChange = (value: string) => {
-    setSelectedType(value);
-  };
 
   return (
     <View style={styles.columnGap}>
@@ -52,14 +53,17 @@ const Membership: React.FC<any> = () => {
             style={styles.rowSpaceBetween}
             key={index}
             onPress={() => {
-              onChange(item.key);
+              onChange('membership', item);
             }}
           >
             <View style={{ flex: 1 }}>
               <GroupCheckbox
                 item={item}
-                value={selectedType}
-                label={{ label: item.name, subLabel: item.price }}
+                value={membership}
+                label={{
+                  label: item.name,
+                  subLabel: `${item.price}/${item.duration}`,
+                }}
               />
             </View>
             <FastImage
@@ -111,6 +115,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 10,
+    alignItems: 'center',
   },
 
   image: {

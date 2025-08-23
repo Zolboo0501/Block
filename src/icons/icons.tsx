@@ -11,6 +11,19 @@ export const Face = () => {
   );
 };
 
+export const Close = () => {
+  return (
+    <Svg width={24} height={24} viewBox="0 0 24 24" fill="none">
+      <Path
+        d="M6 18L18 6M6 6l12 12"
+        stroke="#DEDEDE"
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+};
 export const EyeOpen = () => {
   return (
     <Svg width={20} height={20} viewBox="0 0 20 20" fill="none">

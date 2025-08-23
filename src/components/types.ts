@@ -54,6 +54,7 @@ export interface IButton {
   disabled?: boolean;
   border?: boolean;
   leftIcon?: any;
+  borderColor?: string;
 }
 
 export interface ITextView {

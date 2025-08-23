@@ -10,6 +10,7 @@ import RegisterProvider from 'provider/RegisterProvider';
 import ValidationForm from './screen/auth/register/ValidationForm';
 import Rules from './screen/auth/register/Rules';
 import MembershipDetail from './screen/auth/register/MembershipDetail';
+import Payment from './screen/auth/register/Payment';
 
 const Routes = () => {
   const Stack = createNativeStackNavigator();
@@ -24,7 +25,7 @@ const Routes = () => {
   const AuthScreens = () => {
     return (
       <Stack.Navigator
-        initialRouteName="MembershipDetail"
+        initialRouteName="Payment"
         screenOptions={{ headerStyle: { backgroundColor: '#111111' } }}
       >
         <Stack.Screen
@@ -75,6 +76,14 @@ const Routes = () => {
         <Stack.Screen
           name="MembershipDetail"
           component={MembershipDetail}
+          options={{
+            headerShown: true,
+            headerShadowVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="Payment"
+          component={Payment}
           options={{
             headerShown: true,
             headerShadowVisible: false,

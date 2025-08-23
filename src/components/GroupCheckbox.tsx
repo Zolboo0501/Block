@@ -3,11 +3,22 @@ import { StyleSheet, View } from 'react-native';
 import TextView from './TextView';
 
 const GroupCheckbox: React.FC<any> = ({ item, value, label }) => {
+  const renderFill = () => {
+    if (typeof value === 'string') {
+      if (value === item.key) {
+        return <View style={styles.fill} />;
+      }
+    }
+    if (typeof value === 'object') {
+      if (value?.key === item.key) {
+        return <View style={styles.fill} />;
+      }
+    }
+  };
+
   return (
     <View style={styles.row}>
-      <View style={styles.circle}>
-        {value === item.key && <View style={styles.fill} />}
-      </View>
+      <View style={styles.circle}>{renderFill()}</View>
       <View>
         <TextView fontSize={14} fontWeight={'500'}>
           {label.label}

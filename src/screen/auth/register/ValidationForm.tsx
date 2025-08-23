@@ -11,7 +11,9 @@ const ValidationForm: React.FC<any> = ({ navigation }) => {
     setNavigation({ navigation, title: 'Vault Membership Form' });
   }, [navigation]);
 
-  const onSave = () => {};
+  const onSave = () => {
+    navigation.navigate('OtpVerify', { type: 'register' });
+  };
 
   return (
     <KeyboardContainer>
