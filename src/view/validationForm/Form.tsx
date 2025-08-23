@@ -20,6 +20,7 @@ const Form: React.FC<any> = ({ onSave }) => {
     phone,
     email,
     onChange,
+    password,
   } = useRegister();
 
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
@@ -90,6 +91,15 @@ const Form: React.FC<any> = ({ onSave }) => {
         value={email}
         onChangeText={(text: string) => onChange('email', text)}
         keyboardType="email-address"
+      />
+      <Input
+        labelColor={'#DEDEDE'}
+        labelFontFamily="Optician Sans"
+        label="Password"
+        value={password}
+        onChangeText={(text: string) => onChange('password', text)}
+        keyboardType="default"
+        secureTextEntry
       />
       <Communications />
       <View style={styles.rules}>

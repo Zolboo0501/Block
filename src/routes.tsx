@@ -8,6 +8,7 @@ import SignIn from './screen/auth/SignIn';
 import OtpVerify from './screen/auth/OtpVerify';
 import RegisterProvider from 'provider/RegisterProvider';
 import ValidationForm from './screen/auth/register/ValidationForm';
+import Rules from './screen/auth/register/Rules';
 
 const Routes = () => {
   const Stack = createNativeStackNavigator();
@@ -22,7 +23,7 @@ const Routes = () => {
   const AuthScreens = () => {
     return (
       <Stack.Navigator
-        initialRouteName="ValidationForm"
+        initialRouteName="Rules"
         screenOptions={{ headerStyle: { backgroundColor: '#111111' } }}
       >
         <Stack.Screen
@@ -57,6 +58,14 @@ const Routes = () => {
         <Stack.Screen
           name="ValidationForm"
           component={ValidationForm}
+          options={{
+            headerShown: true,
+            headerShadowVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="Rules"
+          component={Rules}
           options={{
             headerShown: true,
             headerShadowVisible: false,

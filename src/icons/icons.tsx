@@ -32,6 +32,18 @@ export const EyeOpen = () => {
   );
 };
 
+export const Plus = () => {
+  return (
+    <Svg width={24} height={24} viewBox="0 0 24 24" fill="none">
+      <Path
+        d="M12 4.5v15m7.5-7.5h-15"
+        stroke="#fff"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+};
 export const ArrowLeft = () => {
   return (
     <Svg width={24} height={24} viewBox="0 0 24 24" fill="none">
