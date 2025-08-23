@@ -9,6 +9,7 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import DatePicker from 'react-native-date-picker';
 import Communications from './Communications';
+import { useNavigation } from '@react-navigation/native';
 
 const Form: React.FC<any> = ({ onSave }) => {
   const {
@@ -23,6 +24,7 @@ const Form: React.FC<any> = ({ onSave }) => {
     password,
   } = useRegister();
 
+  const navigation = useNavigation<any>();
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -106,7 +108,7 @@ const Form: React.FC<any> = ({ onSave }) => {
         <TextView fontFamily="Optician Sans" fontSize={14} color="#DEDEDE">
           Do you Accept
         </TextView>
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity onPress={() => navigation.navigate('Rules')}>
           <TextView
             fontFamily="Optician Sans"
             fontSize={14}
@@ -147,7 +149,7 @@ const Form: React.FC<any> = ({ onSave }) => {
         <TextView fontSize={14} center>
           Already have an account?
         </TextView>
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
           <TextView
             fontSize={14}
             center

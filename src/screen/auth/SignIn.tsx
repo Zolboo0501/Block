@@ -76,7 +76,7 @@ const SignIn: React.FC<any> = ({ navigation }) => {
               color="#111111"
               titleWeight={'500'}
               border
-              onPress={() => {}}
+              onPress={() => navigation.navigate('ValidationForm')}
             />
           </View>
         </View>

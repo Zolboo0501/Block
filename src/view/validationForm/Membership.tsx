@@ -1,6 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import FastImage from '@d11/react-native-fast-image';
 import images from '@images';
+import { useNavigation } from '@react-navigation/native';
 import { WIDTH } from '@utils';
 import GroupCheckbox from 'components/GroupCheckbox';
 import TextView from 'components/TextView';
@@ -30,7 +31,7 @@ const Membership: React.FC<any> = () => {
   ];
 
   const [selectedType, setSelectedType] = useState<string>('');
-
+  const navigation = useNavigation<any>();
   const onChange = (value: string) => {
     setSelectedType(value);
   };
@@ -76,7 +77,9 @@ const Membership: React.FC<any> = () => {
         style={{ paddingHorizontal: 15 }}
       >
         For more information on Membership types please{' '}
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('MembershipDetail')}
+        >
           <TextView
             fontSize={14}
             fontWeight={'500'}

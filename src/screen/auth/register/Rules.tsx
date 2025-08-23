@@ -24,8 +24,8 @@ const Rules: React.FC<any> = ({ navigation }) => {
   }, [navigation]);
 
   return (
-    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-      <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <View style={styles.space}>
           <View style={styles.rowSpaceBetween}>
             <View>
@@ -85,8 +85,8 @@ const Rules: React.FC<any> = ({ navigation }) => {
 
           <CollapseView />
         </View>
-      </SafeAreaView>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 

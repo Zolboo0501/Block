@@ -15,7 +15,7 @@ const Login: React.FC<any> = ({ navigation }) => {
   };
 
   const onRegister = () => {
-    navigation.navigate('Register');
+    navigation.navigate('ValidationForm');
   };
 
   return (
