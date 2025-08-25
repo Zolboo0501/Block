@@ -170,7 +170,7 @@ const SuccessView: React.FC<any> = ({ onClose }) => {
   const onHandlePress = () => {
     onClose();
     setTimeout(() => {
-      navigation.navigate('Profile');
+      navigation.navigate('Biometric');
     }, 500);
   };
 

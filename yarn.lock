@@ -1826,6 +1826,16 @@
     use-latest-callback "^0.2.4"
     use-sync-external-store "^1.5.0"
 
+"@react-navigation/drawer@^7.5.7":
+  version "7.5.7"
+  resolved "https://registry.yarnpkg.com/@react-navigation/drawer/-/drawer-7.5.7.tgz#563407da08289e97a9c6e293423560cb7bc80288"
+  integrity sha512-iRmeFUMZ4DPYgiuPVKsohL40flGAO0rxWwOg4iWkh0DsglI9yKpDXTUsUjmY4bMTv61jYYWV92OcSCBJjXwJoA==
+  dependencies:
+    "@react-navigation/elements" "^2.6.3"
+    color "^4.2.3"
+    react-native-drawer-layout "^4.1.12"
+    use-latest-callback "^0.2.4"
+
 "@react-navigation/elements@^2.6.3":
   version "2.6.3"
   resolved "https://registry.yarnpkg.com/@react-navigation/elements/-/elements-2.6.3.tgz#77cc4d989c0831ec59dc87b982f18bc644ac8e67"
@@ -5804,6 +5814,13 @@ react-native-date-picker@^5.0.13:
   version "5.0.13"
   resolved "https://registry.yarnpkg.com/react-native-date-picker/-/react-native-date-picker-5.0.13.tgz#fe05f58652aaeee9e67f73cf7436c32a623ff3a4"
   integrity sha512-qCLUODZVsJetO5zuoXjw1D39K527XWqBG8sOfhWdHyPzf13h8RXR1/RSKd1N0fdRDi5GdyizYmB0lPAK12/hbw==
+
+react-native-drawer-layout@^4.1.12:
+  version "4.1.12"
+  resolved "https://registry.yarnpkg.com/react-native-drawer-layout/-/react-native-drawer-layout-4.1.12.tgz#0cdfe2d2ca9288cb099f1e1808c8addf2fad25de"
+  integrity sha512-oKolvp5seiUieG+RHGjpFe8rH8Ds24iW0QBl31TlCVOX7tdn42IQIBl5tuD1i7h3q+VqqnbcT+NB2dcJ5suZkw==
+  dependencies:
+    use-latest-callback "^0.2.4"
 
 react-native-gesture-handler@^2.28.0:
   version "2.28.0"

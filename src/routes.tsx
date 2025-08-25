@@ -11,8 +11,13 @@ import ValidationForm from './screen/auth/register/ValidationForm';
 import Rules from './screen/auth/register/Rules';
 import MembershipDetail from './screen/auth/register/MembershipDetail';
 import Payment from './screen/auth/register/Payment';
+import Biometric from './screen/auth/register/Biometric';
+import Home from './screen/home/Home';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import DrawerContent from './navigation/DrawerContent';
 
 const Routes = () => {
+  const Drawer = createDrawerNavigator();
   const Stack = createNativeStackNavigator();
   const MyTheme = {
     ...DefaultTheme,
@@ -22,10 +27,28 @@ const Routes = () => {
     },
   };
 
+  const DrawerContainer = () => {
+    return (
+      <Drawer.Navigator
+        defaultStatus={'closed'}
+        screenOptions={{
+          headerShown: false,
+        }}
+        drawerContent={(rest: any) => <DrawerContent {...rest} />}
+      >
+        <Drawer.Screen
+          name="Home"
+          options={{ headerShown: false }}
+          component={Home}
+        />
+      </Drawer.Navigator>
+    );
+  };
+
   const AuthScreens = () => {
     return (
       <Stack.Navigator
-        initialRouteName="Payment"
+        initialRouteName="Main"
         screenOptions={{ headerStyle: { backgroundColor: '#111111' } }}
       >
         <Stack.Screen
@@ -88,6 +111,22 @@ const Routes = () => {
             headerShown: true,
             headerShadowVisible: false,
           }}
+        />
+        <Stack.Screen
+          name="Biometric"
+          component={Biometric}
+          options={{
+            headerShown: false,
+            headerShadowVisible: false,
+          }}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: false,
+            headerShadowVisible: false,
+          }}
+          name="Main"
+          component={DrawerContainer}
         />
       </Stack.Navigator>
     );

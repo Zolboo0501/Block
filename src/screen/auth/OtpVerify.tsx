@@ -57,8 +57,9 @@ const OtpVerify: React.FC<any> = ({ navigation, route }) => {
 
   const onSave = () => {
     if (type === 'register') {
-      navigation.navigate('Payment');
+      return navigation.navigate('Payment');
     }
+    return navigation.navigate('Home');
   };
 
   return (

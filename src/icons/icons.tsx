@@ -11,6 +11,52 @@ export const Face = () => {
   );
 };
 
+export const Send = ({ size }: { size?: number }) => {
+  return (
+    <Svg width={size} height={size} fill="none" viewBox="0 0 24 24">
+      <Path
+        d="M12.815 12.197l-7.532 1.256a.5.5 0 00-.386.318L2.3 20.728c-.248.64.421 1.25 1.035.943l18-9a.75.75 0 000-1.342l-18-9c-.614-.307-1.283.304-1.035.943l2.598 6.957a.5.5 0 00.386.319l7.532 1.255a.2.2 0 010 .394z"
+        fill="#212121"
+      />
+    </Svg>
+  );
+};
+export const Microphone = () => {
+  return (
+    <Svg width={24} height={24} viewBox="0 0 24 24" fill="none">
+      <Path
+        d="M9 6.008v6.023a3.008 3.008 0 106.015 0V6.008a3.008 3.008 0 10-6.015 0zM11 21h2v-2.07a7.062 7.062 0 01-2 0V21zm-1 0v-2.29c-2.891-.86-5-3.539-5-6.71v-.5a.5.5 0 011 0v.5a6 6 0 0012 0v-.5a.5.5 0 011 0v.5a7.003 7.003 0 01-5 6.71V21h2.5a.5.5 0 010 1h-9a.5.5 0 010-1H10zM8 6.008a4.008 4.008 0 118.015 0v6.023a4.008 4.008 0 01-8.015 0V6.008z"
+        fill="#DEDEDE"
+      />
+    </Svg>
+  );
+};
+
+export const Attachment = () => {
+  return (
+    <Svg width={20} height={20} viewBox="0 0 20 20" fill="none">
+      <Path
+        d="M15.313 10.616l-6.411 6.41a3.75 3.75 0 11-5.304-5.303l9.117-9.116a2.5 2.5 0 113.535 3.536l-9.123 9.124a1.25 1.25 0 01-1.76-1.776l6.508-6.509m-4.74 8.276l-.01.009"
+        stroke="#DEDEDE"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+};
+export const Menu = () => {
+  return (
+    <Svg width={24} height={24} viewBox="0 0 24 24" fill="none">
+      <Path
+        d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12"
+        stroke="#DEDEDE"
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+};
 export const Close = () => {
   return (
     <Svg width={24} height={24} viewBox="0 0 24 24" fill="none">
