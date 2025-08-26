@@ -8,6 +8,11 @@ import { Menu } from './icons';
 import { Attachment } from './icons';
 import { Microphone } from './icons';
 import { Send } from './icons';
+import { Profile } from './icons';
+import { ChevronLeft } from './icons';
+import { Folder } from './icons';
+import { LogoutIcon } from './icons';
+import { Edit } from './icons';
 
 export {
   Face,
@@ -20,4 +25,9 @@ export {
   Attachment,
   Microphone,
   Send,
+  Profile,
+  ChevronLeft,
+  Folder,
+  LogoutIcon,
+  Edit,
 };

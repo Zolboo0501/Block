@@ -42,11 +42,13 @@ interface IRegisterState {
       | 'communication',
     value: any,
   ) => void;
+
+  signedIn: () => void;
 }
 
 export const RegisterContext = createContext({} as IRegisterState);
 
-const RegisterProvider: React.FC<any> = ({ children }) => {
+const RegisterProvider: React.FC<any> = ({ children, value }) => {
   const [state, setState] = useState<IRegister>({
     phone: '',
     email: '',
@@ -92,6 +94,8 @@ const RegisterProvider: React.FC<any> = ({ children }) => {
     nationality: state.nationality,
     dateOfBirth: state.dateOfBirth,
     communication: state.communication,
+
+    signedIn: () => value?.dispatch({ type: 'LOGIN', token: 'loggedIn' }),
 
     onChange: (
       key:

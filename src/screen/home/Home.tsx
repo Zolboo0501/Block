@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react-native/no-inline-styles */
 import { Attachment, Microphone, Send } from '@icons';
@@ -24,7 +25,8 @@ const suggest = [
   'Request custom drinks',
 ];
 
-const Home: React.FC<any> = ({ navigation }) => {
+const Home: React.FC<any> = ({ navigation, route }) => {
+  const textFromChats = route.params?.text;
   const [text, setText] = React.useState('');
   const scrollRef = useRef<any>(null);
 
@@ -81,6 +83,12 @@ const Home: React.FC<any> = ({ navigation }) => {
       scrollRef.current?.scrollToEnd({ animated: true });
     }
   }, [message]);
+
+  useEffect(() => {
+    if (textFromChats) {
+      onSend(textFromChats);
+    }
+  }, [textFromChats]);
 
   const onSend = (value?: string) => {
     if (value) {

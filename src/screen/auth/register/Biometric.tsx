@@ -38,7 +38,9 @@ const Biometric: React.FC<any> = ({ navigation }) => {
             titleSize={14}
             border={true}
             color="#111111"
-            onPress={() => {}}
+            onPress={() => {
+              navigation.navigate('Main');
+            }}
           />
         </View>
       </View>

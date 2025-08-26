@@ -1,10 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
 import GroupCheckbox from 'components/GroupCheckbox';
 import TextView from 'components/TextView';
-import useRegister from 'hooks/useRegister';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
-const Communications: React.FC<any> = () => {
+const Communications: React.FC<any> = ({ value, onChange }) => {
   const checkboxs = [
     {
       label: 'By email',
@@ -20,8 +19,6 @@ const Communications: React.FC<any> = () => {
     },
   ];
 
-  const { communication, onChange } = useRegister();
-
   return (
     <View style={{ gap: 16 }}>
       <TextView fontSize={14} fontFamily="Optician Sans" color="#DEDEDE">
@@ -29,11 +26,8 @@ const Communications: React.FC<any> = () => {
       </TextView>
       <View style={styles.rowSpaceBetween}>
         {checkboxs.map((item: any, index: number) => (
-          <TouchableOpacity
-            key={index}
-            onPress={() => onChange('communication', item.key)}
-          >
-            <GroupCheckbox value={communication} item={item} label={item} />
+          <TouchableOpacity key={index} onPress={() => onChange(item.key)}>
+            <GroupCheckbox value={value} item={item} label={item} />
           </TouchableOpacity>
         ))}
       </View>

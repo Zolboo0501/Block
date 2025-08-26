@@ -22,6 +22,7 @@ const Form: React.FC<any> = ({ onSave }) => {
     email,
     onChange,
     password,
+    communication,
   } = useRegister();
 
   const navigation = useNavigation<any>();
@@ -103,7 +104,10 @@ const Form: React.FC<any> = ({ onSave }) => {
         keyboardType="default"
         secureTextEntry
       />
-      <Communications />
+      <Communications
+        value={communication}
+        onChange={(value: any) => onChange('communication', value)}
+      />
       <View style={styles.rules}>
         <TextView fontFamily="Optician Sans" fontSize={14} color="#DEDEDE">
           Do you Accept

@@ -11,6 +11,59 @@ export const Face = () => {
   );
 };
 
+export const LogoutIcon = () => {
+  return (
+    <Svg width={24} height={24} viewBox="0 0 24 24" fill="none">
+      <Path
+        d="M7.5 3H5.25A2.25 2.25 0 003 5.25v13.5A2.25 2.25 0 005.25 21H7.5m9-13.5L21 12m0 0l-4.5 4.5M21 12H7.5"
+        stroke="#DEDEDE"
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+};
+
+export const Edit = () => {
+  return (
+    <Svg width={18} height={18} viewBox="0 0 18 18" fill="none">
+      <Path
+        d="M8.25 2.25h-4.5a1.5 1.5 0 00-1.5 1.5v10.5a1.5 1.5 0 001.5 1.5h10.5a1.5 1.5 0 001.5-1.5v-4.5m-2.625-7.125l-6 6L6 12l3.375-1.125 6-6a1.591 1.591 0 00-2.25-2.25z"
+        stroke="#939393"
+        strokeOpacity={0.4}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+};
+export const Folder = () => {
+  return (
+    <Svg width={24} height={24} viewBox="0 0 24 24" fill="none">
+      <Path
+        d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379c-.398 0-.78-.159-1.061-.44z"
+        stroke="#DEDEDE"
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+};
+export const Profile = () => {
+  return (
+    <Svg width={24} height={24} viewBox="0 0 24 24" fill="none">
+      <Path
+        d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+        stroke="#DEDEDE"
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+};
 export const Send = ({ size }: { size?: number }) => {
   return (
     <Svg width={size} height={size} fill="none" viewBox="0 0 24 24">
@@ -32,6 +85,19 @@ export const Microphone = () => {
   );
 };
 
+export const ChevronLeft = () => {
+  return (
+    <Svg width={24} height={24} viewBox="0 0 24 24" fill="none">
+      <Path
+        d="M16 4l-8 8 8 8"
+        stroke="#DEDEDE"
+        strokeWidth={2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+};
 export const Attachment = () => {
   return (
     <Svg width={20} height={20} viewBox="0 0 20 20" fill="none">

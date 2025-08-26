@@ -6,12 +6,13 @@ import Button from 'components/Button';
 import KeyboardContainer from 'components/KeyboardContainer';
 import OTPInput from 'components/OTPInput';
 import TextView from 'components/TextView';
+import useRegister from 'hooks/useRegister';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { SafeAreaView, StyleSheet, TouchableOpacity, View } from 'react-native';
 
 const OtpVerify: React.FC<any> = ({ navigation, route }) => {
   const { type } = route.params || {};
-
+  const { signedIn } = useRegister();
   const [otp, setOtp] = useState<any>([]);
   const [disable, setDisable] = useState(true);
   const [errorMessage, setErrorMessage] = useState(false);
@@ -59,7 +60,7 @@ const OtpVerify: React.FC<any> = ({ navigation, route }) => {
     if (type === 'register') {
       return navigation.navigate('Payment');
     }
-    return navigation.navigate('Home');
+    return signedIn();
   };
 
   return (
