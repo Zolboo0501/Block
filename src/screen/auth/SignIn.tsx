@@ -67,6 +67,7 @@ const SignIn: React.FC<any> = ({ navigation }) => {
           <View style={styles.buttonContainer}>
             <Button
               title="SIGN IN"
+              titleSize={14}
               titleWeight={'500'}
               onPress={() => onSave()}
               disabled={disable}
@@ -74,6 +75,7 @@ const SignIn: React.FC<any> = ({ navigation }) => {
             <Button
               title="BECOME A MEMBER"
               color="#111111"
+              titleSize={14}
               titleWeight={'500'}
               border
               onPress={() => navigation.navigate('ValidationForm')}

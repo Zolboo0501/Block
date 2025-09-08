@@ -12,6 +12,8 @@ import { SafeAreaView, StyleSheet, View } from 'react-native';
 import Form from 'view/validationForm/Form';
 import Membership from 'view/validationForm/Membership';
 
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 const ValidationForm: React.FC<any> = ({ navigation }) => {
   const alert = useAlert();
 
@@ -43,8 +45,9 @@ const ValidationForm: React.FC<any> = ({ navigation }) => {
   });
 
   const [register] = useMutation(userQL.register, {
-    onCompleted(data) {
-      console.log(data, 'data');
+    onCompleted() {
+      alert.onSuccess('We are sending an OTP code to your phone number.');
+      navigation.navigate('OtpVerify', { type: 'register' });
     },
 
     onError(err) {
@@ -87,11 +90,19 @@ const ValidationForm: React.FC<any> = ({ navigation }) => {
 
       if (key === 'phone') {
         if (value.length < 8) {
+          isError = true;
           return (newErrors[key] = true);
         }
         return (newErrors[key] = false);
       }
 
+      if (key === 'email') {
+        if (!emailRegex.test(value)) {
+          isError = true;
+          return (newErrors[key] = true);
+        }
+        return (newErrors[key] = false);
+      }
       if (key === 'toggleCheckBox') {
         if (!toggleCheckBox) {
           isError = true;
