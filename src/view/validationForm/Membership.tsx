@@ -8,7 +8,7 @@ import TextView from 'components/TextView';
 import useRegister from 'hooks/useRegister';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
-const Membership: React.FC<any> = () => {
+const Membership: React.FC<any> = ({ isError }) => {
   const data = [
     {
       image: images.member,
@@ -64,6 +64,7 @@ const Membership: React.FC<any> = () => {
                   label: item.name,
                   subLabel: `${item.price}/${item.duration}`,
                 }}
+                isError={isError}
               />
             </View>
             <FastImage
@@ -73,6 +74,11 @@ const Membership: React.FC<any> = () => {
             />
           </TouchableOpacity>
         ))}
+        {isError && (
+          <TextView fontSize={13} color="#FF4648" fontWeight={'500'}>
+            You must select the membership.
+          </TextView>
+        )}
       </View>
       <TextView
         fontSize={14}

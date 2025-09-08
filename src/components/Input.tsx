@@ -22,6 +22,29 @@ const Input: React.FC<InputProps> = ({
 
   const handleChange = () => setIsHide(prevState => !prevState);
 
+  const renderError = () => {
+    if (isError && isPhone) {
+      return (
+        <TextView fontSize={13} color="#FF4648" fontWeight={'500'}>
+          Phone number must 8 digits.
+        </TextView>
+      );
+    }
+    if (isError && keyboardType === 'email-address') {
+      return (
+        <TextView fontSize={13} color="#FF4648" fontWeight={'500'}>
+          Email is not valid.
+        </TextView>
+      );
+    }
+    if (isError) {
+      return (
+        <TextView fontSize={13} color="#FF4648" fontWeight={'500'}>
+          {label} is empty.
+        </TextView>
+      );
+    }
+  };
   return (
     <View style={styles.columnGap}>
       <TextView
@@ -36,7 +59,7 @@ const Input: React.FC<InputProps> = ({
           styles.inputContainer,
           {
             borderBottomWidth: 1,
-            borderColor: '#DEDEDE',
+            borderColor: isError ? '#FF4648' : '#DEDEDE',
           },
         ]}
       >
@@ -62,6 +85,7 @@ const Input: React.FC<InputProps> = ({
           </TouchableOpacity>
         )}
       </View>
+      {renderError()}
     </View>
   );
 };

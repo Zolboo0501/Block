@@ -1,4 +1,4 @@
-import Svg, { Path } from 'react-native-svg';
+import Svg, { Circle, Path } from 'react-native-svg';
 
 export const Face = () => {
   return (
@@ -25,6 +25,46 @@ export const LogoutIcon = () => {
   );
 };
 
+export const AlertClose = ({
+  color = '#fff',
+  size = 16,
+}: {
+  color?: string;
+  size?: number;
+}) => {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 16 16" fill="none">
+      <Path
+        d="M13.437 2.571a.858.858 0 00-1.216 0L8 6.783l-4.22-4.22A.86.86 0 102.563 3.78L6.783 8l-4.22 4.22a.86.86 0 001.217 1.217L8 9.217l4.22 4.22a.862.862 0 001.404-.937.862.862 0 00-.187-.28L9.217 8l4.22-4.22a.865.865 0 000-1.209z"
+        fill={color}
+      />
+    </Svg>
+  );
+};
+
+export const Success = ({ size = 16 }: { size?: number }) => {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 16 16" fill="none">
+      <Circle cx={8} cy={8} r={8} fill="#3DCBB1" />
+      <Path
+        d="M7.003 10.681a.776.776 0 00.264-.044.626.626 0 00.23-.15l4.002-4.003a.647.647 0 00.194-.476.677.677 0 00-.211-.494.669.669 0 00-.494-.194c-.2 0-.364.065-.494.194L7.003 9.006 5.469 7.472a.647.647 0 00-.477-.194.677.677 0 00-.493.211.669.669 0 00-.194.494c0 .2.064.364.194.494l2.01 2.01c.07.07.147.12.23.15.081.029.17.044.264.044z"
+        fill="#fff"
+      />
+    </Svg>
+  );
+};
+
+export const Alert = () => {
+  return (
+    <Svg width={18} height={18} viewBox="0 0 18 18" fill="none">
+      <Circle cx={9} cy={9} r={9} fill="#FF4648" />
+      <Path
+        d="M8.25 4.75a.75.75 0 011.5 0v6a.75.75 0 11-1.5 0v-6zm0 8.5a.75.75 0 111.5 0 .75.75 0 01-1.5 0z"
+        fill="#fff"
+      />
+    </Svg>
+  );
+};
 export const Edit = () => {
   return (
     <Svg width={18} height={18} viewBox="0 0 18 18" fill="none">

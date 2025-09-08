@@ -1,8 +1,9 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import TextView from './TextView';
 
-const GroupCheckbox: React.FC<any> = ({ item, value, label }) => {
+const GroupCheckbox: React.FC<any> = ({ item, value, label, isError }) => {
   const renderFill = () => {
     if (typeof value === 'string') {
       if (value === item.key) {
@@ -18,7 +19,16 @@ const GroupCheckbox: React.FC<any> = ({ item, value, label }) => {
 
   return (
     <View style={styles.row}>
-      <View style={styles.circle}>{renderFill()}</View>
+      <View
+        style={[
+          styles.circle,
+          {
+            borderColor: isError ? '#FF4648' : '#DEDEDE',
+          },
+        ]}
+      >
+        {renderFill()}
+      </View>
       <View>
         <TextView fontSize={14} fontWeight={'500'}>
           {label.label}
@@ -45,7 +55,6 @@ const styles = StyleSheet.create({
     width: 16,
     height: 16,
     borderWidth: 1,
-    borderColor: '#DEDEDE',
     padding: 3,
     borderRadius: 20,
   },

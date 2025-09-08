@@ -6,7 +6,7 @@ interface IRegister {
   otp: any;
   password: string;
   membership: any;
-  title: string;
+  title: any;
   forename: string;
   surname: string;
   nationality: string;
@@ -20,7 +20,7 @@ interface IRegisterState {
   otp: any;
   password: string;
   membership: any;
-  title: string;
+  title: any;
   forename: string;
   surname: string;
   nationality: string;
@@ -55,7 +55,7 @@ const RegisterProvider: React.FC<any> = ({ children, value }) => {
     otp: [''],
     password: '',
     membership: {},
-    title: '',
+    title: {},
     forename: '',
     surname: '',
     nationality: '',

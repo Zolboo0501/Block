@@ -20,10 +20,13 @@ import Profile from './screen/profile/Profile';
 import AuthProvider from 'provider/AuthProvider';
 import ReNew from './screen/profile/ReNew';
 import EditProfile from './screen/profile/EditProfile';
+import { useMMKVBoolean } from 'react-native-mmkv';
+import { keys } from '@storage';
 
 const Routes = () => {
   const Drawer = createDrawerNavigator();
   const Stack = createNativeStackNavigator();
+  const [splashShow, _] = useMMKVBoolean(keys.splashShow);
   const MyTheme = {
     ...DefaultTheme,
     colors: {
@@ -80,7 +83,7 @@ const Routes = () => {
   const AuthScreens = () => {
     return (
       <Stack.Navigator
-        initialRouteName="Onboard"
+        initialRouteName={splashShow ? 'Login' : 'Onboard'}
         screenOptions={{ headerStyle: { backgroundColor: '#111111' } }}
       >
         <Stack.Screen
@@ -215,18 +218,6 @@ const Routes = () => {
 
   return (
     <NavigationContainer theme={MyTheme}>
-      {/* <Stack.Navigator>
-        <Stack.Screen
-          options={{
-            headerShown: true,
-            headerShadowVisible: false,
-            headerStyle: { backgroundColor: '#111111' },
-            headerTintColor: '#fff',
-          }}
-          name="Profile"
-          component={Profile}
-        />
-      </Stack.Navigator> */}
       {loginState?.loginToken === null ? (
         <RegisterProvider value={contextValue}>
           <AuthScreens />

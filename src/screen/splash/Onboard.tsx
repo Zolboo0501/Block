@@ -2,6 +2,7 @@
 import FastImage from '@d11/react-native-fast-image';
 
 import images from '@images';
+import { keys } from '@storage';
 import { WIDTH } from '@utils';
 import Button from 'components/Button';
 import TextView from 'components/TextView';
@@ -14,6 +15,7 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
+import { useMMKVBoolean } from 'react-native-mmkv';
 
 const screens: any = [
   {
@@ -38,6 +40,7 @@ const Onboard: React.FC<any> = ({ navigation }) => {
   const scrollX = useRef(new Animated.Value(0)).current;
   const slidesRef = useRef<FlatList>(null);
   const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
+  const [_, setSplashShow] = useMMKVBoolean(keys.splashShow);
 
   const viewableItemsChanged = useRef(
     ({ viewableItems }: { viewableItems: any }) => {
@@ -110,12 +113,17 @@ const Onboard: React.FC<any> = ({ navigation }) => {
               titleSize={14}
               border={!isLast ? true : false}
               color="#111111"
-              onPress={() => navigation.navigate('Login')}
+              onPress={() => onSkip()}
             />
           </View>
         </View>
       </View>
     );
+  };
+
+  const onSkip = () => {
+    setSplashShow(true);
+    navigation.navigate('Login');
   };
 
   return (

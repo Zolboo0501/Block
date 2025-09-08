@@ -3,7 +3,7 @@ import GroupCheckbox from 'components/GroupCheckbox';
 import TextView from 'components/TextView';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
-const Communications: React.FC<any> = ({ value, onChange }) => {
+const Communications: React.FC<any> = ({ value, onChange, isError }) => {
   const checkboxs = [
     {
       label: 'By email',
@@ -27,10 +27,20 @@ const Communications: React.FC<any> = ({ value, onChange }) => {
       <View style={styles.rowSpaceBetween}>
         {checkboxs.map((item: any, index: number) => (
           <TouchableOpacity key={index} onPress={() => onChange(item.key)}>
-            <GroupCheckbox value={value} item={item} label={item} />
+            <GroupCheckbox
+              value={value}
+              item={item}
+              label={item}
+              isError={isError}
+            />
           </TouchableOpacity>
         ))}
       </View>
+      {isError && (
+        <TextView fontSize={13} color="#FF4648" fontWeight={'500'}>
+          You must select the communications.
+        </TextView>
+      )}
     </View>
   );
 };

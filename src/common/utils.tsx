@@ -35,4 +35,13 @@ const setNavigation = ({
   });
 };
 
-export { WIDTH, HEIGHT, setNavigation };
+const isEmpty = (value: any) => {
+  if (typeof value === 'string') {
+    return value.length === 0 ? true : false;
+  }
+  if (typeof value === 'object') {
+    return Object.keys(value).length === 0 ? true : false;
+  }
+};
+
+export { WIDTH, HEIGHT, setNavigation, isEmpty };

@@ -13,6 +13,9 @@ import { ChevronLeft } from './icons';
 import { Folder } from './icons';
 import { LogoutIcon } from './icons';
 import { Edit } from './icons';
+import { AlertClose } from './icons';
+import { Success } from './icons';
+import { Alert } from './icons';
 
 export {
   Face,
@@ -30,4 +33,7 @@ export {
   Folder,
   LogoutIcon,
   Edit,
+  AlertClose,
+  Success,
+  Alert,
 };
