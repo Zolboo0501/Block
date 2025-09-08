@@ -83,7 +83,8 @@ const AlertProvider: React.FC<any> = ({ children }) => {
           <View style={styles.infoContainer}>
             {alertState.type === 'error' ? <Alert /> : <Success size={18} />}
             <TextView
-              fontSize={12}
+              fontWeight={'500'}
+              fontSize={13}
               color={alertState.type === 'error' ? '#FF4648' : '#05A660'}
             >
               {alertState.message}
@@ -127,6 +128,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 12,
+    marginRight: 15,
   },
 });
 export default AlertProvider;

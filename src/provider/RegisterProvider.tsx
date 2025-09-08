@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 import React, { createContext, useState } from 'react';
 
 interface IRegister {
@@ -12,6 +13,7 @@ interface IRegister {
   nationality: string;
   dateOfBirth: any;
   communication: string;
+  userId: string;
 }
 
 interface IRegisterState {
@@ -26,7 +28,7 @@ interface IRegisterState {
   nationality: string;
   dateOfBirth: any;
   communication: string;
-
+  userId: string;
   onChange: (
     key:
       | 'phone'
@@ -39,7 +41,8 @@ interface IRegisterState {
       | 'surname'
       | 'nationality'
       | 'dateOfBirth'
-      | 'communication',
+      | 'communication'
+      | 'userId',
     value: any,
   ) => void;
 
@@ -61,6 +64,7 @@ const RegisterProvider: React.FC<any> = ({ children, value }) => {
     nationality: '',
     dateOfBirth: new Date('1985-06-22'),
     communication: '',
+    userId: '',
   });
 
   const onChange = (
@@ -75,7 +79,8 @@ const RegisterProvider: React.FC<any> = ({ children, value }) => {
       | 'surname'
       | 'nationality'
       | 'dateOfBirth'
-      | 'communication',
+      | 'communication'
+      | 'userId',
     value: string,
   ) => {
     if (key === 'otp' && (value === '' || value === undefined)) return;
@@ -94,7 +99,7 @@ const RegisterProvider: React.FC<any> = ({ children, value }) => {
     nationality: state.nationality,
     dateOfBirth: state.dateOfBirth,
     communication: state.communication,
-
+    userId: state.userId,
     signedIn: () => value?.dispatch({ type: 'LOGIN', token: 'loggedIn' }),
 
     onChange: (
@@ -109,7 +114,8 @@ const RegisterProvider: React.FC<any> = ({ children, value }) => {
         | 'surname'
         | 'nationality'
         | 'dateOfBirth'
-        | 'communication',
+        | 'communication'
+        | 'userId',
       value: string,
     ) => onChange(key, value),
   };

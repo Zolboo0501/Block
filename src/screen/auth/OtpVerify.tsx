@@ -1,4 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
+import { useMutation } from '@apollo/client/react';
+import { ClIENTPORTAL_ID } from '@constants';
 import FastImage from '@d11/react-native-fast-image';
 import images from '@images';
 import { setNavigation } from '@utils';
@@ -6,18 +8,47 @@ import Button from 'components/Button';
 import KeyboardContainer from 'components/KeyboardContainer';
 import OTPInput from 'components/OTPInput';
 import TextView from 'components/TextView';
+import userQL from 'graph/userQL';
+import useAlert from 'hooks/useAlert';
 import useRegister from 'hooks/useRegister';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { SafeAreaView, StyleSheet, TouchableOpacity, View } from 'react-native';
 
 const OtpVerify: React.FC<any> = ({ navigation, route }) => {
-  const { type } = route.params || {};
-  const { signedIn } = useRegister();
-  const [otp, setOtp] = useState<any>([]);
+  const type = route.params?.type || '';
+  const alert = useAlert();
+  const { otp, onChange, signedIn, userId } = useRegister();
   const [disable, setDisable] = useState(true);
   const [errorMessage, setErrorMessage] = useState(false);
-  const [time, setTime] = useState(120);
+  const [time, setTime] = useState(3);
   const [isStop, setIsStop] = useState(false);
+
+  const { phone } = useRegister();
+
+  const [loginWithPhone] = useMutation(userQL.clientPortalLoginWithPhone, {
+    onCompleted() {
+      setTime(120);
+      setIsStop(false);
+      onChange('otp', ['']);
+      alert.onSuccess('A 4-digit verification code has been sent.');
+    },
+    onError(error) {
+      alert.onError(error.message);
+    },
+  });
+
+  const [verifyOTPMutation, { loading }] = useMutation(
+    userQL.clientPortalVerifyOTP,
+    {
+      onCompleted: () => {
+        navigation.navigate('Payment');
+      },
+      onError: err => {
+        setErrorMessage(true);
+        alert.onError(err.message);
+      },
+    },
+  );
 
   useLayoutEffect(() => {
     setNavigation({ navigation, title: ' ' });
@@ -43,22 +74,26 @@ const OtpVerify: React.FC<any> = ({ navigation, route }) => {
     return () => clearInterval(interval);
   }, [time]);
 
-  const onChange = (newValue: any) => {
-    const filteredCode = newValue.filter(
-      (item: any) => item !== '' && item !== undefined,
-    );
-
-    setOtp(filteredCode);
-  };
-
   const reSendOTP = () => {
-    setTime(120);
-    setIsStop(false);
+    if (type === 'register') {
+      loginWithPhone({
+        variables: {
+          clientPortalId: ClIENTPORTAL_ID,
+          phone,
+        },
+      });
+    } else {
+    }
   };
 
   const onSave = () => {
     if (type === 'register') {
-      return navigation.navigate('Payment');
+      return verifyOTPMutation({
+        variables: {
+          userId: userId,
+          phoneOtp: otp.join(''),
+        },
+      });
     }
     return signedIn();
   };
@@ -84,7 +119,13 @@ const OtpVerify: React.FC<any> = ({ navigation, route }) => {
             <OTPInput
               length={4}
               value={otp}
-              onChange={onChange}
+              onChange={newValue => {
+                const filteredCode = newValue.filter(
+                  (item: any) => item !== '' && item !== undefined,
+                );
+
+                onChange('otp', filteredCode);
+              }}
               disabled={false}
               inputError={errorMessage}
             />
@@ -93,6 +134,7 @@ const OtpVerify: React.FC<any> = ({ navigation, route }) => {
               titleWeight={'500'}
               onPress={() => onSave()}
               disabled={disable}
+              loading={loading}
             />
             <View style={styles.reSend}>
               <TouchableOpacity>

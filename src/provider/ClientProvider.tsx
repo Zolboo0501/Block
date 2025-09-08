@@ -6,7 +6,7 @@ import {
 } from '@apollo/client';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { getMainDefinition } from '@apollo/client/utilities';
-import { apiUrl, baseUrl } from '@constants';
+import { apiUrl, baseUrl, ERXES_APP_TOKEN } from '@constants';
 import { createClient } from 'graphql-ws';
 
 // WebSocket link
@@ -19,6 +19,7 @@ const wsLink = new GraphQLWsLink(
 // HTTP link
 const httpLink = new HttpLink({
   uri: `${apiUrl}/graphql`,
+  headers: { 'erxes-app-token': ERXES_APP_TOKEN },
 });
 
 // Split based on operation type

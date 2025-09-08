@@ -1,5 +1,6 @@
-import { useMutation } from '@apollo/client/react';
-import { CLIENT_PORTAL } from '@constants';
+/* eslint-disable @typescript-eslint/no-shadow */
+import { useLazyQuery, useMutation } from '@apollo/client/react';
+import { ClIENTPORTAL_ID } from '@constants';
 import { isEmpty, setNavigation } from '@utils';
 import KeyboardContainer from 'components/KeyboardContainer';
 import TextView from 'components/TextView';
@@ -29,25 +30,101 @@ const ValidationForm: React.FC<any> = ({ navigation }) => {
     password,
     communication,
     membership,
+    onChange,
   } = useRegister();
 
   const [fieldErrors, setFieldErrors] = useState({
-    title: false,
-    forename: false,
-    surname: false,
-    password: false,
-    phone: false,
-    email: false,
-    membership: false,
-    dateOfBirth: false,
-    communication: false,
-    rules: false,
+    title: {
+      isEmpty: false,
+      label: 'YOUR TITLE',
+    },
+    forename: {
+      isEmpty: false,
+      label: 'FORENAME',
+    },
+    surname: {
+      isEmpty: false,
+      label: 'SURNAME',
+    },
+    password: {
+      isEmpty: false,
+      label: 'PASSWORD',
+    },
+    phone: {
+      isEmpty: false,
+      label: 'PHONE',
+    },
+    email: {
+      isEmpty: false,
+      label: 'EMAIL',
+    },
+    membership: {
+      isEmpty: false,
+      label: 'MEMBERSHIP',
+    },
+    dateOfBirth: {
+      isEmpty: false,
+      label: 'DATE OF BIRTH',
+    },
+    communication: {
+      isEmpty: false,
+      label: 'COMMUNICATIONS',
+    },
+    rules: {
+      isEmpty: false,
+      label: 'VAULT RULES',
+    },
   });
 
-  const [register] = useMutation(userQL.register, {
+  const [getDetail] = useLazyQuery(userQL.clientPortalUserDetail);
+
+  const [customerEdit] = useMutation(userQL.customerEdit, {
     onCompleted() {
       alert.onSuccess('We are sending an OTP code to your phone number.');
       navigation.navigate('OtpVerify', { type: 'register' });
+    },
+    onError(error) {
+      console.log(error.message);
+      alert.onError(`${error.message} in customer edit`);
+    },
+  });
+
+  const [register] = useMutation(userQL.register, {
+    onCompleted(data: any) {
+      const id = data?.clientPortalRegister;
+      onChange('userId', id);
+      getDetail({
+        variables: { _id: id },
+      })
+        .then(({ data }: { data: any }) => {
+          const erxesCustomerId = data?.clientPortalUserDetail?.erxesCustomerId;
+
+          customerEdit({
+            variables: {
+              _id: erxesCustomerId,
+              firstName: forename,
+              lastName: surname,
+              sex: title.value,
+              birthDate: dateOfBirth,
+              emails: [
+                {
+                  type: 'primary',
+                  email,
+                },
+              ],
+              phones: [
+                {
+                  phone,
+                  type: 'primary',
+                },
+              ],
+            },
+          });
+        })
+        .catch(err => {
+          console.log(err.message);
+          alert.onError(`${err.message} in detail`);
+        });
     },
 
     onError(err) {
@@ -75,7 +152,12 @@ const ValidationForm: React.FC<any> = ({ navigation }) => {
     };
 
     let isError = false;
-    let newErrors: { [key: string]: boolean } = {};
+    let newErrors: {
+      [key: string]: {
+        isEmpty: boolean;
+        label: string;
+      };
+    } = { ...fieldErrors };
 
     Object.entries(fieldsToCheck).forEach(([key, value]) => {
       if (key === 'dateOfBirth') {
@@ -83,40 +165,50 @@ const ValidationForm: React.FC<any> = ({ navigation }) => {
         const diff = dayjs(today).diff(dayjs(value), 'years');
         if (diff < 21) {
           isError = true;
-          return (newErrors[key] = true);
+          return (newErrors[key].isEmpty = true);
         }
-        return (newErrors[key] = false);
+        return (newErrors[key].isEmpty = false);
       }
 
       if (key === 'phone') {
         if (value.length < 8) {
           isError = true;
-          return (newErrors[key] = true);
+          return (newErrors[key].isEmpty = true);
         }
-        return (newErrors[key] = false);
+        return (newErrors[key].isEmpty = false);
       }
 
       if (key === 'email') {
         if (!emailRegex.test(value)) {
           isError = true;
-          return (newErrors[key] = true);
+          return (newErrors[key].isEmpty = true);
         }
-        return (newErrors[key] = false);
+        return (newErrors[key].isEmpty = false);
       }
       if (key === 'toggleCheckBox') {
         if (!toggleCheckBox) {
           isError = true;
-          return (newErrors.rules = true);
+          return (newErrors.rules.isEmpty = true);
         }
-        return (newErrors.rules = false);
+        return (newErrors.rules.isEmpty = false);
       }
 
       if (isEmpty(value)) {
         isError = true;
-        return (newErrors[key] = true);
+        return (newErrors[key].isEmpty = true);
       }
-      return (newErrors[key] = false);
+      return (newErrors[key].isEmpty = false);
     });
+
+    const emptyLabels = Object.values(newErrors)
+      .filter((item: any) => item?.isEmpty)
+      .map((item: any) => item?.label);
+
+    if (emptyLabels.length > 0) {
+      alert.onError(
+        `${emptyLabels.join(', ')} certain fields are incomplete or invalid.`,
+      );
+    }
 
     setFieldErrors({ ...fieldErrors, ...newErrors });
 
@@ -127,7 +219,8 @@ const ValidationForm: React.FC<any> = ({ navigation }) => {
     if (validationForm()) {
       register({
         variables: {
-          clientPortalId: CLIENT_PORTAL,
+          username: phone,
+          clientPortalId: ClIENTPORTAL_ID,
           phone,
           email,
           firstName: forename,
@@ -150,7 +243,7 @@ const ValidationForm: React.FC<any> = ({ navigation }) => {
               FORM
             </TextView>
           </View>
-          <Membership isError={fieldErrors.membership} />
+          <Membership isError={fieldErrors.membership?.isEmpty} />
           <Form
             fieldErrors={fieldErrors}
             toggleCheckBox={toggleCheckBox}

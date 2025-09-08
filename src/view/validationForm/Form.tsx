@@ -67,7 +67,9 @@ const Form: React.FC<any> = ({
           selectedTextStyle={styles.dropdownText}
           style={[
             styles.select,
-            { borderColor: fieldErrors?.title ? '#FF4648' : '#DEDEDE' },
+            {
+              borderColor: fieldErrors?.title?.isEmpty ? '#FF4648' : '#DEDEDE',
+            },
           ]}
           data={selectData}
           onChange={(item: any) => {
@@ -78,7 +80,7 @@ const Form: React.FC<any> = ({
           iconStyle={{ tintColor: 'white' }}
           renderItem={renderItem}
         />
-        {fieldErrors?.title && (
+        {fieldErrors?.title?.isEmpty && (
           <TextView fontSize={13} color="#FF4648" fontWeight={'500'}>
             YOUR TITLE must be selected.
           </TextView>
@@ -90,7 +92,7 @@ const Form: React.FC<any> = ({
         label="FORENAME"
         value={forename}
         onChangeText={(text: string) => onChange('forename', text)}
-        isError={fieldErrors?.forename}
+        isError={fieldErrors?.forename?.isEmpty}
       />
       <Input
         labelColor={'#DEDEDE'}
@@ -98,7 +100,7 @@ const Form: React.FC<any> = ({
         label="SURNAME"
         value={surname}
         onChangeText={(text: string) => onChange('surname', text)}
-        isError={fieldErrors?.surname}
+        isError={fieldErrors?.surname?.isEmpty}
       />
       <Input
         labelColor={'#DEDEDE'}
@@ -120,7 +122,9 @@ const Form: React.FC<any> = ({
             style={[
               styles.input,
               {
-                borderColor: fieldErrors?.dateOfBirth ? '#FF4648' : '#DEDEDE',
+                borderColor: fieldErrors?.dateOfBirth?.isEmpty
+                  ? '#FF4648'
+                  : '#DEDEDE',
               },
             ]}
             onPress={() => setOpen(true)}
@@ -131,7 +135,7 @@ const Form: React.FC<any> = ({
 
         <TextView
           fontSize={13}
-          color={fieldErrors?.dateOfBirth ? '#FF4648' : '#93939366'}
+          color={fieldErrors?.dateOfBirth?.isEmpty ? '#FF4648' : '#93939366'}
         >
           Candidates for Membership must be over 21 years of age!
         </TextView>
@@ -144,7 +148,7 @@ const Form: React.FC<any> = ({
         label="PHONE NUMBER"
         value={phone}
         onChangeText={(text: string) => onChange('phone', text)}
-        isError={fieldErrors.phone}
+        isError={fieldErrors.phone?.isEmpty}
       />
       <Input
         labelColor={'#DEDEDE'}
@@ -153,7 +157,7 @@ const Form: React.FC<any> = ({
         value={email}
         onChangeText={(text: string) => onChange('email', text)}
         keyboardType="email-address"
-        isError={fieldErrors.email}
+        isError={fieldErrors.email?.isEmpty}
       />
       <Input
         labelColor={'#DEDEDE'}
@@ -163,12 +167,12 @@ const Form: React.FC<any> = ({
         onChangeText={(text: string) => onChange('password', text)}
         keyboardType="default"
         secureTextEntry
-        isError={fieldErrors?.password}
+        isError={fieldErrors?.password?.isEmpty}
       />
       <Communications
         value={communication}
         onChange={(value: any) => onChange('communication', value)}
-        isError={fieldErrors?.communication}
+        isError={fieldErrors?.communication?.isEmpty}
       />
       <View style={styles.rules}>
         <TextView fontFamily="Optician Sans" fontSize={14} color="#DEDEDE">
@@ -192,12 +196,12 @@ const Form: React.FC<any> = ({
           text="By continuing, you agree to our Vault Rules"
           innerIconStyle={{
             borderRadius: 8,
-            borderColor: fieldErrors?.rules ? '#FF4648' : '#fff',
+            borderColor: fieldErrors?.rules?.isEmpty ? '#FF4648' : '#fff',
           }}
           iconStyle={{ borderRadius: 8 }}
           textStyle={{
             textDecorationLine: 'none',
-            color: fieldErrors?.rules ? '#FF9797' : '#fff',
+            color: fieldErrors?.rules?.isEmpty ? '#FF9797' : '#fff',
             fontSize: 14,
             fontFamily: 'General Sans',
           }}
@@ -206,7 +210,7 @@ const Form: React.FC<any> = ({
             setToggleCheckBox(isChecked);
           }}
         />
-        {fieldErrors?.rules && (
+        {fieldErrors?.rules?.isEmpty && (
           <TextView fontSize={13} color="#FF4648" fontWeight={'500'}>
             You must be accept rules.
           </TextView>
