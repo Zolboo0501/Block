@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
+import { MEMBERSHIP_DATA } from '@constants';
 import FastImage from '@d11/react-native-fast-image';
-import images from '@images';
 import { useNavigation } from '@react-navigation/native';
 import { WIDTH } from '@utils';
 import GroupCheckbox from 'components/GroupCheckbox';
@@ -9,30 +9,6 @@ import useRegister from 'hooks/useRegister';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 const Membership: React.FC<any> = ({ isError }) => {
-  const data = [
-    {
-      image: images.member,
-      name: 'PLATINUM',
-      price: '‍$2,000',
-      key: 'PLATINUM',
-      duration: '4 years',
-    },
-    {
-      image: images.member2,
-      name: 'LIFETIME',
-      price: '‍$5,000',
-      key: 'LIFETIME',
-      duration: 'LIFETIME',
-    },
-    {
-      image: images.member3,
-      name: 'ANNUAL',
-      price: '$1000',
-      key: 'ANNUAL',
-      duration: '1 year',
-    },
-  ];
-
   const { membership, onChange } = useRegister();
 
   const navigation = useNavigation<any>();
@@ -48,7 +24,7 @@ const Membership: React.FC<any> = ({ isError }) => {
         Select Membership Plan
       </TextView>
       <View style={styles.membership}>
-        {data.map((item: any, index: number) => (
+        {MEMBERSHIP_DATA.map((item: any, index: number) => (
           <TouchableOpacity
             style={styles.rowSpaceBetween}
             key={index}
@@ -62,7 +38,9 @@ const Membership: React.FC<any> = ({ isError }) => {
                 value={membership}
                 label={{
                   label: item.name,
-                  subLabel: `${item.price}/${item.duration}`,
+                  subLabel: `${item.price}/${
+                    item.duration === 999 ? '∞' : item.duration
+                  } years`,
                 }}
                 isError={isError}
               />

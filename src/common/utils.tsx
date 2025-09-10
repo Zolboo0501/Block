@@ -1,6 +1,7 @@
 import { ArrowLeft } from '@icons';
 import TextView from 'components/TextView';
 import { Dimensions, TouchableOpacity } from 'react-native';
+import ReactNativeBiometrics from 'react-native-biometrics';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
@@ -43,5 +44,9 @@ const isEmpty = (value: any) => {
     return Object.keys(value).length === 0 ? true : false;
   }
 };
+
+export const biometrics = new ReactNativeBiometrics({
+  allowDeviceCredentials: true,
+});
 
 export { WIDTH, HEIGHT, setNavigation, isEmpty };

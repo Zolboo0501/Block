@@ -20,7 +20,7 @@ const OtpVerify: React.FC<any> = ({ navigation, route }) => {
   const { otp, onChange, signedIn, userId } = useRegister();
   const [disable, setDisable] = useState(true);
   const [errorMessage, setErrorMessage] = useState(false);
-  const [time, setTime] = useState(3);
+  const [time, setTime] = useState(120);
   const [isStop, setIsStop] = useState(false);
 
   const { phone } = useRegister();
@@ -41,7 +41,7 @@ const OtpVerify: React.FC<any> = ({ navigation, route }) => {
     userQL.clientPortalVerifyOTP,
     {
       onCompleted: () => {
-        navigation.navigate('Payment');
+        navigation.navigate('Payment', { type: 'register' });
       },
       onError: err => {
         setErrorMessage(true);

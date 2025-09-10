@@ -73,7 +73,7 @@ const OTPInput: React.FC<OTPInputProps> = ({
           placeholder="0"
           textAlign="center"
           key={index}
-          maxLength={index === 0 ? length : 1}
+          maxLength={1}
           value={value[index]}
           selectTextOnFocus
           editable={!disabled}
@@ -107,5 +107,7 @@ const styles = StyleSheet.create({
     height: 71,
     borderRadius: 20,
     borderWidth: 1.5,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

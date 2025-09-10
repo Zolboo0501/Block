@@ -26,7 +26,13 @@ const Communications: React.FC<any> = ({ value, onChange, isError }) => {
       </TextView>
       <View style={styles.rowSpaceBetween}>
         {checkboxs.map((item: any, index: number) => (
-          <TouchableOpacity key={index} onPress={() => onChange(item.key)}>
+          <TouchableOpacity
+            key={index}
+            onPress={() => {
+              console.log(item.key, 'key');
+              onChange(item.key);
+            }}
+          >
             <GroupCheckbox
               value={value}
               item={item}

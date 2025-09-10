@@ -83,7 +83,7 @@ const Routes = () => {
   const AuthScreens = () => {
     return (
       <Stack.Navigator
-        initialRouteName={splashShow ? 'Login' : 'Onboard'}
+        initialRouteName="Biometric"
         screenOptions={{ headerStyle: { backgroundColor: '#111111' } }}
       >
         <Stack.Screen

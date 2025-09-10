@@ -5,11 +5,11 @@ import { keys } from '@storage';
 import Button from 'components/Button';
 import React from 'react';
 import { SafeAreaView, StyleSheet, View } from 'react-native';
-import { useMMKVObject } from 'react-native-mmkv';
+import { useMMKVBoolean, useMMKVObject } from 'react-native-mmkv';
 
 const Login: React.FC<any> = ({ navigation }) => {
   const [latestAccount] = useMMKVObject(keys.latestAccount);
-
+  const [confirmFaceId, _] = useMMKVBoolean(keys.confirmFaceId);
   const onSignIn = () => {
     navigation.navigate('SignIn');
   };
@@ -34,7 +34,7 @@ const Login: React.FC<any> = ({ navigation }) => {
             titleSize={14}
             titleWeight={'500'}
             onPress={() => onSignIn()}
-            icon={latestAccount ? <Face /> : undefined}
+            icon={latestAccount && confirmFaceId ? <Face /> : undefined}
           />
           <Button
             title="BECOME A MEMBER"

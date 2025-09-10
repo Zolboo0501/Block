@@ -18,6 +18,9 @@ const Form: React.FC<any> = ({
   onSave,
   toggleCheckBox,
   setToggleCheckBox,
+  loading,
+  customerLoading,
+  detailLoading,
 }) => {
   const {
     title,
@@ -221,6 +224,7 @@ const Form: React.FC<any> = ({
         titleWeight={'500'}
         titleSize={14}
         onPress={() => onSave()}
+        loading={detailLoading || loading || customerLoading}
       />
       <View style={styles.buttonContainer}>
         <TextView fontSize={14} center>

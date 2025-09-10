@@ -14,6 +14,7 @@ interface IRegister {
   dateOfBirth: any;
   communication: string;
   userId: string;
+  erxesCustomerId: string;
 }
 
 interface IRegisterState {
@@ -29,6 +30,7 @@ interface IRegisterState {
   dateOfBirth: any;
   communication: string;
   userId: string;
+  erxesCustomerId: string;
   onChange: (
     key:
       | 'phone'
@@ -42,7 +44,8 @@ interface IRegisterState {
       | 'nationality'
       | 'dateOfBirth'
       | 'communication'
-      | 'userId',
+      | 'userId'
+      | 'erxesCustomerId',
     value: any,
   ) => void;
 
@@ -65,6 +68,7 @@ const RegisterProvider: React.FC<any> = ({ children, value }) => {
     dateOfBirth: new Date('1985-06-22'),
     communication: '',
     userId: '',
+    erxesCustomerId: '',
   });
 
   const onChange = (
@@ -80,7 +84,8 @@ const RegisterProvider: React.FC<any> = ({ children, value }) => {
       | 'nationality'
       | 'dateOfBirth'
       | 'communication'
-      | 'userId',
+      | 'userId'
+      | 'erxesCustomerId',
     value: string,
   ) => {
     if (key === 'otp' && (value === '' || value === undefined)) return;
@@ -100,6 +105,7 @@ const RegisterProvider: React.FC<any> = ({ children, value }) => {
     dateOfBirth: state.dateOfBirth,
     communication: state.communication,
     userId: state.userId,
+    erxesCustomerId: state.erxesCustomerId,
     signedIn: () => value?.dispatch({ type: 'LOGIN', token: 'loggedIn' }),
 
     onChange: (
@@ -115,7 +121,8 @@ const RegisterProvider: React.FC<any> = ({ children, value }) => {
         | 'nationality'
         | 'dateOfBirth'
         | 'communication'
-        | 'userId',
+        | 'userId'
+        | 'erxesCustomerId',
       value: string,
     ) => onChange(key, value),
   };

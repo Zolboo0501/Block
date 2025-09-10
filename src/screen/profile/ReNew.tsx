@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
+import { MEMBERSHIP_DATA } from '@constants';
 import FastImage from '@d11/react-native-fast-image';
 import BottomSheet from '@gorhom/bottom-sheet';
-import images from '@images';
 import { setNavigation } from '@utils';
 import GroupCheckbox from 'components/GroupCheckbox';
 import PaymentMethod from 'components/PaymentMethod';
@@ -14,30 +14,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-
-const data = [
-  {
-    image: images.member,
-    name: 'PLATINUM',
-    price: '‍$2,000',
-    key: 'PLATINUM',
-    duration: '4 years',
-  },
-  {
-    image: images.member2,
-    name: 'LIFETIME',
-    price: '‍$5,000',
-    key: 'LIFETIME',
-    duration: 'LIFETIME',
-  },
-  {
-    image: images.member3,
-    name: 'ANNUAL',
-    price: '$1000',
-    key: 'ANNUAL',
-    duration: '1 year',
-  },
-];
 
 const ReNew: React.FC<any> = ({ navigation }) => {
   const [membership, setMembership] = useState<any>();
@@ -74,7 +50,7 @@ const ReNew: React.FC<any> = ({ navigation }) => {
               >
                 Your Selected Membership Plan
               </TextView>
-              {data.map((item: any, index: number) => (
+              {MEMBERSHIP_DATA.map((item: any, index: number) => (
                 <TouchableOpacity
                   style={[styles.rowSpaceBetween, { paddingHorizontal: 10 }]}
                   key={index}
@@ -88,7 +64,9 @@ const ReNew: React.FC<any> = ({ navigation }) => {
                       value={membership}
                       label={{
                         label: item.name,
-                        subLabel: `${item.price}/${item.duration}`,
+                        subLabel: `${item.price}/${
+                          item.duration === 999 ? '∞' : item.duration
+                        } years`,
                       }}
                     />
                   </View>
@@ -133,7 +111,9 @@ const ReNew: React.FC<any> = ({ navigation }) => {
                 <TextView fontSize={14} fontFamily="Optician Sans">
                   Duration:
                 </TextView>
-                <TextView fontSize={14}>{membership?.duration}</TextView>
+                <TextView fontSize={14}>
+                  {membership.duration === 999 ? '∞' : membership.duration}
+                </TextView>
               </View>
               <TextView fontWeight={'500'} fontFamily="14">
                 Our lifetime membership is designed to enhance your experience

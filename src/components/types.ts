@@ -53,7 +53,6 @@ export interface IButton {
   style?: StyleProp<ViewStyle>;
   disabled?: boolean;
   border?: boolean;
-  leftIcon?: any;
   borderColor?: string;
 }
 

@@ -76,20 +76,25 @@ const ValidationForm: React.FC<any> = ({ navigation }) => {
     },
   });
 
-  const [getDetail] = useLazyQuery(userQL.clientPortalUserDetail);
+  const [getDetail, { loading: detailLoading }] = useLazyQuery(
+    userQL.clientPortalUserDetail,
+  );
 
-  const [customerEdit] = useMutation(userQL.customerEdit, {
-    onCompleted() {
-      alert.onSuccess('We are sending an OTP code to your phone number.');
-      navigation.navigate('OtpVerify', { type: 'register' });
+  const [customerEdit, { loading: customerLoading }] = useMutation(
+    userQL.customerEdit,
+    {
+      onCompleted() {
+        alert.onSuccess('We are sending an OTP code to your phone number.');
+        navigation.navigate('OtpVerify', { type: 'register' });
+      },
+      onError(error) {
+        console.log(error.message);
+        alert.onError(`${error.message} in customer edit`);
+      },
     },
-    onError(error) {
-      console.log(error.message);
-      alert.onError(`${error.message} in customer edit`);
-    },
-  });
+  );
 
-  const [register] = useMutation(userQL.register, {
+  const [register, { loading }] = useMutation(userQL.register, {
     onCompleted(data: any) {
       const id = data?.clientPortalRegister;
       onChange('userId', id);
@@ -98,6 +103,7 @@ const ValidationForm: React.FC<any> = ({ navigation }) => {
       })
         .then(({ data }: { data: any }) => {
           const erxesCustomerId = data?.clientPortalUserDetail?.erxesCustomerId;
+          onChange('erxesCustomerId', erxesCustomerId);
 
           customerEdit({
             variables: {
@@ -249,6 +255,9 @@ const ValidationForm: React.FC<any> = ({ navigation }) => {
             toggleCheckBox={toggleCheckBox}
             setToggleCheckBox={setToggleCheckBox}
             onSave={onSave}
+            loading={loading}
+            customerLoading={customerLoading}
+            detailLoading={detailLoading}
           />
         </View>
       </SafeAreaView>
