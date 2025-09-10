@@ -214,6 +214,24 @@ const clientPortalUserDetail = gql`
   }
 `;
 
+const clientPortalLogin = gql`
+  mutation clientPortalLogin(
+    $login: String!
+    $password: String!
+    $clientPortalId: String!
+    $deviceToken: String
+    $twoFactor: TwoFactor
+  ) {
+    clientPortalLogin(
+      login: $login
+      password: $password
+      clientPortalId: $clientPortalId
+      deviceToken: $deviceToken
+      twoFactor: $twoFactor
+    )
+  }
+`;
+
 export default {
   register,
   clientPortalLoginWithPhone,
@@ -222,4 +240,5 @@ export default {
   customerEdit,
   currentUser,
   clientPortalUserDetail,
+  clientPortalLogin,
 };

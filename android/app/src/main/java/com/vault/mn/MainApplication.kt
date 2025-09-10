@@ -1,4 +1,4 @@
-package com.block
+package com.vault.mn
 
 import android.app.Application
 import com.facebook.react.PackageList

@@ -4,7 +4,7 @@
 import { useLazyQuery, useMutation, useQuery } from '@apollo/client/react';
 import FastImage from '@d11/react-native-fast-image';
 import BottomSheet from '@gorhom/bottom-sheet';
-import { setNavigation } from '@utils';
+import { biometrics, setNavigation } from '@utils';
 import GroupCheckbox from 'components/GroupCheckbox';
 import PaymentItem from 'components/PaymentItem';
 import PaymentMethod from 'components/PaymentMethod';
@@ -59,7 +59,7 @@ const Payment: React.FC<any> = ({ navigation, route }) => {
   );
 
   const [customerEdit] = useMutation(userQL.customerEdit, {
-    onCompleted() {
+    async onCompleted() {
       navigation.navigate('Biometric');
     },
     onError(error) {

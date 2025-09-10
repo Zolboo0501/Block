@@ -1,16 +1,92 @@
+import { useMutation } from '@apollo/client/react';
+import { ClIENTPORTAL_ID } from '@constants';
 import FastImage from '@d11/react-native-fast-image';
 import { Face } from '@icons';
 import images from '@images';
 import { keys } from '@storage';
+import { biometrics } from '@utils';
 import Button from 'components/Button';
+import userQL from 'graph/userQL';
+import useAlert from 'hooks/useAlert';
+import useRegister from 'hooks/useRegister';
 import React from 'react';
 import { SafeAreaView, StyleSheet, View } from 'react-native';
+import { BiometryTypes } from 'react-native-biometrics';
 import { useMMKVBoolean, useMMKVObject } from 'react-native-mmkv';
 
 const Login: React.FC<any> = ({ navigation }) => {
-  const [latestAccount] = useMMKVObject(keys.latestAccount);
+  const [latestAccount, __] = useMMKVObject<{
+    phone: string;
+    password: string;
+  }>(keys.latestAccount);
   const [confirmFaceId, _] = useMMKVBoolean(keys.confirmFaceId);
+  const alert = useAlert();
+  const { signedIn } = useRegister();
+
+  const [loginMutation] = useMutation(userQL.clientPortalLogin, {
+    onCompleted() {
+      signedIn();
+    },
+    onError(error) {
+      alert.onError(error.message);
+      console.log(error.message);
+    },
+  });
+
+  const initialBiometrics = async () => {
+    const { available, biometryType } = await biometrics.isSensorAvailable();
+
+    if (biometryType === BiometryTypes.FaceID && available) {
+      recognition();
+    }
+    if (biometryType === BiometryTypes.Biometrics && available) {
+      recognition();
+    }
+    if (biometryType === BiometryTypes.TouchID && available) {
+      recognition();
+    }
+  };
+
+  const recognition = () => {
+    const timestamp = Math.round(new Date().getTime() / 1000).toString();
+    const payload = `${latestAccount?.phone}__${timestamp}`;
+    biometrics
+      .createSignature({
+        promptMessage: 'Тохируулах',
+        payload: payload,
+      })
+      .then((resultObject: any) => {
+        const { success } = resultObject;
+        if (success) {
+          console.log({
+            login: latestAccount?.phone,
+            password: latestAccount?.password,
+            clientPortalId: ClIENTPORTAL_ID,
+          });
+          loginMutation({
+            variables: {
+              login: latestAccount?.phone,
+              password: latestAccount?.password,
+              clientPortalId: ClIENTPORTAL_ID,
+            },
+          });
+          // setConfirmFaceId(true);
+          // setLoginFaceId(false);
+          // return navigation.navigate('Main');
+        } else {
+          alert.onError('Тохиргоо хийхэд алдаа гарлаа.');
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        alert.onError('Баталгаажуулалт хийхэд алдаа гарлаа.');
+      });
+  };
+
   const onSignIn = () => {
+    if (confirmFaceId) {
+      return initialBiometrics();
+    }
     navigation.navigate('SignIn');
   };
 
@@ -34,7 +110,13 @@ const Login: React.FC<any> = ({ navigation }) => {
             titleSize={14}
             titleWeight={'500'}
             onPress={() => onSignIn()}
-            icon={latestAccount && confirmFaceId ? <Face /> : undefined}
+            icon={
+              latestAccount?.password &&
+              latestAccount?.phone &&
+              confirmFaceId ? (
+                <Face />
+              ) : undefined
+            }
           />
           <Button
             title="BECOME A MEMBER"

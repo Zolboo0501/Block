@@ -10,7 +10,7 @@
 		01EF3BD653424AFA806C35F8 /* GeneralSans-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0E3B748050FE4ABABEB6794A /* GeneralSans-BoldItalic.otf */; };
 		0B09016EE1954482A52D06D0 /* GeneralSans-ExtralightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2ED59E29664B477CACF98FAB /* GeneralSans-ExtralightItalic.otf */; };
 		0C3877FAFC944B44BCE2E4C2 /* GeneralSans-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7A8508856DDA4BD89C08514F /* GeneralSans-Italic.otf */; };
-		0C80B921A6F3F58F76C31292 /* libPods-Block.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-Block.a */; };
+		0C80B921A6F3F58F76C31292 /* libPods-Vault.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-Vault.a */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		17C12DF27EF34888B55E9C60 /* NewYork PERSONAL USE.otf in Resources */ = {isa = PBXBuildFile; fileRef = E28DB20C85214ABCB92E2B57 /* NewYork PERSONAL USE.otf */; };
 		24FBF0330B8AC77FFAF28170 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
@@ -22,6 +22,7 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		854D94B1C9D547C6B8466B8B /* GeneralSans-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9EE6F909B5B74D17BD53A824 /* GeneralSans-MediumItalic.otf */; };
 		872BA19D29F842308DB65C88 /* GeneralSans-Extralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8F971034FA784C3A8FA7448F /* GeneralSans-Extralight.otf */; };
+		888EEDAE2E7154F200301946 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 888EEDAD2E7154F200301946 /* GoogleService-Info.plist */; };
 		93018D1A87DA48C398D2A842 /* GeneralSans-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2A7B9A1699444D6AB9FA9326 /* GeneralSans-Light.otf */; };
 		BC2F3026787D4C049A30ACB8 /* GeneralSans-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8F55CFEDC4214ABDB96CCFE9 /* GeneralSans-LightItalic.otf */; };
 		F3C338B1FCDA46DFB8500530 /* GeneralSans-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = B670E17C39CF4A3B8CE67423 /* GeneralSans-SemiboldItalic.otf */; };
@@ -29,29 +30,30 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0E3B748050FE4ABABEB6794A /* GeneralSans-BoldItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "GeneralSans-BoldItalic.otf"; path = "../assets/fonts/GeneralSans-BoldItalic.otf"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* Block.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Block.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Block/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Block/Info.plist; sourceTree = "<group>"; };
-		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = Block/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		2A7B9A1699444D6AB9FA9326 /* GeneralSans-Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "GeneralSans-Light.otf"; path = "../assets/fonts/GeneralSans-Light.otf"; sourceTree = "<group>"; };
-		2ED59E29664B477CACF98FAB /* GeneralSans-ExtralightItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "GeneralSans-ExtralightItalic.otf"; path = "../assets/fonts/GeneralSans-ExtralightItalic.otf"; sourceTree = "<group>"; };
-		3B4392A12AC88292D35C810B /* Pods-Block.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Block.debug.xcconfig"; path = "Target Support Files/Pods-Block/Pods-Block.debug.xcconfig"; sourceTree = "<group>"; };
-		527B642D250A4908A2435B45 /* GeneralSans-Semibold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "GeneralSans-Semibold.otf"; path = "../assets/fonts/GeneralSans-Semibold.otf"; sourceTree = "<group>"; };
-		5709B34CF0A7D63546082F79 /* Pods-Block.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Block.release.xcconfig"; path = "Target Support Files/Pods-Block/Pods-Block.release.xcconfig"; sourceTree = "<group>"; };
-		5B1792D8EA99486F979ED0A6 /* GeneralSans-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "GeneralSans-Bold.otf"; path = "../assets/fonts/GeneralSans-Bold.otf"; sourceTree = "<group>"; };
-		5DCACB8F33CDC322A6C60F78 /* libPods-Block.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Block.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Block/AppDelegate.swift; sourceTree = "<group>"; };
-		7A8508856DDA4BD89C08514F /* GeneralSans-Italic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "GeneralSans-Italic.otf"; path = "../assets/fonts/GeneralSans-Italic.otf"; sourceTree = "<group>"; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Block/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8F55CFEDC4214ABDB96CCFE9 /* GeneralSans-LightItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "GeneralSans-LightItalic.otf"; path = "../assets/fonts/GeneralSans-LightItalic.otf"; sourceTree = "<group>"; };
-		8F971034FA784C3A8FA7448F /* GeneralSans-Extralight.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "GeneralSans-Extralight.otf"; path = "../assets/fonts/GeneralSans-Extralight.otf"; sourceTree = "<group>"; };
-		94AECA03E25F46A58F9F1E56 /* GeneralSans-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "GeneralSans-Regular.otf"; path = "../assets/fonts/GeneralSans-Regular.otf"; sourceTree = "<group>"; };
-		9EE6F909B5B74D17BD53A824 /* GeneralSans-MediumItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "GeneralSans-MediumItalic.otf"; path = "../assets/fonts/GeneralSans-MediumItalic.otf"; sourceTree = "<group>"; };
-		A575F3B336904B29A93BA69F /* GeneralSans-Medium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "GeneralSans-Medium.otf"; path = "../assets/fonts/GeneralSans-Medium.otf"; sourceTree = "<group>"; };
-		B670E17C39CF4A3B8CE67423 /* GeneralSans-SemiboldItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "GeneralSans-SemiboldItalic.otf"; path = "../assets/fonts/GeneralSans-SemiboldItalic.otf"; sourceTree = "<group>"; };
-		CB473CC76D0F453FBEA835FD /* Optician-Sans.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Optician-Sans.otf"; path = "../assets/fonts/Optician-Sans.otf"; sourceTree = "<group>"; };
-		E28DB20C85214ABCB92E2B57 /* NewYork PERSONAL USE.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "NewYork PERSONAL USE.otf"; path = "../assets/fonts/NewYork PERSONAL USE.otf"; sourceTree = "<group>"; };
+		0E3B748050FE4ABABEB6794A /* GeneralSans-BoldItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GeneralSans-BoldItalic.otf"; path = "../assets/fonts/GeneralSans-BoldItalic.otf"; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* Vault.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vault.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Vault/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Vault/Info.plist; sourceTree = "<group>"; };
+		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = Vault/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		2A7B9A1699444D6AB9FA9326 /* GeneralSans-Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GeneralSans-Light.otf"; path = "../assets/fonts/GeneralSans-Light.otf"; sourceTree = "<group>"; };
+		2ED59E29664B477CACF98FAB /* GeneralSans-ExtralightItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GeneralSans-ExtralightItalic.otf"; path = "../assets/fonts/GeneralSans-ExtralightItalic.otf"; sourceTree = "<group>"; };
+		3B4392A12AC88292D35C810B /* Pods-Vault.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vault.debug.xcconfig"; path = "Target Support Files/Pods-Vault/Pods-Vault.debug.xcconfig"; sourceTree = "<group>"; };
+		527B642D250A4908A2435B45 /* GeneralSans-Semibold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GeneralSans-Semibold.otf"; path = "../assets/fonts/GeneralSans-Semibold.otf"; sourceTree = "<group>"; };
+		5709B34CF0A7D63546082F79 /* Pods-Vault.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vault.release.xcconfig"; path = "Target Support Files/Pods-Vault/Pods-Vault.release.xcconfig"; sourceTree = "<group>"; };
+		5B1792D8EA99486F979ED0A6 /* GeneralSans-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GeneralSans-Bold.otf"; path = "../assets/fonts/GeneralSans-Bold.otf"; sourceTree = "<group>"; };
+		5DCACB8F33CDC322A6C60F78 /* libPods-Vault.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vault.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Vault/AppDelegate.swift; sourceTree = "<group>"; };
+		7A8508856DDA4BD89C08514F /* GeneralSans-Italic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GeneralSans-Italic.otf"; path = "../assets/fonts/GeneralSans-Italic.otf"; sourceTree = "<group>"; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Vault/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		888EEDAD2E7154F200301946 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8F55CFEDC4214ABDB96CCFE9 /* GeneralSans-LightItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GeneralSans-LightItalic.otf"; path = "../assets/fonts/GeneralSans-LightItalic.otf"; sourceTree = "<group>"; };
+		8F971034FA784C3A8FA7448F /* GeneralSans-Extralight.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GeneralSans-Extralight.otf"; path = "../assets/fonts/GeneralSans-Extralight.otf"; sourceTree = "<group>"; };
+		94AECA03E25F46A58F9F1E56 /* GeneralSans-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GeneralSans-Regular.otf"; path = "../assets/fonts/GeneralSans-Regular.otf"; sourceTree = "<group>"; };
+		9EE6F909B5B74D17BD53A824 /* GeneralSans-MediumItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GeneralSans-MediumItalic.otf"; path = "../assets/fonts/GeneralSans-MediumItalic.otf"; sourceTree = "<group>"; };
+		A575F3B336904B29A93BA69F /* GeneralSans-Medium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GeneralSans-Medium.otf"; path = "../assets/fonts/GeneralSans-Medium.otf"; sourceTree = "<group>"; };
+		B670E17C39CF4A3B8CE67423 /* GeneralSans-SemiboldItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GeneralSans-SemiboldItalic.otf"; path = "../assets/fonts/GeneralSans-SemiboldItalic.otf"; sourceTree = "<group>"; };
+		CB473CC76D0F453FBEA835FD /* Optician-Sans.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Optician-Sans.otf"; path = "../assets/fonts/Optician-Sans.otf"; sourceTree = "<group>"; };
+		E28DB20C85214ABCB92E2B57 /* NewYork PERSONAL USE.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NewYork PERSONAL USE.otf"; path = "../assets/fonts/NewYork PERSONAL USE.otf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -60,7 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C80B921A6F3F58F76C31292 /* libPods-Block.a in Frameworks */,
+				0C80B921A6F3F58F76C31292 /* libPods-Vault.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,10 +88,9 @@
 				CB473CC76D0F453FBEA835FD /* Optician-Sans.otf */,
 			);
 			name = Resources;
-			path = "";
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* Block */ = {
+		13B07FAE1A68108700A75B9A /* Vault */ = {
 			isa = PBXGroup;
 			children = (
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -98,14 +99,14 @@
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */,
 			);
-			name = Block;
+			name = Vault;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				5DCACB8F33CDC322A6C60F78 /* libPods-Block.a */,
+				5DCACB8F33CDC322A6C60F78 /* libPods-Vault.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -120,7 +121,8 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				13B07FAE1A68108700A75B9A /* Block */,
+				888EEDAD2E7154F200301946 /* GoogleService-Info.plist */,
+				13B07FAE1A68108700A75B9A /* Vault */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
@@ -135,7 +137,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* Block.app */,
+				13B07F961A680F5B00A75B9A /* Vault.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -143,8 +145,8 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3B4392A12AC88292D35C810B /* Pods-Block.debug.xcconfig */,
-				5709B34CF0A7D63546082F79 /* Pods-Block.release.xcconfig */,
+				3B4392A12AC88292D35C810B /* Pods-Vault.debug.xcconfig */,
+				5709B34CF0A7D63546082F79 /* Pods-Vault.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -152,9 +154,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		13B07F861A680F5B00A75B9A /* Block */ = {
+		13B07F861A680F5B00A75B9A /* Vault */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Block" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Vault" */;
 			buildPhases = (
 				C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
@@ -169,9 +171,9 @@
 			);
 			dependencies = (
 			);
-			name = Block;
-			productName = Block;
-			productReference = 13B07F961A680F5B00A75B9A /* Block.app */;
+			name = Vault;
+			productName = Vault;
+			productReference = 13B07F961A680F5B00A75B9A /* Vault.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -187,7 +189,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Block" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Vault" */;
 			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -200,7 +202,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* Block */,
+				13B07F861A680F5B00A75B9A /* Vault */,
 			);
 		};
 /* End PBXProject section */
@@ -221,6 +223,7 @@
 				93018D1A87DA48C398D2A842 /* GeneralSans-Light.otf in Resources */,
 				BC2F3026787D4C049A30ACB8 /* GeneralSans-LightItalic.otf in Resources */,
 				F6A25FD3C0D94E9385039CC8 /* GeneralSans-Medium.otf in Resources */,
+				888EEDAE2E7154F200301946 /* GoogleService-Info.plist in Resources */,
 				854D94B1C9D547C6B8466B8B /* GeneralSans-MediumItalic.otf in Resources */,
 				6D5A17BEADD14D9D904E3226 /* GeneralSans-Regular.otf in Resources */,
 				80578093B3DC49D0AA729ECF /* GeneralSans-Semibold.otf in Resources */,
@@ -255,15 +258,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Block/Pods-Block-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Vault/Pods-Vault-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Block/Pods-Block-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Vault/Pods-Vault-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Block/Pods-Block-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Vault/Pods-Vault-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6C13908B3E611B091E2990E8 /* [CP-User] [RNFB] Core Configuration */ = {
@@ -294,7 +297,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Block-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Vault-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -307,15 +310,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Block/Pods-Block-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Vault/Pods-Vault-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Block/Pods-Block-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Vault/Pods-Vault-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Block/Pods-Block-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Vault/Pods-Vault-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -334,13 +337,14 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-Block.debug.xcconfig */;
+			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-Vault.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = Block/Info.plist;
+				INFOPLIST_FILE = Vault/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Vault;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -352,8 +356,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = Block;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vault.mn;
+				PRODUCT_NAME = Vault;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -362,12 +366,13 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-Block.release.xcconfig */;
+			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-Vault.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				INFOPLIST_FILE = Block/Info.plist;
+				INFOPLIST_FILE = Vault/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Vault;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -379,8 +384,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = Block;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vault.mn;
+				PRODUCT_NAME = Vault;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -541,7 +546,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Block" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Vault" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -550,7 +555,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Block" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Vault" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
