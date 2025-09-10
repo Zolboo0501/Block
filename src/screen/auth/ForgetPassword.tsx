@@ -2,7 +2,6 @@ import { useMutation } from '@apollo/client/react';
 import { ClIENTPORTAL_ID } from '@constants';
 import FastImage from '@d11/react-native-fast-image';
 import images from '@images';
-import { keys } from '@storage';
 import { setNavigation } from '@utils';
 import Button from 'components/Button';
 import Container from 'components/Container';
@@ -11,61 +10,39 @@ import KeyboardContainer from 'components/KeyboardContainer';
 import TextView from 'components/TextView';
 import userQL from 'graph/userQL';
 import useAlert from 'hooks/useAlert';
-import useRegister from 'hooks/useRegister';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { useMMKVString } from 'react-native-mmkv';
+import { StyleSheet, View } from 'react-native';
 
-const SignIn: React.FC<any> = ({ navigation }) => {
-  const alert = useAlert();
+const ForgetPassword: React.FC<any> = ({ navigation }) => {
+  const [phone, setPhone] = useState('');
   const [disable, setDisable] = useState(true);
-  const { signedIn } = useRegister();
-  const [deviceToken] = useMMKVString(keys.deviceToken);
-  const [user, setUser] = useState({
-    phone: '',
-    password: '',
-  });
-
-  const [login, { loading: loginLoading }] = useMutation(
-    userQL.clientPortalLogin,
-    {
-      onCompleted() {
-        signedIn();
-      },
-      onError(err) {
-        alert.onError(err.message);
-      },
+  const alert = useAlert();
+  const [forget, { loading }] = useMutation(userQL.clientPortalForgotPassword, {
+    onCompleted() {
+      navigation.navigate('OtpVerify', { number: phone });
     },
-  );
+    onError(error) {
+      alert.onError(error.message);
+    },
+  });
 
   useLayoutEffect(() => {
     setNavigation({ navigation, title: ' ' });
   }, [navigation]);
 
   useEffect(() => {
-    if (user.password.length > 0 && user.phone.length === 8) {
+    if (phone.length === 8) {
       setDisable(false);
     } else {
       setDisable(true);
     }
-  }, [user]);
-
-  const onChange = (text: string, type: string) => {
-    if (type === 'phone') {
-      setUser(prev => ({ ...prev, phone: text }));
-    }
-    if (type === 'password') {
-      setUser(prev => ({ ...prev, password: text }));
-    }
-  };
+  }, [phone]);
 
   const onSave = () => {
-    login({
+    forget({
       variables: {
-        login: user.phone,
-        password: user.password,
         clientPortalId: ClIENTPORTAL_ID,
-        deviceToken,
+        phone,
       },
     });
   };
@@ -82,47 +59,38 @@ const SignIn: React.FC<any> = ({ navigation }) => {
             />
           </View>
           <View style={styles.inputContainer}>
+            <TextView fontSize={14} center>
+              FORGOT PASSWORD
+            </TextView>
+            <TextView center>
+              Please enter your phone number to receive an OTP code for password
+              reset
+            </TextView>
             <Input
               label="PHONE"
-              value={user.phone}
-              onChangeText={(text: string) => onChange(text, 'phone')}
+              value={phone}
+              onChangeText={(text: string) => setPhone(text)}
               placeholder="Enter your phone"
               isPhone={true}
               maxLength={8}
               keyboardType="phone-pad"
             />
-            <Input
-              label="PASSWORD"
-              value={user.password}
-              onChangeText={(text: string) => onChange(text, 'password')}
-              placeholder="Enter your password"
-              secureTextEntry
-              keyboardType="default"
-            />
-            <TouchableOpacity
-              style={styles.end}
-              onPress={() => navigation.navigate('ForgetPassword')}
-            >
-              <TextView fontSize={14} fontFamily="General Sans">
-                Forgot password ?
-              </TextView>
-            </TouchableOpacity>
             <View style={styles.buttonContainer}>
               <Button
-                title="SIGN IN"
+                title="CONTINUE"
                 titleSize={14}
-                loading={loginLoading}
                 titleWeight={'500'}
                 onPress={() => onSave()}
+                loading={loading}
                 disabled={disable}
               />
               <Button
-                title="BECOME A MEMBER"
+                title="BACK"
                 color="#111111"
                 titleSize={14}
                 titleWeight={'500'}
                 border
-                onPress={() => navigation.navigate('ValidationForm')}
+                onPress={() => navigation.goBack()}
               />
             </View>
           </View>
@@ -132,29 +100,25 @@ const SignIn: React.FC<any> = ({ navigation }) => {
   );
 };
 
-export default SignIn;
+export default ForgetPassword;
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-
-  end: {
-    alignItems: 'flex-end',
+  buttonContainer: {
+    gap: 20,
+    marginTop: 100,
   },
   logo: {
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
   },
-  image: {
-    width: 240,
-    height: 240,
-  },
   inputContainer: {
     flex: 1,
     gap: 16,
   },
-  buttonContainer: {
-    gap: 20,
-    marginTop: 15,
+  image: {
+    width: 240,
+    height: 240,
   },
 });

@@ -52,7 +52,7 @@ const Login: React.FC<any> = ({ navigation }) => {
     const payload = `${latestAccount?.phone}__${timestamp}`;
     biometrics
       .createSignature({
-        promptMessage: 'Тохируулах',
+        promptMessage: 'Biometric setup',
         payload: payload,
       })
       .then((resultObject: any) => {
@@ -70,16 +70,13 @@ const Login: React.FC<any> = ({ navigation }) => {
               clientPortalId: ClIENTPORTAL_ID,
             },
           });
-          // setConfirmFaceId(true);
-          // setLoginFaceId(false);
-          // return navigation.navigate('Main');
         } else {
-          alert.onError('Тохиргоо хийхэд алдаа гарлаа.');
+          alert.onError('Biometric authentication failed.');
         }
       })
       .catch(err => {
         console.log(err);
-        alert.onError('Баталгаажуулалт хийхэд алдаа гарлаа.');
+        alert.onError('Biometric authentication is not available.');
       });
   };
 

@@ -16,8 +16,10 @@ import Routes from './src/routes';
 import { ApolloProvider } from '@apollo/client/react';
 import ClientProvider from 'provider/ClientProvider';
 import AlertProvider from 'provider/AlertProvider';
+import useFirebase from 'hooks/useFirebase';
 
 const App: React.FC<any> = () => {
+  useFirebase();
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
       <GestureHandlerRootView style={{ flex: 1, height: '100%' }}>

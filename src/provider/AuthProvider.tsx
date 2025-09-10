@@ -1,14 +1,38 @@
-import React, { createContext } from 'react';
+import { useQuery } from '@apollo/client/react';
+import userQL from 'graph/userQL';
+import React, { createContext, useEffect, useState } from 'react';
 
 interface IAuth {
+  loggedUser: any;
   signedOut: () => void;
+  updateUser: () => void;
 }
 
 export const AuthContext = createContext({} as IAuth);
 
 const AuthProvider: React.FC<any> = ({ children, value }) => {
+  const [loggedUser, setLoggedUser] = useState<any>();
+
+  const { data, refetch } = useQuery<any>(userQL.clientPortalCurrentUser, {
+    fetchPolicy: 'network-only',
+  });
+
+  useEffect(() => {
+    if (data && data?.clientPortalCurrentUser?._id) {
+      const userData = data?.clientPortalCurrentUser;
+      setLoggedUser(userData);
+    }
+  }, [data]);
+
+  const logout = () => {
+    value?.dispatch({ type: 'LOGOUT', token: null });
+    setLoggedUser(null);
+  };
+
   const mContext: IAuth = {
-    signedOut: () => value?.dispatch({ type: 'LOGOUT', token: null }),
+    loggedUser: loggedUser,
+    updateUser: () => refetch(),
+    signedOut: () => logout(),
   };
 
   return (

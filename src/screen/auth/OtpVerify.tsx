@@ -16,20 +16,35 @@ import { SafeAreaView, StyleSheet, TouchableOpacity, View } from 'react-native';
 
 const OtpVerify: React.FC<any> = ({ navigation, route }) => {
   const type = route.params?.type || '';
+  const number = route?.params?.number || '';
+
+  const [code, setCode] = useState<any>(['']);
   const alert = useAlert();
-  const { otp, onChange, signedIn, userId } = useRegister();
+  const { onChange, userId } = useRegister();
   const [disable, setDisable] = useState(true);
   const [errorMessage, setErrorMessage] = useState(false);
-  const [time, setTime] = useState(120);
+  const [time, setTime] = useState(2);
   const [isStop, setIsStop] = useState(false);
 
   const { phone } = useRegister();
+
+  const [forget] = useMutation(userQL.clientPortalForgotPassword, {
+    onCompleted() {
+      setTime(120);
+      setIsStop(false);
+      setCode(['']);
+      alert.onSuccess('A 4-digit verification code has been sent.');
+    },
+    onError(error) {
+      alert.onError(error.message);
+    },
+  });
 
   const [loginWithPhone] = useMutation(userQL.clientPortalLoginWithPhone, {
     onCompleted() {
       setTime(120);
       setIsStop(false);
-      onChange('otp', ['']);
+      setCode(['']);
       alert.onSuccess('A 4-digit verification code has been sent.');
     },
     onError(error) {
@@ -55,11 +70,11 @@ const OtpVerify: React.FC<any> = ({ navigation, route }) => {
   }, [navigation]);
 
   useEffect(() => {
-    const isOtpComplete = otp?.every(
+    const isOtpComplete = code?.every(
       (item: any) => item?.toString().trim() !== '',
     );
-    setDisable(!isOtpComplete || otp.length !== 4);
-  }, [otp]);
+    setDisable(!isOtpComplete || code.length !== 4);
+  }, [code]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -82,20 +97,26 @@ const OtpVerify: React.FC<any> = ({ navigation, route }) => {
           phone,
         },
       });
-    } else {
     }
+    return forget({
+      variables: {
+        clientPortalId: ClIENTPORTAL_ID,
+        phone: number,
+      },
+    });
   };
 
   const onSave = () => {
     if (type === 'register') {
+      onChange('otp', code);
       return verifyOTPMutation({
         variables: {
-          userId: userId,
-          phoneOtp: otp.join(''),
+          userId,
+          phoneOtp: code.join(''),
         },
       });
     }
-    return signedIn();
+    navigation.navigate('Password', { code: code?.join(''), number });
   };
 
   return (
@@ -118,13 +139,13 @@ const OtpVerify: React.FC<any> = ({ navigation, route }) => {
             </TextView>
             <OTPInput
               length={4}
-              value={otp}
+              value={code}
               onChange={newValue => {
                 const filteredCode = newValue.filter(
                   (item: any) => item !== '' && item !== undefined,
                 );
 
-                onChange('otp', filteredCode);
+                setCode(filteredCode);
               }}
               disabled={false}
               inputError={errorMessage}
@@ -137,11 +158,10 @@ const OtpVerify: React.FC<any> = ({ navigation, route }) => {
               loading={loading}
             />
             <View style={styles.reSend}>
-              <TouchableOpacity>
-                <TextView fontSize={14} center>
-                  Didn’t receive code?
-                </TextView>
-              </TouchableOpacity>
+              <TextView fontSize={14} center>
+                Didn’t receive code?
+              </TextView>
+
               <TextView fontSize={18} center>
                 {String(Math.floor(time / 60)).padStart(2, '0')}:
                 {String(time % 60).padStart(2, '0')}

@@ -4,7 +4,7 @@
 import { useLazyQuery, useMutation, useQuery } from '@apollo/client/react';
 import FastImage from '@d11/react-native-fast-image';
 import BottomSheet from '@gorhom/bottom-sheet';
-import { biometrics, setNavigation } from '@utils';
+import { setNavigation } from '@utils';
 import GroupCheckbox from 'components/GroupCheckbox';
 import PaymentItem from 'components/PaymentItem';
 import PaymentMethod from 'components/PaymentMethod';

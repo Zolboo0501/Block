@@ -22,6 +22,8 @@ import ReNew from './screen/profile/ReNew';
 import EditProfile from './screen/profile/EditProfile';
 import { useMMKVBoolean } from 'react-native-mmkv';
 import { keys } from '@storage';
+import ForgetPassword from './screen/auth/ForgetPassword';
+import Password from './screen/auth/Password';
 
 const Routes = () => {
   const Drawer = createDrawerNavigator();
@@ -102,6 +104,22 @@ const Routes = () => {
         <Stack.Screen
           name="SignIn"
           component={SignIn}
+          options={{
+            headerShown: true,
+            headerShadowVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="ForgetPassword"
+          component={ForgetPassword}
+          options={{
+            headerShown: true,
+            headerShadowVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="Password"
+          component={Password}
           options={{
             headerShown: true,
             headerShadowVisible: false,

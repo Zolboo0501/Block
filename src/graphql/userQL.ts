@@ -87,7 +87,7 @@ const clientPortalVerifyOTP = gql`
   }
 `;
 
-const cleintPortalForgotPassword = gql`
+const clientPortalForgotPassword = gql`
   mutation clientPortalForgotPassword(
     $clientPortalId: String!
     $phone: String
@@ -205,6 +205,20 @@ mutation customersEdit(
 }
 `;
 
+const clienPortalResetPassword = gql`
+  mutation clientPortalResetPasswordWithCode(
+    $phone: String!
+    $password: String!
+    $code: String!
+  ) {
+    clientPortalResetPasswordWithCode(
+      phone: $phone
+      password: $password
+      code: $code
+    )
+  }
+`;
+
 const clientPortalUserDetail = gql`
   query clientPortalUserDetail($_id: String!) {
     clientPortalUserDetail(_id: $_id) {
@@ -232,13 +246,84 @@ const clientPortalLogin = gql`
   }
 `;
 
+const clientPortalCurrentUser = gql`
+  query clientPortalCurrentUser {
+    clientPortalCurrentUser {
+      _id
+      email
+      firstName
+      lastName
+      type
+      erxesCompanyId
+      phone
+      erxesCustomerId
+      username
+      customFieldsData
+      avatar
+      twoFactorDevices {
+        key
+        device
+        date
+      }
+      customer {
+        _id
+        state
+        createdAt
+        modifiedAt
+        avatar
+        integrationId
+        firstName
+        lastName
+        middleName
+        birthDate
+        sex
+        email
+        primaryEmail
+        emails
+        primaryPhone
+        phones
+        primaryAddress
+        addresses
+        phone
+        tagIds
+        remoteAddress
+        location
+        visitorContactInfo
+        customFieldsData
+        customFieldsDataByFieldCode
+        trackedData
+        ownerId
+        position
+        department
+        leadStatus
+        hasAuthority
+        description
+        isSubscribed
+        code
+        emailValidationStatus
+        phoneValidationStatus
+        isOnline
+        lastSeenAt
+        sessionCount
+        urlVisits
+        links
+        score
+      }
+    }
+  }
+`;
+
+
+
 export default {
   register,
   clientPortalLoginWithPhone,
-  cleintPortalForgotPassword,
+  clientPortalForgotPassword,
   clientPortalVerifyOTP,
   customerEdit,
   currentUser,
   clientPortalUserDetail,
   clientPortalLogin,
+  clientPortalCurrentUser,
+  clienPortalResetPassword
 };

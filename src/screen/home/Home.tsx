@@ -46,36 +46,6 @@ const Home: React.FC<any> = ({ navigation, route }) => {
       date: new Date('2025-08-21'),
       type: 'me',
     },
-    {
-      text: 'I’m doing well, thanks for asking.',
-      date: new Date('2025-08-08'),
-      type: 'user',
-    },
-    {
-      text: 'I’m doing well, thanks for asking.',
-      date: new Date('2025-08-08'),
-      type: 'user',
-    },
-    {
-      text: 'I’m doing well, thanks for asking.',
-      date: new Date('2025-08-08'),
-      type: 'user',
-    },
-    {
-      text: 'I’m doing well, thanks for asking.',
-      date: new Date('2025-08-08'),
-      type: 'user',
-    },
-    {
-      text: 'I’m doing well, thanks for asking.',
-      date: new Date('2025-08-08'),
-      type: 'user',
-    },
-    {
-      text: 'I’m doing well, thanks for asking. This message is to test the scroll view functionality.',
-      date: new Date('2025-08-08'),
-      type: 'user',
-    },
   ]);
 
   useEffect(() => {

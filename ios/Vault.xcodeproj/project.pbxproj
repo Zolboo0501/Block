@@ -45,6 +45,7 @@
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Vault/AppDelegate.swift; sourceTree = "<group>"; };
 		7A8508856DDA4BD89C08514F /* GeneralSans-Italic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GeneralSans-Italic.otf"; path = "../assets/fonts/GeneralSans-Italic.otf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Vault/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8868DFDF2E7192940028A1A6 /* Vault.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Vault.entitlements; path = Vault/Vault.entitlements; sourceTree = "<group>"; };
 		888EEDAD2E7154F200301946 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8F55CFEDC4214ABDB96CCFE9 /* GeneralSans-LightItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GeneralSans-LightItalic.otf"; path = "../assets/fonts/GeneralSans-LightItalic.otf"; sourceTree = "<group>"; };
 		8F971034FA784C3A8FA7448F /* GeneralSans-Extralight.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GeneralSans-Extralight.otf"; path = "../assets/fonts/GeneralSans-Extralight.otf"; sourceTree = "<group>"; };
@@ -93,6 +94,7 @@
 		13B07FAE1A68108700A75B9A /* Vault */ = {
 			isa = PBXGroup;
 			children = (
+				8868DFDF2E7192940028A1A6 /* Vault.entitlements */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				761780EC2CA45674006654EE /* AppDelegate.swift */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
@@ -341,7 +343,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Vault/Vault.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z4Y4UX444M;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Vault/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Vault;
@@ -370,7 +374,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Vault/Vault.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z4Y4UX444M;
 				INFOPLIST_FILE = Vault/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Vault;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
