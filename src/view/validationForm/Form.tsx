@@ -12,6 +12,7 @@ import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import DatePicker from 'react-native-date-picker';
 import { Dropdown } from 'react-native-element-dropdown';
 import Communications from './Communications';
+import { selectData } from '@constants';
 
 const Form: React.FC<any> = ({
   fieldErrors,
@@ -38,11 +39,6 @@ const Form: React.FC<any> = ({
   const navigation = useNavigation<any>();
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
-
-  const selectData = [
-    { label: 'Male', value: 1 },
-    { label: 'Female', value: 2 },
-  ];
 
   const renderItem = (item: any) => {
     return (

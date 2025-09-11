@@ -27,6 +27,7 @@ const DrawerContent: React.FC<any> = ({ navigation }) => {
   const insets = useSafeAreaInsets();
   const { signedOut } = useAuth();
 
+  const { loggedUser } = useAuth();
   return (
     <View
       style={[
@@ -90,7 +91,7 @@ const DrawerContent: React.FC<any> = ({ navigation }) => {
         ]}
       >
         <TextView fontWeight={'500'} fontSize={18} color="#DEDEDE">
-          Batbold Mendsaikhan
+          {loggedUser?.lastName} {loggedUser?.firstName}
         </TextView>
         <LogoutIcon />
       </TouchableOpacity>

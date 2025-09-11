@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 import { useLazyQuery, useMutation } from '@apollo/client/react';
-import { ClIENTPORTAL_ID } from '@constants';
+import { ClIENTPORTAL_ID, emailRegex } from '@constants';
 import { keys } from '@storage';
 import { isEmpty, setNavigation } from '@utils';
 import KeyboardContainer from 'components/KeyboardContainer';
@@ -14,8 +14,6 @@ import { SafeAreaView, StyleSheet, View } from 'react-native';
 import { useMMKVBoolean } from 'react-native-mmkv';
 import Form from 'view/validationForm/Form';
 import Membership from 'view/validationForm/Membership';
-
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const ValidationForm: React.FC<any> = ({ navigation }) => {
   const alert = useAlert();
