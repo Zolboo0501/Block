@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import { useMutation } from '@apollo/client/react';
 import { ClIENTPORTAL_ID } from '@constants';
 import FastImage from '@d11/react-native-fast-image';
@@ -6,11 +7,12 @@ import images from '@images';
 import { keys } from '@storage';
 import { biometrics } from '@utils';
 import Button from 'components/Button';
+import TextView from 'components/TextView';
 import userQL from 'graph/userQL';
 import useAlert from 'hooks/useAlert';
 import useRegister from 'hooks/useRegister';
 import React from 'react';
-import { SafeAreaView, StyleSheet, View } from 'react-native';
+import { SafeAreaView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { BiometryTypes } from 'react-native-biometrics';
 import { useMMKVBoolean, useMMKVObject } from 'react-native-mmkv';
 
@@ -123,6 +125,18 @@ const Login: React.FC<any> = ({ navigation }) => {
             border
             color="#111111"
           />
+          {latestAccount?.password && latestAccount?.phone && confirmFaceId && (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('SignIn');
+              }}
+              style={{ marginTop: 15 }}
+            >
+              <TextView fontSize={14} fontWeight={'500'} center>
+                USE PASSWORD
+              </TextView>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     </SafeAreaView>

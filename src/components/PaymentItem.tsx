@@ -14,19 +14,23 @@ import { WIDTH } from '@utils';
 const PaymentItem: React.FC<any> = ({
   data,
   index,
+  onPress,
 }: {
   data: any;
   index: number;
+  onPress?: (data: any) => void;
 }) => {
   return (
     <TouchableOpacity
       style={styles.itemContainer}
       key={index}
-      onPress={() => {
-        Linking.openURL(data?.link).catch(() =>
-          Alert.alert('Сонгогдсон апп сугаагүй эсвэл алдаа гарсан байна.'),
-        );
-      }}
+      onPress={() =>
+        onPress
+          ? onPress(data)
+          : Linking.openURL(data?.link).catch(() =>
+              Alert.alert('Сонгогдсон апп сугаагүй эсвэл алдаа гарсан байна.'),
+            )
+      }
     >
       <FastImage
         source={{ uri: data?.logo }}

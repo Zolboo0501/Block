@@ -23,7 +23,7 @@ const OtpVerify: React.FC<any> = ({ navigation, route }) => {
   const { onChange, userId } = useRegister();
   const [disable, setDisable] = useState(true);
   const [errorMessage, setErrorMessage] = useState(false);
-  const [time, setTime] = useState(2);
+  const [time, setTime] = useState(120);
   const [isStop, setIsStop] = useState(false);
 
   const { phone } = useRegister();

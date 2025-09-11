@@ -6,6 +6,7 @@ import FastImage from '@d11/react-native-fast-image';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { setNavigation } from '@utils';
 import GroupCheckbox from 'components/GroupCheckbox';
+import Loader from 'components/Loader';
 import PaymentItem from 'components/PaymentItem';
 import PaymentMethod from 'components/PaymentMethod';
 import TextView from 'components/TextView';
@@ -22,7 +23,6 @@ import React, {
   useState,
 } from 'react';
 import {
-  ActivityIndicator,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -202,11 +202,7 @@ const Payment: React.FC<any> = ({ navigation, route }) => {
   }, []);
 
   if (loading || queryLoading) {
-    return (
-      <View style={styles.center}>
-        <ActivityIndicator color={'white'} />
-      </View>
-    );
+    return <Loader />;
   }
 
   return (
@@ -333,7 +329,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     alignItems: 'center',
   },
-  center: { flex: 1, justifyContent: 'center', alignItems: 'center' },
   image: {
     width: 60,
     height: 60,

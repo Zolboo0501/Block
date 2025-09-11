@@ -1,33 +1,211 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
+import { useLazyQuery, useMutation, useQuery } from '@apollo/client/react';
 import { MEMBERSHIP_DATA } from '@constants';
 import FastImage from '@d11/react-native-fast-image';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { setNavigation } from '@utils';
 import GroupCheckbox from 'components/GroupCheckbox';
+import Loader from 'components/Loader';
+import PaymentItem from 'components/PaymentItem';
 import PaymentMethod from 'components/PaymentMethod';
 import TextView from 'components/TextView';
-import React, { useCallback, useLayoutEffect, useRef, useState } from 'react';
+import dayjs from 'dayjs';
+import paymentQL from 'graph/paymentQL';
+import userQL from 'graph/userQL';
+import useAlert from 'hooks/useAlert';
+import useAuth from 'hooks/useAuth';
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 import {
+  Alert,
+  Linking,
   SafeAreaView,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
   View,
 } from 'react-native';
+import useInterval from 'use-interval';
+
+const MEMBERSHIP_ID = 'sB4QZwYtvF3vvzErPSc7y';
+const STATUS_ID = 'ZneG0ueA_cyXkTpGMoxSx';
+const SINCE_ID = 'qYPIouGEzKDbdmuGq0Lxo';
+const BY_ID = '2KFu_MYJtA4recxaJbpiV';
 
 const ReNew: React.FC<any> = ({ navigation }) => {
   const [membership, setMembership] = useState<any>();
   const bottomSheetRef = useRef<BottomSheet>(null);
+  const alert = useAlert();
+  const { loggedUser } = useAuth();
+  const [cancelInterval, setCancelInterval] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [invoice, setInvoice] = useState('');
+  const [urls, setUrls] = useState([]);
+
+  const { data: paymentsData, loading: queryLoading } = useQuery<any>(
+    paymentQL.payments,
+  );
+
+  const [getInvoiceDetail] = useLazyQuery(paymentQL.invoiceDetail, {
+    fetchPolicy: 'network-only',
+  });
+
+  const [customerEdit] = useMutation(userQL.customerEdit, {
+    async onCompleted() {
+      setCancelInterval(true);
+      alert.onSuccess('Your membership has been renewed successfully.');
+      navigation.goBack();
+    },
+    onError(error) {
+      console.log(error.message);
+      alert.onError(error.message);
+    },
+  });
+
+  const [paymentTransactionsAddMutation] = useMutation(
+    paymentQL.paymentTransactionsAdd,
+    {
+      onCompleted(data: any) {
+        const dataUrls = data?.paymentTransactionsAdd?.response?.urls;
+        setUrls(dataUrls);
+        setLoading(false);
+      },
+      onError(error) {
+        console.log(error.message);
+        alert.onError(error.message);
+      },
+    },
+  );
+
+  const [invoiceCreateMutation] = useMutation(paymentQL.invoiceCreate, {
+    onCompleted(data: any) {
+      const invoiceId = data?.invoiceCreate?._id;
+      setInvoice(invoiceId);
+      paymentTransactionsAddMutation({
+        variables: {
+          paymentId: paymentsData?.payments[0]?._id,
+          amount: 100,
+          invoiceId,
+        },
+      });
+    },
+    onError(err) {
+      console.log(err.message);
+      alert.onError(err.message);
+    },
+  });
 
   useLayoutEffect(() => {
     setNavigation({ navigation, title: 'Vault Membership Form' });
   }, [navigation]);
+
+  useEffect(() => {
+    if (paymentsData?.payments?.length > 0) {
+      setLoading(true);
+      invoiceCreateMutation({
+        variables: {
+          amount: 100,
+          customerId: loggedUser?.erxesCustomerId,
+          customerType: 'core:customer',
+        },
+      });
+    }
+  }, [loggedUser, paymentsData]);
 
   const handleSheetChanges = useCallback((index: number) => {
     if (index === -1) {
       bottomSheetRef.current?.close();
     }
   }, []);
+
+  useInterval(
+    () => {
+      invoice &&
+        membership?.key &&
+        getInvoiceDetail({
+          variables: {
+            id: invoice,
+          },
+        })
+          .then(({ data }: { data: any }) => {
+            const invoice = (data || {})?.invoiceDetail || {};
+
+            const paidAmount = invoice?.amount;
+            if (invoice?.status === 'paid' && paidAmount >= 100) {
+              const byDate = loggedUser?.customer?.customFieldsData?.find(
+                (item: any) => item?.field === BY_ID,
+              )?.value;
+
+              const sinceDate = loggedUser?.customer?.customFieldsData?.find(
+                (item: any) => item?.field === SINCE_ID,
+              )?.value;
+
+              let variable: any = {
+                _id: loggedUser?.erxesCustomerId,
+                firstName: loggedUser?.firstName,
+                lastName: loggedUser?.lastName,
+                sex: loggedUser?.customer?.sex,
+                birthDate: loggedUser?.customer?.birthDate,
+                emails: loggedUser?.customer?.emails,
+                phones: loggedUser?.customer?.phones,
+              };
+
+              if (dayjs(byDate).isValid() && dayjs(byDate).isAfter(dayjs())) {
+                // still active → extend from current byDate
+                const newByDate = dayjs(byDate).add(
+                  membership?.duration,
+                  'year',
+                );
+
+                variable.customFieldsData = [
+                  { field: MEMBERSHIP_ID, value: membership?.key },
+                  { field: STATUS_ID, value: 'ACTIVE' },
+                  { field: SINCE_ID, value: sinceDate }, // keep old since date
+                  { field: BY_ID, value: newByDate.format('YYYY-MM-DD') },
+                ];
+              } else {
+                // expired or invalid → start new cycle from today
+                const today = dayjs();
+                const newByDate = today.add(membership?.duration, 'year');
+
+                variable.customFieldsData = [
+                  { field: MEMBERSHIP_ID, value: membership?.key },
+                  { field: STATUS_ID, value: 'ACTIVE' },
+                  { field: SINCE_ID, value: today.format('YYYY-MM-DD') }, // reset since
+                  { field: BY_ID, value: newByDate.format('YYYY-MM-DD') },
+                ];
+              }
+              customerEdit({ variables: variable });
+            }
+          })
+          .catch(error => {
+            console.log('getInvoices error', error.message);
+            console.log(error.message);
+            console.log(JSON.stringify(error, null, 2));
+            alert.onError(error.message);
+          });
+    },
+    cancelInterval ? null : 1000,
+  );
+
+  if (queryLoading || loading) {
+    return <Loader />;
+  }
+
+  const onPayment = (item: any) => {
+    if (!membership?.key) {
+      return alert.onError('Please select a membership option');
+    }
+    Linking.openURL(item?.link).catch(() =>
+      Alert.alert('Сонгогдсон апп сугаагүй эсвэл алдаа гарсан байна.'),
+    );
+  };
 
   return (
     <>
@@ -112,7 +290,8 @@ const ReNew: React.FC<any> = ({ navigation }) => {
                   Duration:
                 </TextView>
                 <TextView fontSize={14}>
-                  {membership.duration === 999 ? '∞' : membership.duration}
+                  {membership?.duration === 999 ? '∞' : membership?.duration}{' '}
+                  years
                 </TextView>
               </View>
               <TextView fontWeight={'500'} fontFamily="14">
@@ -124,15 +303,11 @@ const ReNew: React.FC<any> = ({ navigation }) => {
                 <TextView fontFamily="Optician Sans" fontSize={14}>
                   Payment Method
                 </TextView>
-                <View style={styles.rowSpace}>
-                  <TouchableOpacity
-                    style={styles.box}
-                    onPress={() => {
-                      bottomSheetRef.current?.expand();
-                    }}
-                  >
-                    <TextView>QPay</TextView>
-                  </TouchableOpacity>
+
+                <View style={styles.paymentContainer}>
+                  {urls?.map((item: any, index: number) => (
+                    <PaymentItem data={item} key={index} onPress={onPayment} />
+                  ))}
                 </View>
               </View>
             </View>
@@ -171,6 +346,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
 
     alignItems: 'center',
+  },
+  paymentContainer: {
+    flexDirection: 'row',
+    gap: 10,
+    flexWrap: 'wrap',
   },
   box: {
     padding: 10,

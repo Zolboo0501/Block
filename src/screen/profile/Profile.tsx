@@ -1,26 +1,53 @@
 /* eslint-disable react-native/no-inline-styles */
+import { useQuery } from '@apollo/client/react';
 import { Edit } from '@icons';
 import { setNavigation } from '@utils';
 import Button from 'components/Button';
+import Loader from 'components/Loader';
 import TextView from 'components/TextView';
 import dayjs from 'dayjs';
+import userQL from 'graph/userQL';
+import useAuth from 'hooks/useAuth';
 import React, { useLayoutEffect } from 'react';
 import { SafeAreaView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 
+const MEMBERSHIP_ID = 'sB4QZwYtvF3vvzErPSc7y';
+const BY_ID = '2KFu_MYJtA4recxaJbpiV';
+
 const Profile: React.FC<any> = ({ navigation }) => {
-  const today = dayjs();
+  const { loggedUser } = useAuth();
+  console.log(loggedUser, 'loggedUser');
+  const { data, loading } = useQuery<any>(userQL.customerDetail, {
+    variables: {
+      _id: loggedUser?.erxesCustomerId,
+    },
+  });
 
   useLayoutEffect(() => {
     setNavigation({ navigation, title: 'My Profile' });
   }, [navigation]);
+
+  const customerData = data?.customerDetail;
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  const membership = customerData?.customFieldsData?.find(
+    (item: any) => item?.field === MEMBERSHIP_ID,
+  );
+
+  const valid = customerData?.customFieldsData?.find(
+    (item: any) => item?.field === BY_ID,
+  );
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.space}>
         <View style={styles.column}>
           <View>
-            <TextView fontSize={20}>Hi Mendsaikhan,</TextView>
+            <TextView fontSize={20}>Hi {customerData?.firstName},</TextView>
             <TextView fontSize={20}>Let’s make today awesome! ❤️</TextView>
           </View>
           <View style={styles.gap}>
@@ -29,7 +56,7 @@ const Profile: React.FC<any> = ({ navigation }) => {
             </TextView>
             <View style={styles.rowSpaceBetween}>
               <TextView fontSize={14} fontWeight={'500'} color="#DEDEDE">
-                Batbold Mendsaikhan
+                {customerData?.lastName} {customerData?.firstName}
               </TextView>
               <TouchableOpacity
                 style={{ padding: 4 }}
@@ -41,12 +68,12 @@ const Profile: React.FC<any> = ({ navigation }) => {
           </View>
           <View style={styles.gap}>
             <TextView fontFamily="Optician Sans" fontSize={14} color="#444444">
-              active membership type
+              Active membership type
             </TextView>
             <View style={styles.row}>
               <View style={styles.circle} />
               <TextView fontWeight={'500'} fontSize={14} color="#DEDEDE">
-                Platinum Membership
+                {membership?.value} Membership
               </TextView>
             </View>
           </View>
@@ -57,14 +84,14 @@ const Profile: React.FC<any> = ({ navigation }) => {
             <View style={styles.row}>
               <View style={styles.circle} />
               <TextView fontWeight={'500'} fontSize={14} color="#DEDEDE">
-                {today.format('MMM DD, YYYY')}
+                {dayjs(valid?.value)?.format('MMM DD, YYYY')}
               </TextView>
             </View>
           </View>
           <View style={styles.center}>
             <QRCode
               size={210}
-              value="http://awesome.link.qr"
+              value={customerData?.erxesCustomerId}
               logoBackgroundColor="transparent"
             />
             <View style={{ width: '70%' }}>
