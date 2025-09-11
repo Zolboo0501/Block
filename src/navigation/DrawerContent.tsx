@@ -81,7 +81,9 @@ const DrawerContent: React.FC<any> = ({ navigation }) => {
         </View>
       </ScrollView>
       <TouchableOpacity
-        onPress={() => signedOut()}
+        onPress={() => {
+          signedOut();
+        }}
         style={[
           styles.logout,
           { paddingBottom: insets.bottom > 0 ? insets.bottom : 10 },

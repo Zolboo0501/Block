@@ -54,11 +54,6 @@ const Password: React.FC<any> = ({ navigation, route }) => {
     if (pass.password !== pass.rePassword) {
       return alert.onError('Password and Confirm Password do not match.');
     }
-    console.log({
-      phone: number,
-      password: pass.password,
-      code,
-    });
     reset({
       variables: {
         phone: number,

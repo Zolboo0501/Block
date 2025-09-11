@@ -29,7 +29,6 @@ const Communications: React.FC<any> = ({ value, onChange, isError }) => {
           <TouchableOpacity
             key={index}
             onPress={() => {
-              console.log(item.key, 'key');
               onChange(item.key);
             }}
           >

@@ -17,7 +17,6 @@ const BY_ID = '2KFu_MYJtA4recxaJbpiV';
 
 const Profile: React.FC<any> = ({ navigation }) => {
   const { loggedUser } = useAuth();
-  console.log(loggedUser, 'loggedUser');
   const { data, loading } = useQuery<any>(userQL.customerDetail, {
     variables: {
       _id: loggedUser?.erxesCustomerId,

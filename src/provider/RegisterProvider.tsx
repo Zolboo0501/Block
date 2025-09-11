@@ -55,6 +55,32 @@ interface IRegisterState {
 export const RegisterContext = createContext({} as IRegisterState);
 
 const RegisterProvider: React.FC<any> = ({ children, value }) => {
+  // const [latestAccount, _] = useMMKVObject<any>(keys.latestAccount);
+  // const [deviceToken] = useMMKVString(keys.deviceToken);
+
+  // const [login, { loading }] = useMutation(userQL.clientPortalLogin, {
+  //   onCompleted() {
+  //     value?.dispatch({ type: 'LOGIN', token: 'loggedIn' });
+  //   },
+  //   onError(err) {
+  //     alert.onError(err.message);
+  //   },
+  // });
+
+  // useEffect(() => {
+  //   if (latestAccount?.phone && latestAccount?.password) {
+  //     console.log(latestAccount, 'h');
+  //     login({
+  //       variables: {
+  //         login: latestAccount.phone,
+  //         password: latestAccount.password,
+  //         clientPortalId: ClIENTPORTAL_ID,
+  //         deviceToken,
+  //       },
+  //     });
+  //   }
+  // }, [deviceToken, latestAccount]);
+
   const [state, setState] = useState<IRegister>({
     phone: '',
     email: '',

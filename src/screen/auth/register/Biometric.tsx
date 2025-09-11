@@ -10,7 +10,8 @@ import { SafeAreaView, StyleSheet, View } from 'react-native';
 import ReactNativeBiometrics from 'react-native-biometrics';
 import { useMMKVBoolean, useMMKVObject } from 'react-native-mmkv';
 
-const Biometric: React.FC<any> = () => {
+const Biometric: React.FC<any> = ({ route }) => {
+  const type = route?.params?.type;
   const biometrics = new ReactNativeBiometrics({
     allowDeviceCredentials: true,
   });
@@ -21,13 +22,18 @@ const Biometric: React.FC<any> = () => {
   const initialBiometrics = async () => {
     const { publicKey } = await biometrics.createKeys();
     console.log(publicKey);
-    const userInfo = {
-      phone,
-      password,
-    };
-    setLatestAccount(userInfo);
+    if (type === 'register') {
+      const userInfo = {
+        phone,
+        password,
+      };
+      setLatestAccount(userInfo);
+      setConfirmFaceId(true);
+      return signedIn();
+    }
+
     setConfirmFaceId(true);
-    signedIn();
+    return signedIn();
   };
 
   return (

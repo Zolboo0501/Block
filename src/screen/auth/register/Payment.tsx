@@ -54,13 +54,14 @@ const Payment: React.FC<any> = ({ navigation, route }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [cancelInterval, setCancelInterval] = useState(false);
   const [invoice, setInvoice] = useState('');
+
   const { data: paymentsData, loading: queryLoading } = useQuery<any>(
     paymentQL.payments,
   );
 
   const [customerEdit] = useMutation(userQL.customerEdit, {
-    async onCompleted() {
-      navigation.navigate('Biometric');
+    onCompleted() {
+      navigation.navigate('Biometric', { type: 'register' });
     },
     onError(error) {
       console.log(error.message);

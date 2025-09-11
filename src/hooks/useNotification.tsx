@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import notifee, { AndroidImportance, EventType } from '@notifee/react-native';
+import messaging from '@react-native-firebase/messaging';
+import { useNavigation } from '@react-navigation/native';
 import { keys } from '@storage';
 import { useEffect } from 'react';
 import { Platform } from 'react-native';
 import { useMMKVBoolean } from 'react-native-mmkv';
-import messaging from '@react-native-firebase/messaging';
-import notifee, { AndroidImportance, EventType } from '@notifee/react-native';
-import { useNavigation } from '@react-navigation/native';
 
 const useNotification = () => {
   const [__, setIsNewNotify] = useMMKVBoolean(keys.isNewNotify);
@@ -40,8 +40,6 @@ const useNotification = () => {
 
   // User foreground Action event
   const handleNotifeeEvent = ({ type, detail }: any) => {
-    console.log(type, 'type');
-    console.log(detail, 'detail');
     if (type === EventType.PRESS) {
       navigation.navigate('Зээл', { contractId: '4Uvb62at7ZPBdoEf_6laC' });
     }

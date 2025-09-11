@@ -12,7 +12,6 @@ export const AuthContext = createContext({} as IAuth);
 
 const AuthProvider: React.FC<any> = ({ children, value }) => {
   const [loggedUser, setLoggedUser] = useState<any>();
-
   const { data, refetch } = useQuery<any>(userQL.clientPortalCurrentUser, {
     fetchPolicy: 'network-only',
   });
@@ -25,7 +24,7 @@ const AuthProvider: React.FC<any> = ({ children, value }) => {
   }, [data]);
 
   const logout = () => {
-    value?.dispatch({ type: 'LOGOUT', token: null });
+    value?.dispatch({ type: 'LOGOUT' });
     setLoggedUser(null);
   };
 

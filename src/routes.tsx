@@ -150,6 +150,14 @@ const Routes = () => {
           }}
         />
         <Stack.Screen
+          name="Biometric"
+          component={Biometric}
+          options={{
+            headerShown: false,
+            headerShadowVisible: false,
+          }}
+        />
+        <Stack.Screen
           name="MembershipDetail"
           component={MembershipDetail}
           options={{
@@ -165,14 +173,6 @@ const Routes = () => {
             headerShadowVisible: false,
           }}
         />
-        <Stack.Screen
-          name="Biometric"
-          component={Biometric}
-          options={{
-            headerShown: false,
-            headerShadowVisible: false,
-          }}
-        />
       </Stack.Navigator>
     );
   };
@@ -180,7 +180,6 @@ const Routes = () => {
   const CoreRoot = () => {
     return (
       <Stack.Navigator
-        initialRouteName="Main"
         screenOptions={{
           headerStyle: { backgroundColor: '#111111' },
           headerTintColor: '#fff',

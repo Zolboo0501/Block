@@ -17,11 +17,11 @@ import { BiometryTypes } from 'react-native-biometrics';
 import { useMMKVBoolean, useMMKVObject } from 'react-native-mmkv';
 
 const Login: React.FC<any> = ({ navigation }) => {
-  const [latestAccount, __] = useMMKVObject<{
+  const [latestAccount, setLatestAccount] = useMMKVObject<{
     phone: string;
     password: string;
   }>(keys.latestAccount);
-  const [confirmFaceId, _] = useMMKVBoolean(keys.confirmFaceId);
+  const [confirmFaceId, setConfirmFaceId] = useMMKVBoolean(keys.confirmFaceId);
   const alert = useAlert();
   const { signedIn } = useRegister();
 
@@ -60,11 +60,6 @@ const Login: React.FC<any> = ({ navigation }) => {
       .then((resultObject: any) => {
         const { success } = resultObject;
         if (success) {
-          console.log({
-            login: latestAccount?.phone,
-            password: latestAccount?.password,
-            clientPortalId: ClIENTPORTAL_ID,
-          });
           loginMutation({
             variables: {
               login: latestAccount?.phone,
@@ -83,7 +78,7 @@ const Login: React.FC<any> = ({ navigation }) => {
   };
 
   const onSignIn = () => {
-    if (confirmFaceId) {
+    if (latestAccount?.password && latestAccount?.phone && confirmFaceId) {
       return initialBiometrics();
     }
     navigation.navigate('SignIn');
@@ -128,12 +123,14 @@ const Login: React.FC<any> = ({ navigation }) => {
           {latestAccount?.password && latestAccount?.phone && confirmFaceId && (
             <TouchableOpacity
               onPress={() => {
+                setLatestAccount(undefined);
+                setConfirmFaceId(undefined);
                 navigation.navigate('SignIn');
               }}
               style={{ marginTop: 15 }}
             >
               <TextView fontSize={14} fontWeight={'500'} center>
-                USE PASSWORD
+                CHANGE USER
               </TextView>
             </TouchableOpacity>
           )}

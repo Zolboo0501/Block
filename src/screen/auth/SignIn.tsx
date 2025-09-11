@@ -14,12 +14,18 @@ import useAlert from 'hooks/useAlert';
 import useRegister from 'hooks/useRegister';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { useMMKVString } from 'react-native-mmkv';
+import {
+  useMMKVBoolean,
+  useMMKVObject,
+  useMMKVString,
+} from 'react-native-mmkv';
 
 const SignIn: React.FC<any> = ({ navigation }) => {
   const alert = useAlert();
   const [disable, setDisable] = useState(true);
   const { signedIn } = useRegister();
+  const [confirmFaceId] = useMMKVBoolean(keys.confirmFaceId);
+  const [_, setLatestAccount] = useMMKVObject(keys.latestAccount);
   const [deviceToken] = useMMKVString(keys.deviceToken);
   const [user, setUser] = useState({
     phone: '',
@@ -30,6 +36,10 @@ const SignIn: React.FC<any> = ({ navigation }) => {
     userQL.clientPortalLogin,
     {
       onCompleted() {
+        setLatestAccount(user);
+        if (!confirmFaceId) {
+          return navigation.navigate('Biometric');
+        }
         signedIn();
       },
       onError(err) {
