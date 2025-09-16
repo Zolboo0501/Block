@@ -1,11 +1,14 @@
 import { getAttachmentUrl } from '@utils';
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import RotateImage from './RotateImage';
+import ImageView from './ImageView';
 
 const MultipleImage: React.FC<any> = ({ item }) => {
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
   return (
     <TouchableOpacity
+      onPress={() => setModalVisible(true)}
       style={[
         styles.imagesContainer,
         {
@@ -19,6 +22,11 @@ const MultipleImage: React.FC<any> = ({ item }) => {
 
         return <RotateImage source={source} index={index} key={index} />;
       })}
+      <ImageView
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        item={item}
+      />
     </TouchableOpacity>
   );
 };

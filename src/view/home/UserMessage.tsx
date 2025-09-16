@@ -6,8 +6,8 @@ import dayjs from 'dayjs';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { stripHtml } from 'string-strip-html';
-import MultipleImage from './MultipleImage';
-import Images from './Images';
+import Images from 'components/Images';
+import MultipleImage from 'components/MultipleImage';
 
 const UserMessage: React.FC<any> = ({ item }) => {
   const renderDate = () => {
