@@ -98,11 +98,13 @@ const ValidationForm: React.FC<any> = ({ navigation }) => {
   const [register, { loading }] = useMutation(userQL.register, {
     onCompleted(data: any) {
       const id = data?.clientPortalRegister;
+      console.log(data, 'data regoster');
       onChange('userId', id);
       getDetail({
         variables: { _id: id },
       })
         .then(({ data }: { data: any }) => {
+          console.log(data, 'Data');
           const erxesCustomerId = data?.clientPortalUserDetail?.erxesCustomerId;
           onChange('erxesCustomerId', erxesCustomerId);
 

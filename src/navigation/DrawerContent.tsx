@@ -1,6 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
+import { useQuery } from '@apollo/client/react';
+import { AUTOMATION_ID } from '@constants';
 import { ChevronLeft, Folder, LogoutIcon, Profile } from '@icons';
+import Loader from 'components/Loader';
 import TextView from 'components/TextView';
+import messengerQL from 'graph/messengerQL';
 import useAuth from 'hooks/useAuth';
 import React from 'react';
 import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
@@ -13,21 +17,20 @@ const folders = [
   { icon: <Folder />, label: 'Custom Drinks', onPress: () => {} },
 ];
 
-const chats = [
-  'Arrange chauffeur pickup',
-  'I’d like to reserve  a VIP table',
-  'What should I do if I want to cancel my payment?',
-  'Can I change my membership within the app?',
-  'Does it work on both Android and iPhone?',
-  'Request custom drinks',
-  'When does my membership expire?',
-];
-
 const DrawerContent: React.FC<any> = ({ navigation }) => {
   const insets = useSafeAreaInsets();
   const { signedOut } = useAuth();
 
   const { loggedUser } = useAuth();
+
+  const { data, loading } = useQuery<any>(messengerQL.automationDetail, {
+    variables: {
+      _id: AUTOMATION_ID,
+    },
+  });
+
+  const suggest = data?.automationDetail?.triggers;
+
   return (
     <View
       style={[
@@ -65,18 +68,30 @@ const DrawerContent: React.FC<any> = ({ navigation }) => {
               <TextView fontWeight={'500'} fontSize={18} color="#666666">
                 Chats
               </TextView>
-              <View style={styles.gap}>
-                {chats.map((item: any, index: number) => (
-                  <TouchableOpacity
-                    key={index}
-                    onPress={() => navigation.navigate('Home', { text: item })}
-                  >
-                    <TextView key={index} fontSize={18}>
-                      {item}
-                    </TextView>
-                  </TouchableOpacity>
-                ))}
-              </View>
+              {loading ? (
+                <Loader />
+              ) : (
+                <View style={styles.gap}>
+                  {suggest?.map((item: any, index: number) => (
+                    <TouchableOpacity
+                      key={index}
+                      onPress={() =>
+                        navigation.navigate('Connection', {
+                          text: item?.config?.conditions?.[0]?.conditions?.[0]
+                            ?.keywords?.[0]?.text,
+                        })
+                      }
+                    >
+                      <TextView key={index} fontSize={18}>
+                        {
+                          item?.config?.conditions?.[0]?.conditions?.[0]
+                            ?.keywords?.[0]?.text
+                        }
+                      </TextView>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+              )}
             </View>
           </View>
         </View>

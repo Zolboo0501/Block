@@ -70,6 +70,12 @@ const SignIn: React.FC<any> = ({ navigation }) => {
   };
 
   const onSave = () => {
+    console.log({
+      login: user.phone,
+      password: user.password,
+      clientPortalId: ClIENTPORTAL_ID,
+      deviceToken,
+    });
     login({
       variables: {
         login: user.phone,

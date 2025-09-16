@@ -8,11 +8,19 @@ import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { getMainDefinition } from '@apollo/client/utilities';
 import { apiUrl, baseUrl, ERXES_APP_TOKEN } from '@constants';
 import { createClient } from 'graphql-ws';
+import { loadDevMessages, loadErrorMessages } from '@apollo/client/dev';
 
 // WebSocket link
 const wsLink = new GraphQLWsLink(
   createClient({
     url: `wss://${baseUrl}/graphql`,
+    retryAttempts: 1000,
+    retryWait: async () => new Promise(res => setTimeout(res, 5000)),
+    on: {
+      connected: () => console.log('✅ WebSocket connected'),
+      closed: () => console.log('⚠️ WebSocket closed'),
+      error: err => console.error('❌ WebSocket error:', err),
+    },
   }),
 );
 
@@ -34,6 +42,10 @@ const splitLink = ApolloLink.split(
   wsLink,
   httpLink,
 );
+if (__DEV__) {
+  loadDevMessages();
+  loadErrorMessages();
+}
 
 export const createApolloClient = () =>
   new ApolloClient({

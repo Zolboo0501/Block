@@ -1,29 +1,29 @@
 /* eslint-disable react/no-unstable-nested-components */
+import { initialLoginState } from '@constants';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { keys } from '@storage';
+import AuthProvider from 'provider/AuthProvider';
 import RegisterProvider from 'provider/RegisterProvider';
 import React from 'react';
+import { useMMKVBoolean } from 'react-native-mmkv';
+import Connection from './Connection';
 import DrawerContent from './navigation/DrawerContent';
+import ForgetPassword from './screen/auth/ForgetPassword';
 import Login from './screen/auth/Login';
 import OtpVerify from './screen/auth/OtpVerify';
+import Password from './screen/auth/Password';
 import Biometric from './screen/auth/register/Biometric';
 import MembershipDetail from './screen/auth/register/MembershipDetail';
 import Payment from './screen/auth/register/Payment';
 import Rules from './screen/auth/register/Rules';
 import ValidationForm from './screen/auth/register/ValidationForm';
 import SignIn from './screen/auth/SignIn';
-import Home from './screen/home/Home';
-import Onboard from './screen/splash/Onboard';
-import { initialLoginState } from '@constants';
-import Profile from './screen/profile/Profile';
-import AuthProvider from 'provider/AuthProvider';
-import ReNew from './screen/profile/ReNew';
 import EditProfile from './screen/profile/EditProfile';
-import { useMMKVBoolean } from 'react-native-mmkv';
-import { keys } from '@storage';
-import ForgetPassword from './screen/auth/ForgetPassword';
-import Password from './screen/auth/Password';
+import Profile from './screen/profile/Profile';
+import ReNew from './screen/profile/ReNew';
+import Onboard from './screen/splash/Onboard';
 
 const Routes = () => {
   const Drawer = createDrawerNavigator();
@@ -74,9 +74,9 @@ const Routes = () => {
         drawerContent={(rest: any) => <DrawerContent {...rest} />}
       >
         <Drawer.Screen
-          name="Home"
+          name="Connection"
           options={{ headerShown: false }}
-          component={Home}
+          component={Connection}
         />
       </Drawer.Navigator>
     );
