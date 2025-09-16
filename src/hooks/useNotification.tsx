@@ -41,7 +41,7 @@ const useNotification = () => {
   // User foreground Action event
   const handleNotifeeEvent = ({ type, detail }: any) => {
     if (type === EventType.PRESS) {
-      navigation.navigate('Зээл', { contractId: '4Uvb62at7ZPBdoEf_6laC' });
+      // navigation.navigate('Зээл', { contractId: '4Uvb62at7ZPBdoEf_6laC' });
     }
   };
 

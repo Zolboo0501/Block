@@ -1,3 +1,4 @@
+import { apiUrl } from '@constants';
 import { ArrowLeft } from '@icons';
 import TextView from 'components/TextView';
 import { Dimensions, TouchableOpacity } from 'react-native';
@@ -43,6 +44,17 @@ const isEmpty = (value: any) => {
   if (typeof value === 'object') {
     return Object.keys(value).length === 0 ? true : false;
   }
+};
+
+export const getAttachmentUrl = (value: string, width?: any) => {
+  if (value && !value.includes('https')) {
+    const encodedKey = encodeURIComponent(value);
+    if (width) {
+      return apiUrl + '/read-file?key=' + encodedKey + '&width=' + width;
+    }
+    return apiUrl + '/read-file?key=' + encodedKey;
+  }
+  return value;
 };
 
 export const biometrics = new ReactNativeBiometrics({
