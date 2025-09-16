@@ -2,7 +2,7 @@
 import FastImage from '@d11/react-native-fast-image';
 import { Close } from '@icons';
 import { getAttachmentUrl, WIDTH } from '@utils';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   Modal,
   ScrollView,
@@ -12,9 +12,25 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-const ImageView: React.FC<any> = ({ item, modalVisible, setModalVisible }) => {
+const ImageView: React.FC<any> = ({
+  item,
+  modalVisible,
+  setModalVisible,
+  index,
+}) => {
   const scrollRef = useRef<ScrollView>(null);
   const insets = useSafeAreaInsets();
+
+  useEffect(() => {
+    if (modalVisible && scrollRef.current) {
+      setTimeout(() => {
+        scrollRef.current?.scrollTo({
+          x: WIDTH * index,
+          animated: false, // set true if you want animation
+        });
+      }, 50);
+    }
+  }, [modalVisible, index]);
 
   return (
     <Modal

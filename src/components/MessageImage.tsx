@@ -7,12 +7,15 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 
 const MessageImage: React.FC<any> = ({ item, image, index }) => {
   const source = getAttachmentUrl(image?.url);
-
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const isOdd = index % 2 === 1;
 
   return (
-    <TouchableOpacity onPress={() => setModalVisible(true)}>
+    <TouchableOpacity
+      onPress={() => {
+        setModalVisible(true);
+      }}
+    >
       <FastImage
         source={{
           uri: `${source}`,
@@ -31,6 +34,7 @@ const MessageImage: React.FC<any> = ({ item, image, index }) => {
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
         item={item}
+        index={index}
       />
     </TouchableOpacity>
   );
