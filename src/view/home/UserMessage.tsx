@@ -1,36 +1,14 @@
 import FastImage from '@d11/react-native-fast-image';
 import images from '@images';
-import { WIDTH } from '@utils';
+import { messageDate, WIDTH } from '@utils';
+import Images from 'components/Images';
+import MultipleImage from 'components/MultipleImage';
 import TextView from 'components/TextView';
-import dayjs from 'dayjs';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { stripHtml } from 'string-strip-html';
-import Images from 'components/Images';
-import MultipleImage from 'components/MultipleImage';
 
 const UserMessage: React.FC<any> = ({ item }) => {
-  const renderDate = () => {
-    const now = dayjs();
-    const messageTime = dayjs(item.createdAt);
-
-    const diffMinutes = now.diff(messageTime, 'minute');
-    const diffHours = now.diff(messageTime, 'hour');
-    const diffDays = now.diff(messageTime, 'day');
-
-    if (diffDays === 0) {
-      if (diffMinutes < 1) return 'Just now';
-      if (diffHours === 0) return `${diffMinutes} minutes ago`;
-      if (diffHours < 12 && diffHours > 0) return `${diffHours} hours ago`;
-      return messageTime.format('HH:mm'); // same day but older than 12h
-    }
-
-    if (diffDays === 1) return 'Yesterday';
-    if (diffDays === 2) return 'The day before yesterday';
-
-    return messageTime.format('YYYY.MM.DD');
-  };
-
   const renderText = () => {
     const messageText =
       item?.botData?.length > 0
@@ -48,7 +26,7 @@ const UserMessage: React.FC<any> = ({ item }) => {
   return (
     <View style={styles.container}>
       <TextView fontSize={12} color="#666666">
-        {renderDate()}
+        {messageDate(item)}
       </TextView>
       <View style={styles.rowGap}>
         <FastImage source={images.logo45} style={styles.image} />
@@ -92,6 +70,5 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 18,
     borderBottomRightRadius: 18,
     maxWidth: WIDTH - 100,
-    gap: 10,
   },
 });

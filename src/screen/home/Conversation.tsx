@@ -3,7 +3,9 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 import { useMutation, useQuery } from '@apollo/client/react';
 import { AUTOMATION_ID } from '@constants';
+import { uploadHandler } from '@utils';
 import Loader from 'components/Loader';
+import Processing from 'components/Processing';
 import messengerQL from 'graph/messengerQL';
 import useAlert from 'hooks/useAlert';
 import useAuth from 'hooks/useAuth';
@@ -15,6 +17,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
+import { launchImageLibrary } from 'react-native-image-picker';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import Header from 'view/home/Header';
 import InstantMessage from 'view/home/InstantMessage';
@@ -27,6 +30,8 @@ const Conversation: React.FC<any> = ({ id, integrationId, autoText }) => {
   const [text, setText] = useState('');
   const alert = useAlert();
   const { loggedUser } = useAuth();
+  const [isUploading, onUploading] = useState(false);
+  const [files, setFiles] = useState<any[]>([]);
 
   const { data, loading, subscribeToMore } = useQuery<any>(
     messengerQL.conversationDetail,
@@ -50,13 +55,13 @@ const Conversation: React.FC<any> = ({ id, integrationId, autoText }) => {
 
   useEffect(() => {
     if (data?.widgetsConversationDetail?.messages?.length > 0) {
-      setTimeout(() => scrollRef.current?.scrollToEnd({ animated: true }), 500);
+      setTimeout(() => scrollRef.current?.scrollToEnd({ animated: true }), 600);
     }
   }, [data]);
 
   useEffect(() => {
     if (autoText) {
-      onSend(autoText);
+      onSend();
     }
   }, [autoText]);
 
@@ -64,6 +69,8 @@ const Conversation: React.FC<any> = ({ id, integrationId, autoText }) => {
     onCompleted(data: any) {
       const _id = data?.widgetsInsertMessage?.conversationId;
       setConversationId(_id);
+      setFiles([]);
+      setText('');
     },
     onError(error) {
       alert.onError(error.message);
@@ -110,17 +117,86 @@ const Conversation: React.FC<any> = ({ id, integrationId, autoText }) => {
     };
   }, [conversationId, id, subscribeToMore]);
 
-  const onSend = (hasText: string) => {
-    insertMessage({
-      variables: {
-        integrationId,
-        customerId: loggedUser?.erxesCustomerId,
-        conversationId: id ? id : conversationId,
-        contentType: 'text',
-        message: hasText ? hasText : text,
-      },
+  const onStart = () => {
+    setTimeout(() => {
+      onUploading(true);
+    }, 1000);
+  };
+
+  const onError = (message: string) => {
+    console.log(message);
+    setTimeout(() => onUploading(false), 2000);
+    setTimeout(() => alert.onError(message), 3500);
+  };
+
+  const onEnd = (result?: any, file?: any) => {
+    if (result.status === 200) {
+      if (files.length === 0) {
+        setTimeout(
+          () => scrollRef.current?.scrollToEnd({ animated: true }),
+          600,
+        );
+      }
+      const fileConvert = {
+        name: file?.name,
+        size: file?.size,
+        type: file?.type,
+        url: result?.data,
+      };
+      setFiles((prev: any) => [...prev, fileConvert]);
+    }
+    setTimeout(() => {
+      onUploading(false);
+    }, 1000);
+  };
+
+  const onSend = () => {
+    if (autoText?.length > 0 || text?.length > 0 || files?.length > 0) {
+      insertMessage({
+        variables: {
+          integrationId,
+          customerId: loggedUser?.erxesCustomerId,
+          conversationId: id || conversationId,
+          contentType: 'text',
+          message: autoText ? autoText : text,
+          attachments: autoText ? [] : [...files],
+        },
+      });
+    }
+  };
+
+  const onImage = async () => {
+    const result: any = await launchImageLibrary({
+      mediaType: 'mixed',
     });
-    setText('');
+
+    if (result.errorCode) {
+      return alert.onError(result.errorCode);
+    }
+
+    if (result.didCancel) {
+      return;
+    }
+
+    if (files.length === 0) {
+      setTimeout(() => scrollRef.current?.scrollToEnd({ animated: true }), 600);
+    }
+    const file = {
+      name: result.assets[0].fileName,
+      size: result.assets[0].fileSize,
+      type: result.assets[0].type,
+      uri: result?.assets[0]?.uri,
+    };
+
+    uploadHandler({
+      file,
+      event: (event: any) => {
+        console.log(Math.round((100 * event.loaded) / event.total));
+      },
+      onStart,
+      onError,
+      onEnd,
+    });
   };
 
   if (loading || messageLoading) {
@@ -143,10 +219,18 @@ const Conversation: React.FC<any> = ({ id, integrationId, autoText }) => {
             <MessageList
               data={data?.widgetsConversationDetail?.messages || []}
             />
-            <MessageInput text={text} setText={setText} onSend={onSend} />
+            <MessageInput
+              text={text}
+              setText={setText}
+              onSend={onSend}
+              onImage={onImage}
+              files={files}
+              setFiles={setFiles}
+            />
           </View>
         </TouchableWithoutFeedback>
       </KeyboardAwareScrollView>
+      <Processing isVisible={isUploading} onVisible={onUploading} />
     </SafeAreaView>
   );
 };

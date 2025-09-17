@@ -1,31 +1,42 @@
-import { Attachment, Microphone, Send } from '@icons';
+import { Attachment, Gallery, Send } from '@icons';
 import React from 'react';
 import { StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
+import RenderImages from './RenderImages';
 
-const MessageInput: React.FC<any> = ({ text, setText, onSend }) => {
+const MessageInput: React.FC<any> = ({
+  text,
+  setText,
+  files,
+  onSend,
+  onImage,
+  setFiles,
+}) => {
   return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        value={text}
-        style={styles.input}
-        placeholder="Type message..."
-        placeholderTextColor={'#DEDEDE'}
-        onChangeText={(value: string) => setText(value)}
-        onSubmitEditing={() => {
-          onSend();
-        }}
-      />
-      <TouchableOpacity>
-        <Microphone />
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <Attachment />
-      </TouchableOpacity>
-      {text.trim().length > 0 && (
-        <TouchableOpacity style={styles.send} onPress={() => onSend()}>
-          <Send size={18} />
+    <View style={styles.container}>
+      <RenderImages files={files} setFiles={setFiles} />
+      <View style={styles.inputContainer}>
+        <TextInput
+          value={text}
+          style={styles.input}
+          placeholder="Type message..."
+          placeholderTextColor={'#DEDEDE'}
+          onChangeText={(value: string) => setText(value)}
+          onSubmitEditing={() => {
+            onSend();
+          }}
+        />
+        <TouchableOpacity onPress={() => onImage()}>
+          <Gallery />
         </TouchableOpacity>
-      )}
+        <TouchableOpacity>
+          <Attachment />
+        </TouchableOpacity>
+        {(text.trim().length > 0 || files.length > 0) && (
+          <TouchableOpacity style={styles.send} onPress={onSend}>
+            <Send size={18} />
+          </TouchableOpacity>
+        )}
+      </View>
     </View>
   );
 };
@@ -33,6 +44,9 @@ const MessageInput: React.FC<any> = ({ text, setText, onSend }) => {
 export default MessageInput;
 
 const styles = StyleSheet.create({
+  container: {
+    gap: 10,
+  },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',

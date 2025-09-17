@@ -25,6 +25,19 @@ export const LogoutIcon = () => {
   );
 };
 
+export const Gallery = () => {
+  return (
+    <Svg width={20} height={20} viewBox="0 0 22 22" fill="none">
+      <Path
+        d="M2.139 17.508C3.498 20.077 6.21 21 11 21c6.618 0 9.271-1.762 9.865-7.194M2.14 17.508C1.329 15.976 1 13.858 1 11 1 3.353 3.353 1 11 1s10 2.353 10 10c0 1.029-.043 1.962-.135 2.806M2.14 17.508l3.668-3.668a2.353 2.353 0 013.327 0l.202.202a2.353 2.353 0 003.328 0l2.555-2.555a2.353 2.353 0 013.327 0l2.32 2.32M9.46 7.288a2.172 2.172 0 11-4.34-.001 2.172 2.172 0 014.34.001z"
+        stroke="#DEDEDE"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+};
+
 export const AlertClose = ({
   color = '#fff',
   size = 16,
@@ -163,9 +176,9 @@ export const Menu = () => {
     </Svg>
   );
 };
-export const Close = () => {
+export const Close = ({ size = 24 }: { size?: number }) => {
   return (
-    <Svg width={24} height={24} viewBox="0 0 24 24" fill="none">
+    <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
       <Path
         d="M6 18L18 6M6 6l12 12"
         stroke="#DEDEDE"

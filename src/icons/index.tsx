@@ -16,6 +16,7 @@ import { Edit } from './icons';
 import { AlertClose } from './icons';
 import { Success } from './icons';
 import { Alert } from './icons';
+import { Gallery } from './icons';
 
 export {
   Face,
@@ -36,4 +37,5 @@ export {
   AlertClose,
   Success,
   Alert,
+  Gallery,
 };

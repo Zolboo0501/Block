@@ -1,8 +1,10 @@
 import { apiUrl } from '@constants';
 import { ArrowLeft } from '@icons';
 import TextView from 'components/TextView';
+import dayjs from 'dayjs';
 import { Dimensions, TouchableOpacity } from 'react-native';
 import ReactNativeBiometrics from 'react-native-biometrics';
+import axios from 'axios';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
@@ -46,6 +48,27 @@ const isEmpty = (value: any) => {
   }
 };
 
+export const messageDate = (item: any) => {
+  const now = dayjs();
+  const messageTime = dayjs(item?.createdAt);
+
+  const diffMinutes = now.diff(messageTime, 'minute');
+  const diffHours = now.diff(messageTime, 'hour');
+  const diffDays = now.diff(messageTime, 'day');
+
+  if (diffDays === 0) {
+    if (diffMinutes < 1) return 'Just now';
+    if (diffHours === 0) return `${diffMinutes} minutes ago`;
+    if (diffHours < 12 && diffHours > 0) return `${diffHours} hours ago`;
+    return messageTime.format('HH:mm'); // same day but older than 12h
+  }
+
+  if (diffDays === 1) return 'Yesterday';
+  if (diffDays === 2) return 'The day before yesterday';
+
+  return messageTime.format('YYYY.MM.DD');
+};
+
 export const getAttachmentUrl = (value: string, width?: any) => {
   if (value && !value.includes('https')) {
     const encodedKey = encodeURIComponent(value);
@@ -55,6 +78,73 @@ export const getAttachmentUrl = (value: string, width?: any) => {
     return apiUrl + '/read-file?key=' + encodedKey;
   }
   return value;
+};
+
+export const uploadHandler = ({ file, onStart, onError, onEnd }: any) => {
+  onStart && onStart(file);
+  const formData = new FormData();
+  formData.append('file', file);
+
+  const fullUrl = encodeURI(
+    `${apiUrl}/upload-file?kind=main&maxHeight=800&maxWidth=800`,
+  );
+
+  axios
+    .post(fullUrl, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      timeout: 100000,
+      withCredentials: true,
+    })
+    .then(res => {
+      if (res.status !== 200) {
+        return onError && onError(res.status);
+      }
+
+      onEnd && onEnd(res, file);
+    })
+    .catch(e => {
+      if (e?.message?.includes('413')) {
+        return onError && onError('File size is too big!');
+      }
+      if (e?.message?.includes('500')) {
+        return onError && onError('Server error!');
+      }
+      console.log(e);
+      onError && onError('uploadHandler: ' + e);
+    });
+};
+
+export const uploadRemoveFile = ({
+  fileName,
+  onStart,
+  onError,
+  onEnd,
+}: any) => {
+  onStart();
+  axios
+    .post(
+      `${apiUrl}/pl:core/delete-file`,
+      `fileName=${encodeURIComponent(fileName)}`,
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        },
+        timeout: 100000,
+        withCredentials: true,
+      },
+    )
+    .then(res => {
+      if (res.status !== 200) {
+        return onError && onError(res.status);
+      }
+      onEnd && onEnd(res, fileName);
+    })
+    .catch(err => {
+      console.log(err);
+      onError && onError('remove file: ' + err);
+    });
 };
 
 export const biometrics = new ReactNativeBiometrics({
