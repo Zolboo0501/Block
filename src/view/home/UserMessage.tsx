@@ -70,5 +70,6 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 18,
     borderBottomRightRadius: 18,
     maxWidth: WIDTH - 100,
+    gap: 10,
   },
 });

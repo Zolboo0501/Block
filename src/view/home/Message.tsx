@@ -4,21 +4,10 @@ import MultipleAttachment from 'components/MultipleAttachment';
 import TextView from 'components/TextView';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { stripHtml } from 'string-strip-html';
 
 const Message: React.FC<any> = ({ item }) => {
   const renderText = () => {
-    const messageText =
-      item?.botData?.length > 0
-        ? item?.botData?.[0]?.text
-        : item?.content || '';
-
-    return (
-      messageText &&
-      stripHtml(messageText).result && (
-        <TextView>{stripHtml(messageText).result}</TextView>
-      )
-    );
+    return <TextView>{item?.content}</TextView>;
   };
 
   return (
@@ -51,5 +40,6 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 18,
     borderBottomLeftRadius: 18,
     maxWidth: WIDTH - 100,
+    gap: 10,
   },
 });

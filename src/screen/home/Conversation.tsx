@@ -167,5 +167,5 @@ export default Conversation;
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  space: { paddingHorizontal: 15, flex: 1 },
+  space: { paddingHorizontal: 15, flex: 1, paddingVertical: 10 },
 });
