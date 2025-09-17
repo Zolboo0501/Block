@@ -5,7 +5,7 @@ import ImageView from 'components/ImageView';
 import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 
-const MessageImage: React.FC<any> = ({ item, image, index }) => {
+const MessageImage: React.FC<any> = ({ item, image, isAllImage, index }) => {
   const source = getAttachmentUrl(image?.url);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const isOdd = index % 2 === 1;
@@ -24,7 +24,7 @@ const MessageImage: React.FC<any> = ({ item, image, index }) => {
         resizeMode={FastImage.resizeMode.cover}
         style={[
           styles.image2,
-          {
+          isAllImage && {
             marginLeft: isOdd ? 40 : 0,
             marginTop: isOdd ? -60 : index === 2 ? -60 : 0,
           },

@@ -17,6 +17,10 @@ import { AlertClose } from './icons';
 import { Success } from './icons';
 import { Alert } from './icons';
 import { Gallery } from './icons';
+import { PdfIcon } from './icons';
+import { WordIcon } from './icons';
+import { ExcelIcon } from './icons';
+import { FileIcon } from './icons';
 
 export {
   Face,
@@ -38,4 +42,8 @@ export {
   Success,
   Alert,
   Gallery,
+  PdfIcon,
+  WordIcon,
+  ExcelIcon,
+  FileIcon,
 };

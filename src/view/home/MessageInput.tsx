@@ -25,10 +25,10 @@ const MessageInput: React.FC<any> = ({
             onSend();
           }}
         />
-        <TouchableOpacity onPress={() => onImage()}>
+        <TouchableOpacity onPress={() => onImage()} style={styles.padding}>
           <Gallery />
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity style={styles.padding}>
           <Attachment />
         </TouchableOpacity>
         {(text.trim().length > 0 || files.length > 0) && (
@@ -44,6 +44,9 @@ const MessageInput: React.FC<any> = ({
 export default MessageInput;
 
 const styles = StyleSheet.create({
+  padding: {
+    padding: 3,
+  },
   container: {
     gap: 10,
   },

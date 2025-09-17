@@ -2120,6 +2120,11 @@
     prompts "^2.4.2"
     semver "^7.5.2"
 
+"@react-native-documents/picker@^10.1.6":
+  version "10.1.6"
+  resolved "https://registry.yarnpkg.com/@react-native-documents/picker/-/picker-10.1.6.tgz#b04ee7d38c0e6e2e3ba69327840bf15509a57212"
+  integrity sha512-IufAu32LMway1BYJw7JqqWO7OFsBJd/nPtwxDV7Gm0dOfQi2l8ZpQtyrMHyEANU6yVl0SIQZk1tL+dOOSaYJaw==
+
 "@react-native-firebase/app@^23.3.1":
   version "23.3.1"
   resolved "https://registry.yarnpkg.com/@react-native-firebase/app/-/app-23.3.1.tgz#5e00d7c8975b0faa824b227c5edd95abcb77083e"

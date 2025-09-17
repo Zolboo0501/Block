@@ -1,8 +1,8 @@
 import FastImage from '@d11/react-native-fast-image';
 import images from '@images';
 import { messageDate, WIDTH } from '@utils';
-import Images from 'components/Images';
-import MultipleImage from 'components/MultipleImage';
+import Attachments from 'components/Attachments';
+import MultipleAttachment from 'components/MultipleAttachment';
 import TextView from 'components/TextView';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
@@ -32,9 +32,9 @@ const UserMessage: React.FC<any> = ({ item }) => {
         <FastImage source={images.logo45} style={styles.image} />
         <View style={styles.messageContainer}>
           {item?.attachments?.length > 3 ? (
-            <MultipleImage item={item} />
+            <MultipleAttachment item={item} />
           ) : (
-            <Images item={item} />
+            <Attachments item={item} />
           )}
 
           {renderText()}

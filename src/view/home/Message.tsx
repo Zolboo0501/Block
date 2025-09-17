@@ -1,6 +1,6 @@
 import { messageDate, WIDTH } from '@utils';
-import Images from 'components/Images';
-import MultipleImage from 'components/MultipleImage';
+import Attachments from 'components/Attachments';
+import MultipleAttachment from 'components/MultipleAttachment';
 import TextView from 'components/TextView';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
@@ -28,9 +28,9 @@ const Message: React.FC<any> = ({ item }) => {
       </TextView>
       <View style={styles.messageContainer}>
         {item?.attachments?.length > 3 ? (
-          <MultipleImage item={item} />
+          <MultipleAttachment item={item} />
         ) : (
-          <Images item={item} />
+          <Attachments item={item} />
         )}
 
         {renderText()}

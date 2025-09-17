@@ -62,26 +62,30 @@ const ImageView: React.FC<any> = ({
           scrollEventThrottle={16}
           pagingEnabled
         >
-          {item?.attachments?.map((image: any, index: number) => (
-            <View
-              key={index}
-              style={{
-                flex: 1,
-                width: WIDTH,
-              }}
-            >
-              <FastImage
-                source={{
-                  uri: getAttachmentUrl(image?.url),
-                  priority: FastImage.priority.high,
-                }}
-                resizeMode={FastImage.resizeMode.contain}
-                style={{
-                  flex: 1,
-                }}
-              />
-            </View>
-          ))}
+          {item?.attachments?.map((image: any, index: number) => {
+            if (image?.type?.includes('image')) {
+              return (
+                <View
+                  key={index}
+                  style={{
+                    flex: 1,
+                    width: WIDTH,
+                  }}
+                >
+                  <FastImage
+                    source={{
+                      uri: getAttachmentUrl(image?.url),
+                      priority: FastImage.priority.high,
+                    }}
+                    resizeMode={FastImage.resizeMode.contain}
+                    style={{
+                      flex: 1,
+                    }}
+                  />
+                </View>
+              );
+            }
+          })}
         </ScrollView>
       </View>
     </Modal>
