@@ -1,5 +1,5 @@
 import { apiUrl } from '@constants';
-import { ArrowLeft } from '@icons';
+import { ArrowLeft, ExcelIcon, FileIcon, PdfIcon, WordIcon } from '@icons';
 import TextView from 'components/TextView';
 import dayjs from 'dayjs';
 import { Dimensions, TouchableOpacity } from 'react-native';
@@ -78,6 +78,19 @@ export const getAttachmentUrl = (value: string, width?: any) => {
     return apiUrl + '/read-file?key=' + encodedKey;
   }
   return value;
+};
+
+export const renderIcon = (att: any) => {
+  if (att?.type?.includes('pdf')) {
+    return <PdfIcon />;
+  }
+  if (att?.type?.includes('word')) {
+    return <WordIcon />;
+  }
+  if (att?.type?.includes('excel')) {
+    return <ExcelIcon />;
+  }
+  return <FileIcon />;
 };
 
 export const uploadHandler = ({ file, onStart, onError, onEnd }: any) => {

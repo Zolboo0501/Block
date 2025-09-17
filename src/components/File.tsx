@@ -1,26 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
-import { ExcelIcon, FileIcon, PdfIcon, WordIcon } from '@icons';
-import { getAttachmentUrl } from '@utils';
+import { getAttachmentUrl, renderIcon } from '@utils';
+import useAlert from 'hooks/useAlert';
 import React from 'react';
 import { Linking, StyleSheet, TouchableOpacity, View } from 'react-native';
 import TextView from './TextView';
-import useAlert from 'hooks/useAlert';
 
 const File: React.FC<any> = ({ att }) => {
   const alert = useAlert();
   const url = getAttachmentUrl(att?.url);
-  const renderIcon = () => {
-    if (att?.type?.includes('pdf')) {
-      return <PdfIcon />;
-    }
-    if (att?.type?.includes('word')) {
-      return <WordIcon />;
-    }
-    if (att?.type?.includes('excel')) {
-      return <ExcelIcon />;
-    }
-    return <FileIcon />;
-  };
 
   return (
     <TouchableOpacity
@@ -29,7 +16,7 @@ const File: React.FC<any> = ({ att }) => {
         Linking.openURL(url).catch(err => alert.onError(err.message))
       }
     >
-      <View style={styles.icon}>{renderIcon()}</View>
+      <View style={styles.icon}>{renderIcon(att)}</View>
       <View style={{ gap: 5 }}>
         <TextView fontSize={14}>{att?.name}</TextView>
         <TextView fontSize={13} fontWeight={'500'}>
