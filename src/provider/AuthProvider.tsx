@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/client/react';
+import { useMutation, useQuery } from '@apollo/client/react';
 import userQL from 'graph/userQL';
 import React, { createContext, useEffect, useState } from 'react';
 
@@ -11,6 +11,8 @@ interface IAuth {
 export const AuthContext = createContext({} as IAuth);
 
 const AuthProvider: React.FC<any> = ({ children, value }) => {
+  const [logoutMutation] = useMutation(userQL.clientPortalLogout);
+
   const [loggedUser, setLoggedUser] = useState<any>();
   const { data, refetch } = useQuery<any>(userQL.clientPortalCurrentUser, {
     fetchPolicy: 'network-only',
@@ -24,8 +26,10 @@ const AuthProvider: React.FC<any> = ({ children, value }) => {
   }, [data]);
 
   const logout = () => {
-    value?.dispatch({ type: 'LOGOUT' });
-    setLoggedUser(null);
+    logoutMutation().then(() => {
+      value?.dispatch({ type: 'LOGOUT' });
+      setLoggedUser(null);
+    });
   };
 
   const mContext: IAuth = {

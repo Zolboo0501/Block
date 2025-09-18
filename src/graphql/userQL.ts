@@ -357,6 +357,12 @@ const customerDetail = gql`
   }
 `;
 
+const clientPortalLogout = gql`
+  mutation {
+    clientPortalLogout
+  }
+`;
+
 export default {
   register,
   clientPortalLoginWithPhone,
@@ -369,4 +375,5 @@ export default {
   clientPortalCurrentUser,
   clienPortalResetPassword,
   customerDetail,
+  clientPortalLogout,
 };
