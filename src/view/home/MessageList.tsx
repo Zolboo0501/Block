@@ -24,7 +24,7 @@ const MessageList: React.FC<any> = ({ data }) => {
   return (
     <FlashList
       data={data}
-      keyExtractor={item => item.id.toString()}
+      keyExtractor={item => item?.id?.toString()}
       renderItem={renderItem}
       ItemSeparatorComponent={Separator}
       contentContainerStyle={styles.container}

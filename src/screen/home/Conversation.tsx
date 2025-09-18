@@ -57,7 +57,7 @@ const Conversation: React.FC<any> = ({ id, integrationId, autoText }) => {
 
   useEffect(() => {
     if (autoText) {
-      onSend();
+      onSend(autoText);
     }
   }, [autoText]);
 
@@ -116,16 +116,16 @@ const Conversation: React.FC<any> = ({ id, integrationId, autoText }) => {
     };
   }, [conversationId, id, subscribeToMore]);
 
-  const onSend = () => {
-    if (autoText?.length > 0 || text?.length > 0 || files?.length > 0) {
+  const onSend = (hasText?: string) => {
+    if (hasText || text?.length > 0 || files?.length > 0) {
       insertMessage({
         variables: {
           integrationId,
           customerId: loggedUser?.erxesCustomerId,
           conversationId: id || conversationId,
           contentType: 'text',
-          message: autoText ? autoText : text,
-          attachments: autoText ? [] : [...files],
+          message: hasText ? hasText : text,
+          attachments: [...files],
         },
       });
     }

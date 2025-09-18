@@ -142,7 +142,7 @@ const MessageInput: React.FC<any> = ({
           <Attachment />
         </TouchableOpacity>
         {(text.trim().length > 0 || files.length > 0) && (
-          <TouchableOpacity style={styles.send} onPress={onSend}>
+          <TouchableOpacity style={styles.send} onPress={() => onSend()}>
             <Send size={18} />
           </TouchableOpacity>
         )}
