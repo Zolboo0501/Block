@@ -7,7 +7,10 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "cp_normal": "yarn hot-updater deploy -i",
+    "cp_force": "yarn hot-updater deploy -i --force-update",
+    "cp_server": "yarn hot-updater console"
   },
   "dependencies": {
     "@apollo/client": "^4.0.4",

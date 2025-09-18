@@ -125,7 +125,7 @@ const SignIn: React.FC<any> = ({ navigation }) => {
             </TouchableOpacity>
             <View style={styles.buttonContainer}>
               <Button
-                title="SIGN IN"
+                title="SIGN INdasidjasoidjaoij"
                 titleSize={14}
                 loading={loginLoading}
                 titleWeight={'500'}
