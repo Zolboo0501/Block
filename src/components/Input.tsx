@@ -40,7 +40,7 @@ const Input: React.FC<InputProps> = ({
     if (isError) {
       return (
         <TextView fontSize={13} color="#FF4648" fontWeight={'500'}>
-          {label} is empty.
+          {label} is empty or invalid.
         </TextView>
       );
     }

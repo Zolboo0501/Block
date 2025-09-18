@@ -41,9 +41,8 @@ const MultipleAttachment: React.FC<any> = ({ item }) => {
           />
         </TouchableOpacity>
       )}
-      {files?.map((att: any, index: number) => (
-        <File att={att} key={index} />
-      ))}
+      {files?.length > 0 &&
+        files?.map((att: any, index: number) => <File att={att} key={index} />)}
     </View>
   );
 };

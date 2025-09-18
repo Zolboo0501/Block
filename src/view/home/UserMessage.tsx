@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import FastImage from '@d11/react-native-fast-image';
 import images from '@images';
 import { messageDate, WIDTH } from '@utils';
@@ -18,7 +19,9 @@ const UserMessage: React.FC<any> = ({ item }) => {
     return (
       messageText &&
       stripHtml(messageText).result && (
-        <TextView>{stripHtml(messageText).result}</TextView>
+        <TextView style={{ marginTop: item?.attachments?.length > 0 ? 10 : 0 }}>
+          {stripHtml(messageText).result}
+        </TextView>
       )
     );
   };
@@ -70,6 +73,5 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 18,
     borderBottomRightRadius: 18,
     maxWidth: WIDTH - 100,
-    gap: 10,
   },
 });

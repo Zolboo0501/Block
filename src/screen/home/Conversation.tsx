@@ -79,12 +79,12 @@ const Conversation: React.FC<any> = ({ id, integrationId, autoText }) => {
       document: messengerQL.conversationMessageInserted,
       variables: { _id: id ? id : conversationId },
       updateQuery: (prev, { subscriptionData }) => {
-        const message = subscriptionData.data.conversationMessageInserted;
-        const widgetsConversationDetail = prev.widgetsConversationDetail || {};
-        const messages = widgetsConversationDetail.messages || [];
+        const message = subscriptionData?.data?.conversationMessageInserted;
+        const widgetsConversationDetail = prev?.widgetsConversationDetail || {};
+        const messages = widgetsConversationDetail?.messages || [];
 
         // check whether or not already inserted
-        const prevEntry = messages.find((m: any) => m._id === message._id);
+        const prevEntry = messages?.find((m: any) => m?._id === message?._id);
 
         if (prevEntry) {
           return prev;
@@ -99,8 +99,11 @@ const Conversation: React.FC<any> = ({ id, integrationId, autoText }) => {
         const next = {
           ...prev,
           widgetsConversationDetail: {
-            ...widgetsConversationDetail,
-            messages: [...messages, message],
+            ...(prev?.widgetsConversationDetail ?? {}),
+            messages: [
+              ...(prev?.widgetsConversationDetail?.messages ?? []),
+              message,
+            ],
           },
         };
 

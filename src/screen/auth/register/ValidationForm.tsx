@@ -194,6 +194,15 @@ const ValidationForm: React.FC<any> = ({ navigation }) => {
         }
         return (newErrors[key].isEmpty = false);
       }
+
+      if (key === 'password') {
+        if (value.length < 4) {
+          isError = true;
+          return (newErrors[key].isEmpty = true);
+        }
+        return (newErrors[key].isEmpty = false);
+      }
+
       if (key === 'toggleCheckBox') {
         if (!toggleCheckBox) {
           isError = true;

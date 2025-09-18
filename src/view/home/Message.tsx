@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import { messageDate, WIDTH } from '@utils';
 import Attachments from 'components/Attachments';
 import MultipleAttachment from 'components/MultipleAttachment';
@@ -7,7 +8,11 @@ import { StyleSheet, View } from 'react-native';
 
 const Message: React.FC<any> = ({ item }) => {
   const renderText = () => {
-    return <TextView>{item?.content}</TextView>;
+    return (
+      <TextView style={{ marginTop: item?.attachments?.length > 0 ? 10 : 0 }}>
+        {item?.content}
+      </TextView>
+    );
   };
 
   return (
@@ -40,6 +45,5 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 18,
     borderBottomLeftRadius: 18,
     maxWidth: WIDTH - 100,
-    gap: 10,
   },
 });
