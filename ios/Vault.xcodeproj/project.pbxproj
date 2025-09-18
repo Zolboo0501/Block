@@ -23,10 +23,12 @@
 		854D94B1C9D547C6B8466B8B /* GeneralSans-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9EE6F909B5B74D17BD53A824 /* GeneralSans-MediumItalic.otf */; };
 		872BA19D29F842308DB65C88 /* GeneralSans-Extralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8F971034FA784C3A8FA7448F /* GeneralSans-Extralight.otf */; };
 		888EEDAE2E7154F200301946 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 888EEDAD2E7154F200301946 /* GoogleService-Info.plist */; };
+		92DC24FC83CF4EAA9AC69BC1 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A99E531EC7A6432C80D84B8B /* Colors.xcassets */; };
 		93018D1A87DA48C398D2A842 /* GeneralSans-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2A7B9A1699444D6AB9FA9326 /* GeneralSans-Light.otf */; };
 		BC2F3026787D4C049A30ACB8 /* GeneralSans-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8F55CFEDC4214ABDB96CCFE9 /* GeneralSans-LightItalic.otf */; };
 		F3C338B1FCDA46DFB8500530 /* GeneralSans-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = B670E17C39CF4A3B8CE67423 /* GeneralSans-SemiboldItalic.otf */; };
 		F6A25FD3C0D94E9385039CC8 /* GeneralSans-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = A575F3B336904B29A93BA69F /* GeneralSans-Medium.otf */; };
+		F7A13337B9A64CCC9CA7A680 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94E6B102BC8D4002A282102F /* BootSplash.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,8 +52,10 @@
 		8F55CFEDC4214ABDB96CCFE9 /* GeneralSans-LightItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GeneralSans-LightItalic.otf"; path = "../assets/fonts/GeneralSans-LightItalic.otf"; sourceTree = "<group>"; };
 		8F971034FA784C3A8FA7448F /* GeneralSans-Extralight.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GeneralSans-Extralight.otf"; path = "../assets/fonts/GeneralSans-Extralight.otf"; sourceTree = "<group>"; };
 		94AECA03E25F46A58F9F1E56 /* GeneralSans-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GeneralSans-Regular.otf"; path = "../assets/fonts/GeneralSans-Regular.otf"; sourceTree = "<group>"; };
+		94E6B102BC8D4002A282102F /* BootSplash.storyboard */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = BootSplash.storyboard; path = Vault/BootSplash.storyboard; sourceTree = "<group>"; };
 		9EE6F909B5B74D17BD53A824 /* GeneralSans-MediumItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GeneralSans-MediumItalic.otf"; path = "../assets/fonts/GeneralSans-MediumItalic.otf"; sourceTree = "<group>"; };
 		A575F3B336904B29A93BA69F /* GeneralSans-Medium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GeneralSans-Medium.otf"; path = "../assets/fonts/GeneralSans-Medium.otf"; sourceTree = "<group>"; };
+		A99E531EC7A6432C80D84B8B /* Colors.xcassets */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = folder.assetcatalog; name = Colors.xcassets; path = Vault/Colors.xcassets; sourceTree = "<group>"; };
 		B670E17C39CF4A3B8CE67423 /* GeneralSans-SemiboldItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GeneralSans-SemiboldItalic.otf"; path = "../assets/fonts/GeneralSans-SemiboldItalic.otf"; sourceTree = "<group>"; };
 		CB473CC76D0F453FBEA835FD /* Optician-Sans.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Optician-Sans.otf"; path = "../assets/fonts/Optician-Sans.otf"; sourceTree = "<group>"; };
 		E28DB20C85214ABCB92E2B57 /* NewYork PERSONAL USE.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NewYork PERSONAL USE.otf"; path = "../assets/fonts/NewYork PERSONAL USE.otf"; sourceTree = "<group>"; };
@@ -100,6 +104,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */,
+				94E6B102BC8D4002A282102F /* BootSplash.storyboard */,
+				A99E531EC7A6432C80D84B8B /* Colors.xcassets */,
 			);
 			name = Vault;
 			sourceTree = "<group>";
@@ -232,6 +238,8 @@
 				F3C338B1FCDA46DFB8500530 /* GeneralSans-SemiboldItalic.otf in Resources */,
 				17C12DF27EF34888B55E9C60 /* NewYork PERSONAL USE.otf in Resources */,
 				65EEDFA2150349FE8DBF241E /* Optician-Sans.otf in Resources */,
+				F7A13337B9A64CCC9CA7A680 /* BootSplash.storyboard in Resources */,
+				92DC24FC83CF4EAA9AC69BC1 /* Colors.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
