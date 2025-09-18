@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "Vault.app"
-               BlueprintName = "Vault"
-               ReferencedContainer = "container:Vault.xcodeproj">
+               BuildableName = "VaultREC.app"
+               BlueprintName = "VaultREC"
+               ReferencedContainer = "container:VaultREC.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "VaultTests.xctest"
-               BlueprintName = "VaultTests"
-               ReferencedContainer = "container:Vault.xcodeproj">
+               BuildableName = "VaultRECTests.xctest"
+               BlueprintName = "VaultRECTests"
+               ReferencedContainer = "container:VaultREC.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "Vault.app"
-            BlueprintName = "Vault"
-            ReferencedContainer = "container:Vault.xcodeproj">
+            BuildableName = "VaultREC.app"
+            BlueprintName = "VaultREC"
+            ReferencedContainer = "container:VaultREC.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "Vault.app"
-            BlueprintName = "Vault"
-            ReferencedContainer = "container:Vault.xcodeproj">
+            BuildableName = "VaultREC.app"
+            BlueprintName = "VaultREC"
+            ReferencedContainer = "container:VaultREC.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
