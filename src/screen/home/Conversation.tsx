@@ -56,7 +56,7 @@ const Conversation: React.FC<any> = ({ id, integrationId, autoText }) => {
 
   useLayoutEffect(() => {
     if (data?.widgetsConversationDetail?.messages?.length > 0) {
-      scrollRef.current?.scrollToEnd({ animated: true });
+      setTimeout(() => scrollRef.current?.scrollToEnd({ animated: true }), 800);
     }
   }, [data?.widgetsConversationDetail?.messages?.length]);
 

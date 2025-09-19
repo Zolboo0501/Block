@@ -12,6 +12,13 @@ export const AUTOMATION_ID = '68c82ced0bb31c5a338ca0b8';
 export const CODE_PUSH_ID = 'nwbcnpkjdixemdxjhjom';
 export const MEMBERSHIP_DATA = [
   {
+    image: images.member3,
+    name: 'ANNUAL',
+    price: '$1000',
+    key: 'ANNUAL',
+    duration: 1,
+  },
+  {
     image: images.member,
     name: 'PLATINUM',
     price: '‍$2,000',
@@ -25,19 +32,12 @@ export const MEMBERSHIP_DATA = [
     key: 'LIFETIME',
     duration: 999,
   },
-  {
-    image: images.member3,
-    name: 'ANNUAL',
-    price: '$1000',
-    key: 'ANNUAL',
-    duration: 1,
-  },
 ];
 
 export const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export const selectData = [
-  { label: 'Male', value: 1 },
-  { label: 'Female', value: 2 },
+  { label: 'Mr', value: 1 },
+  { label: 'Ms', value: 2 },
 ];
 
 export const initialLoginState = {

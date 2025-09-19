@@ -156,7 +156,6 @@ const EditProfile: React.FC<any> = ({ navigation }) => {
     );
   };
 
-  console.log(loggedUser, 'hh');
   const onSave = () => {
     if (validationForm()) {
       console.log('valid');

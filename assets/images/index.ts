@@ -9,7 +9,7 @@ const images = {
   splash3: require('./Messages.png'),
   cancel : require('./cancel.png'),
   success : require('./check.png'),
-  biometric : require('./bio.png')
+  biometric : require('./bio.png'),
 };
 
 export default images;
