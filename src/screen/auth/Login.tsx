@@ -130,7 +130,7 @@ const Login: React.FC<any> = ({ navigation }) => {
               style={{ marginTop: 15 }}
             >
               <TextView fontSize={14} fontWeight={'500'} center>
-                CHANGE USER
+                SIGN IN BY PASSWORD
               </TextView>
             </TouchableOpacity>
           )}
