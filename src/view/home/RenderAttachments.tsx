@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import FastImage from '@d11/react-native-fast-image';
 import { Close } from '@icons';
 import { getAttachmentUrl, renderIcon, uploadRemoveFile } from '@utils';
@@ -27,7 +26,7 @@ const RenderAttachments: React.FC<any> = ({ files, setFiles }) => {
   const onEnd = (result?: any, fileName?: any) => {
     if (result.status === 200) {
       setFiles((prev: any) =>
-        prev.filter((item: any) => item?.uri !== fileName),
+        prev.filter((item: any) => item?.url !== fileName),
       );
     }
     setTimeout(() => {
@@ -36,7 +35,7 @@ const RenderAttachments: React.FC<any> = ({ files, setFiles }) => {
   };
 
   const onDelete = (item: any) => {
-    uploadRemoveFile({ fileName: item?.uri, onStart, onEnd, onError });
+    uploadRemoveFile({ fileName: item?.url, onStart, onEnd, onError });
   };
 
   return (

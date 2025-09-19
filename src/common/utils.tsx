@@ -136,6 +136,7 @@ export const uploadRemoveFile = ({
   onEnd,
 }: any) => {
   onStart();
+  console.log(fileName, 'hh');
   axios
     .post(
       `${apiUrl}/pl:core/delete-file`,

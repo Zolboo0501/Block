@@ -56,7 +56,7 @@ const OtpVerify: React.FC<any> = ({ navigation, route }) => {
     userQL.clientPortalVerifyOTP,
     {
       onCompleted: () => {
-        navigation.navigate('Payment', { type: 'register' });
+        navigation.navigate('Biometric', { type: 'register' });
       },
       onError: err => {
         setErrorMessage(true);

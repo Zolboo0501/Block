@@ -7,7 +7,13 @@ import Loader from 'components/Loader';
 import messengerQL from 'graph/messengerQL';
 import useAlert from 'hooks/useAlert';
 import useAuth from 'hooks/useAuth';
-import React, { useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 import {
   Keyboard,
   SafeAreaView,
@@ -33,10 +39,9 @@ const Conversation: React.FC<any> = ({ id, integrationId, autoText }) => {
     messengerQL.conversationDetail,
     {
       variables: {
-        _id: id,
+        _id: id ? id : conversationId,
         integrationId,
       },
-      skip: !id,
     },
   );
 
@@ -49,11 +54,11 @@ const Conversation: React.FC<any> = ({ id, integrationId, autoText }) => {
     },
   );
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (data?.widgetsConversationDetail?.messages?.length > 0) {
-      setTimeout(() => scrollRef.current?.scrollToEnd({ animated: true }), 600);
+      scrollRef.current?.scrollToEnd({ animated: true });
     }
-  }, [data]);
+  }, [data?.widgetsConversationDetail?.messages?.length]);
 
   useEffect(() => {
     if (autoText) {
@@ -80,34 +85,28 @@ const Conversation: React.FC<any> = ({ id, integrationId, autoText }) => {
       variables: { _id: id ? id : conversationId },
       updateQuery: (prev, { subscriptionData }) => {
         const message = subscriptionData?.data?.conversationMessageInserted;
-        const widgetsConversationDetail = prev?.widgetsConversationDetail || {};
-        const messages = widgetsConversationDetail?.messages || [];
+        if (!message) return prev;
 
-        // check whether or not already inserted
-        const prevEntry = messages?.find((m: any) => m?._id === message?._id);
+        const messages = prev.widgetsConversationDetail?.messages || [];
 
-        if (prevEntry) {
+        // Avoid duplicate lookup every time
+        if (
+          messages.some((m: any) => m._id === message._id) ||
+          message.internal
+        ) {
           return prev;
         }
 
-        // do not show internal or bot messages
-        if (message.internal) {
-          return prev;
-        }
-
-        // add new message to messages list
-        const next = {
+        return {
           ...prev,
           widgetsConversationDetail: {
-            ...(prev?.widgetsConversationDetail ?? {}),
+            ...prev.widgetsConversationDetail,
             messages: [
-              ...(prev?.widgetsConversationDetail?.messages ?? []),
-              message,
+              ...messages,
+              { ...message, isOnline: message.isOnline ?? false },
             ],
           },
         };
-
-        return next;
       },
     });
 
@@ -116,20 +115,31 @@ const Conversation: React.FC<any> = ({ id, integrationId, autoText }) => {
     };
   }, [conversationId, id, subscribeToMore]);
 
-  const onSend = (hasText?: string) => {
-    if (hasText || text?.length > 0 || files?.length > 0) {
-      insertMessage({
-        variables: {
-          integrationId,
-          customerId: loggedUser?.erxesCustomerId,
-          conversationId: id || conversationId,
-          contentType: 'text',
-          message: hasText ? hasText : text,
-          attachments: [...files],
-        },
-      });
-    }
-  };
+  const onSend = useCallback(
+    (hasText?: string) => {
+      if (hasText || text?.length > 0 || files?.length > 0) {
+        insertMessage({
+          variables: {
+            integrationId,
+            customerId: loggedUser?.erxesCustomerId,
+            conversationId: id || conversationId,
+            contentType: 'text',
+            message: hasText ? hasText : text,
+            attachments: [...files],
+          },
+        });
+      }
+    },
+    [
+      text,
+      files,
+      conversationId,
+      id,
+      integrationId,
+      loggedUser?.erxesCustomerId,
+      insertMessage,
+    ],
+  );
 
   if (loading || messageLoading) {
     return <Loader />;
@@ -166,7 +176,7 @@ const Conversation: React.FC<any> = ({ id, integrationId, autoText }) => {
   );
 };
 
-export default Conversation;
+export default React.memo(Conversation);
 
 const styles = StyleSheet.create({
   container: { flex: 1 },

@@ -144,22 +144,20 @@ const conversationMessageInserted = gql`
           location
           position
           shortName
-          __typename
         }
-        __typename
       }
       content
       createdAt
       internal
       fromBot
       contentType
+
       engageData {
         content
         kind
         sentAs
         messageId
         brandId
-        __typename
       }
       botData
       messengerAppData
@@ -168,9 +166,7 @@ const conversationMessageInserted = gql`
         name
         size
         type
-        __typename
       }
-      __typename
     }
   }
 `;

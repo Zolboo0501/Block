@@ -18,6 +18,8 @@ const AuthProvider: React.FC<any> = ({ children, value }) => {
     fetchPolicy: 'network-only',
   });
 
+  console.log(data, 'data');
+
   useEffect(() => {
     if (data && data?.clientPortalCurrentUser?._id) {
       const userData = data?.clientPortalCurrentUser;
