@@ -63,8 +63,9 @@ export const messageDate = (item: any) => {
     return messageTime.format('HH:mm'); // same day but older than 12h
   }
 
-  if (diffDays === 1) return 'Yesterday';
-  if (diffDays === 2) return 'The day before yesterday';
+  if (diffDays === 1) return `Yesterday, ${messageTime.format('HH:mm')}`;
+  if (diffDays === 2)
+    return `Day before yesterday, ${messageTime.format('HH:mm')}`;
 
   return messageTime.format('YYYY.MM.DD');
 };

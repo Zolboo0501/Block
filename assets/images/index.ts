@@ -10,6 +10,7 @@ const images = {
   cancel : require('./cancel.png'),
   success : require('./check.png'),
   biometric : require('./bio.png'),
+  vaultLogoBlack : require('./valutBlack.png')
 };
 
 export default images;

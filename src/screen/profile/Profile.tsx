@@ -10,7 +10,7 @@ import userQL from 'graph/userQL';
 import useAuth from 'hooks/useAuth';
 import React, { useLayoutEffect } from 'react';
 import { SafeAreaView, StyleSheet, TouchableOpacity, View } from 'react-native';
-import QRCode from 'react-native-qrcode-svg';
+import QRCodeStyled from 'react-native-qrcode-styled';
 
 const MEMBERSHIP_ID = 'sB4QZwYtvF3vvzErPSc7y';
 const BY_ID = '2KFu_MYJtA4recxaJbpiV';
@@ -88,11 +88,22 @@ const Profile: React.FC<any> = ({ navigation }) => {
             </View>
           </View>
           <View style={styles.center}>
-            <QRCode
-              size={210}
-              value={customerData?.erxesCustomerId}
-              logoBackgroundColor="transparent"
+            <QRCodeStyled
+              data={customerData?._id}
+              style={styles.svg}
+              padding={20}
+              size={200}
+              color={'#fff'}
+              innerEyesOptions={{
+                color: '#fff',
+              }}
+              outerEyesOptions={{
+                borderRadius: '30%',
+                color: '#fff',
+              }}
             />
+            {/* <QRCode getRef={qrRef} /> */}
+
             <View style={{ width: '70%' }}>
               <TextView fontSize={14} center color="#333333">
                 Scan this QR code to confirm your membership.
@@ -142,6 +153,10 @@ const styles = StyleSheet.create({
   rowSpaceBetween: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  svg: {
+    backgroundColor: '#111111',
+    overflow: 'hidden',
   },
   column: {
     gap: 24,

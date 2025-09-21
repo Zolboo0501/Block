@@ -29,7 +29,7 @@ const Biometric: React.FC<any> = ({ navigation, route }) => {
       };
       setLatestAccount(userInfo);
       setConfirmFaceId(true);
-      navigation.navigate('SignIn');
+      return signedIn();
     }
 
     setConfirmFaceId(true);
