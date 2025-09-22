@@ -67,7 +67,7 @@ export const messageDate = (item: any) => {
   if (diffDays === 2)
     return `Day before yesterday, ${messageTime.format('HH:mm')}`;
 
-  return messageTime.format('YYYY.MM.DD');
+  return messageTime.format('YYYY.MM.DD HH:mm');
 };
 
 export const getAttachmentUrl = (value: string, width?: any) => {
