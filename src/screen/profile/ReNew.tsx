@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
-import { useLazyQuery, useMutation, useQuery } from '@apollo/client/react';
+import { useMutation, useQuery } from '@apollo/client/react';
 import {
   BY_ID,
   MEMBERSHIP_DATA,
@@ -37,7 +38,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import useInterval from 'use-interval';
 
 const ReNew: React.FC<any> = ({ navigation }) => {
   const [membership, setMembership] = useState<any>();
@@ -53,8 +53,11 @@ const ReNew: React.FC<any> = ({ navigation }) => {
     paymentQL.payments,
   );
 
-  const [getInvoiceDetail] = useLazyQuery(paymentQL.invoiceDetail, {
+  const { data, stopPolling } = useQuery<any>(paymentQL.invoiceDetail, {
+    variables: { id: invoice },
     fetchPolicy: 'network-only',
+    pollInterval: cancelInterval ? 0 : 2000, // check every 2 seconds
+    skip: !membership?.key,
   });
 
   const [customerEdit] = useMutation(userQL.customerEdit, {
@@ -87,6 +90,7 @@ const ReNew: React.FC<any> = ({ navigation }) => {
   const [invoiceCreateMutation] = useMutation(paymentQL.invoiceCreate, {
     onCompleted(data: any) {
       const invoiceId = data?.invoiceCreate?._id;
+      console.log(invoiceId, 'hh');
       setInvoice(invoiceId);
       paymentTransactionsAddMutation({
         variables: {
@@ -125,75 +129,58 @@ const ReNew: React.FC<any> = ({ navigation }) => {
     }
   }, []);
 
-  useInterval(
-    () => {
-      invoice &&
-        membership?.key &&
-        getInvoiceDetail({
-          variables: {
-            id: invoice,
-          },
-        })
-          .then(({ data }: { data: any }) => {
-            const invoice = (data || {})?.invoiceDetail || {};
+  useEffect(() => {
+    if (!data) return;
 
-            const paidAmount = invoice?.amount;
-            if (invoice?.status === 'paid' && paidAmount >= 100) {
-              const byDate = loggedUser?.customer?.customFieldsData?.find(
-                (item: any) => item?.field === BY_ID,
-              )?.value;
+    const invoiceDetail = data?.invoiceDetail || {};
+    const paidAmount = invoiceDetail?.amount;
 
-              const sinceDate = loggedUser?.customer?.customFieldsData?.find(
-                (item: any) => item?.field === SINCE_ID,
-              )?.value;
+    if (invoiceDetail?.status === 'paid' && paidAmount >= 100) {
+      // ✅ stop polling once payment confirmed
+      stopPolling();
 
-              let variable: any = {
-                _id: loggedUser?.erxesCustomerId,
-                firstName: loggedUser?.firstName,
-                lastName: loggedUser?.lastName,
-                sex: loggedUser?.customer?.sex,
-                birthDate: loggedUser?.customer?.birthDate,
-                emails: loggedUser?.customer?.emails,
-                phones: loggedUser?.customer?.phones,
-              };
+      const byDate = loggedUser?.customer?.customFieldsData?.find(
+        (item: any) => item?.field === BY_ID,
+      )?.value;
 
-              if (dayjs(byDate).isValid() && dayjs(byDate).isAfter(dayjs())) {
-                // still active → extend from current byDate
-                const newByDate = dayjs(byDate).add(
-                  membership?.duration,
-                  'year',
-                );
+      const sinceDate = loggedUser?.customer?.customFieldsData?.find(
+        (item: any) => item?.field === SINCE_ID,
+      )?.value;
 
-                variable.customFieldsData = [
-                  { field: MEMBERSHIP_ID, value: membership?.key },
-                  { field: STATUS_ID, value: 'ACTIVE' },
-                  { field: SINCE_ID, value: sinceDate }, // keep old since date
-                  { field: BY_ID, value: newByDate.format('YYYY-MM-DD') },
-                ];
-              } else {
-                // expired or invalid → start new cycle from today
-                const today = dayjs();
-                const newByDate = today.add(membership?.duration, 'year');
+      let variable: any = {
+        _id: loggedUser?.erxesCustomerId,
+        firstName: loggedUser?.firstName,
+        lastName: loggedUser?.lastName,
+        sex: loggedUser?.customer?.sex,
+        birthDate: loggedUser?.customer?.birthDate,
+        emails: loggedUser?.customer?.emails,
+        phones: loggedUser?.customer?.phones,
+      };
 
-                variable.customFieldsData = [
-                  { field: MEMBERSHIP_ID, value: membership?.key },
-                  { field: STATUS_ID, value: 'ACTIVE' },
-                  { field: SINCE_ID, value: today.format('YYYY-MM-DD') }, // reset since
-                  { field: BY_ID, value: newByDate.format('YYYY-MM-DD') },
-                ];
-              }
-              customerEdit({ variables: variable });
-            }
-          })
-          .catch(error => {
-            console.log('getInvoices error', error.message);
-            console.log(error.message);
-            console.log(JSON.stringify(error, null, 2));
-            alert.onError(error.message);
-          });
-    },
-    cancelInterval ? null : 1000,
-  );
+      if (dayjs(byDate).isValid() && dayjs(byDate).isAfter(dayjs())) {
+        const newByDate = dayjs(byDate).add(membership?.duration, 'year');
+
+        variable.customFieldsData = [
+          { field: MEMBERSHIP_ID, value: membership?.key },
+          { field: STATUS_ID, value: 'ACTIVE' },
+          { field: SINCE_ID, value: sinceDate },
+          { field: BY_ID, value: newByDate.format('YYYY-MM-DD') },
+        ];
+      } else {
+        const today = dayjs();
+        const newByDate = today.add(membership?.duration, 'year');
+
+        variable.customFieldsData = [
+          { field: MEMBERSHIP_ID, value: membership?.key },
+          { field: STATUS_ID, value: 'ACTIVE' },
+          { field: SINCE_ID, value: today.format('YYYY-MM-DD') },
+          { field: BY_ID, value: newByDate.format('YYYY-MM-DD') },
+        ];
+      }
+
+      customerEdit({ variables: variable });
+    }
+  }, [data]);
 
   if (queryLoading || loading) {
     return <Loader />;
@@ -291,8 +278,11 @@ const ReNew: React.FC<any> = ({ navigation }) => {
                   Duration:
                 </TextView>
                 <TextView fontSize={14}>
-                  {membership?.duration === 999 ? '∞' : membership?.duration}{' '}
-                  years
+                  {membership?.duration === 999
+                    ? '∞ years'
+                    : membership?.duration
+                    ? `${membership.duration} years`
+                    : ''}
                 </TextView>
               </View>
               <TextView fontWeight={'500'} fontFamily="14">

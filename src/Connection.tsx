@@ -2,10 +2,10 @@ import { useMutation, useQuery } from '@apollo/client/react';
 import Loader from 'components/Loader';
 import messengerQL from 'graph/messengerQL';
 import useAuth from 'hooks/useAuth';
-import React, { useEffect } from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 import Conversation from './screen/home/Conversation';
 
-const Connection: React.FC<any> = ({ route }) => {
+const Connection: React.FC<any> = ({ route, navigation }) => {
   const autoText = route?.params?.text;
 
   const { loggedUser } = useAuth();
@@ -31,6 +31,12 @@ const Connection: React.FC<any> = ({ route }) => {
       skip: !connectionData,
     },
   );
+
+  useLayoutEffect(() => {
+    if (loggedUser?.customer?.customFieldsData?.length === 0) {
+      navigation.navigate('ReNew');
+    }
+  }, [loggedUser?.customer?.customFieldsData, navigation]);
 
   useEffect(() => {
     if (data?.integrations?.length > 0) {

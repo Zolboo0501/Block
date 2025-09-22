@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
-import { useLazyQuery, useMutation, useQuery } from '@apollo/client/react';
+import { useMutation, useQuery } from '@apollo/client/react';
 import { BY_ID, MEMBERSHIP_ID, SINCE_ID, STATUS_ID } from '@constants';
 import FastImage from '@d11/react-native-fast-image';
 import BottomSheet from '@gorhom/bottom-sheet';
@@ -30,7 +29,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import useInterval from 'use-interval';
 
 const Payment: React.FC<any> = ({ navigation, route }) => {
   const type = route.params.type ?? '';
@@ -98,83 +96,75 @@ const Payment: React.FC<any> = ({ navigation, route }) => {
     },
   });
 
-  const [getInvoiceDetail] = useLazyQuery(paymentQL.invoiceDetail, {
+  const { data, stopPolling } = useQuery<any>(paymentQL.invoiceDetail, {
+    variables: { id: invoice },
     fetchPolicy: 'network-only',
+    pollInterval: cancelInterval ? 0 : 2000, // check every 1s
+    skip: !invoice, // only run if invoice exists
   });
 
   useLayoutEffect(() => {
     setNavigation({ navigation, title: 'Vault Membership Form' });
   }, [navigation]);
 
-  useInterval(
-    () => {
-      invoice &&
-        getInvoiceDetail({
+  useEffect(() => {
+    if (!data) return;
+
+    const invoiceDetail = data?.invoiceDetail || {};
+    const paidAmount = invoiceDetail?.amount;
+
+    console.log(data, 'ddd');
+    if (invoiceDetail?.status === 'paid' && paidAmount >= 100) {
+      if (type && type === 'register') {
+        const today = dayjs();
+        const byDate = today.add(membership.duration, 'year');
+
+        customerEdit({
           variables: {
-            id: invoice,
+            _id: erxesCustomerId,
+            firstName: forename,
+            lastName: surname,
+            sex: title.value,
+            birthDate: dateOfBirth,
+            emails: [
+              {
+                type: 'primary',
+                email,
+              },
+            ],
+            phones: [
+              {
+                phone,
+                type: 'primary',
+              },
+            ],
+            customFieldsData: [
+              {
+                field: MEMBERSHIP_ID,
+                value: membership?.key,
+              },
+              {
+                field: STATUS_ID,
+                value: 'ACTIVE',
+              },
+              {
+                field: SINCE_ID,
+                value: today.format('YYYY-MM-DD'),
+              },
+              {
+                field: BY_ID,
+                value: byDate.format('YYYY-MM-DD'),
+              },
+            ],
           },
-        })
-          .then(({ data }: { data: any }) => {
-            const invoice = (data || {})?.invoiceDetail || {};
+        });
+      }
 
-            const paidAmount = invoice?.amount;
-            if (invoice?.status === 'paid' && paidAmount >= 100) {
-              if (type && type === 'register') {
-                const today = dayjs();
-                const byDate = today.add(membership.duration, 'year');
-
-                customerEdit({
-                  variables: {
-                    _id: erxesCustomerId,
-                    firstName: forename,
-                    lastName: surname,
-                    sex: title.value,
-                    birthDate: dateOfBirth,
-                    emails: [
-                      {
-                        type: 'primary',
-                        email,
-                      },
-                    ],
-                    phones: [
-                      {
-                        phone,
-                        type: 'primary',
-                      },
-                    ],
-                    customFieldsData: [
-                      {
-                        field: MEMBERSHIP_ID,
-                        value: membership?.key,
-                      },
-                      {
-                        field: STATUS_ID,
-                        value: 'ACTIVE',
-                      },
-                      {
-                        field: SINCE_ID,
-                        value: today,
-                      },
-                      {
-                        field: BY_ID,
-                        value: byDate,
-                      },
-                    ],
-                  },
-                });
-              }
-              setCancelInterval(true);
-            }
-          })
-          .catch(error => {
-            console.log('getInvoices error', error.message);
-            console.log(error.message);
-            console.log(JSON.stringify(error, null, 2));
-            alert.onError(error.message + 'sdadsa');
-          });
-    },
-    cancelInterval ? null : 1000,
-  );
+      // ✅ stop polling once invoice is paid
+      stopPolling();
+      setCancelInterval(true);
+    }
+  }, [data]);
 
   useEffect(() => {
     if (paymentsData?.payments?.length > 0) {
