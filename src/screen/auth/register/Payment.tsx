@@ -2,6 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 import { useLazyQuery, useMutation, useQuery } from '@apollo/client/react';
+import { BY_ID, MEMBERSHIP_ID, SINCE_ID, STATUS_ID } from '@constants';
 import FastImage from '@d11/react-native-fast-image';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { setNavigation } from '@utils';
@@ -30,11 +31,6 @@ import {
   View,
 } from 'react-native';
 import useInterval from 'use-interval';
-
-const MEMBERSHIP_ID = 'sB4QZwYtvF3vvzErPSc7y';
-const STATUS_ID = 'ZneG0ueA_cyXkTpGMoxSx';
-const SINCE_ID = 'qYPIouGEzKDbdmuGq0Lxo';
-const BY_ID = '2KFu_MYJtA4recxaJbpiV';
 
 const Payment: React.FC<any> = ({ navigation, route }) => {
   const type = route.params.type ?? '';

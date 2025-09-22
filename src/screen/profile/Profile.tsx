@@ -1,5 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import { useQuery } from '@apollo/client/react';
+import { BY_ID, MEMBERSHIP_ID } from '@constants';
 import { Edit } from '@icons';
 import { setNavigation } from '@utils';
 import Button from 'components/Button';
@@ -11,9 +12,6 @@ import useAuth from 'hooks/useAuth';
 import React, { useLayoutEffect } from 'react';
 import { SafeAreaView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import QRCodeStyled from 'react-native-qrcode-styled';
-
-const MEMBERSHIP_ID = 'sB4QZwYtvF3vvzErPSc7y';
-const BY_ID = '2KFu_MYJtA4recxaJbpiV';
 
 const Profile: React.FC<any> = ({ navigation }) => {
   const { loggedUser } = useAuth();
