@@ -12,7 +12,7 @@ const InstantMessage: React.FC<any> = ({ data, onSend }) => {
         </TextView>
       </View>
       <View style={styles.column}>
-        {data.map((item: any, index: number) => (
+        {data?.map((item: any, index: number) => (
           <TouchableOpacity
             key={index}
             style={styles.select}
