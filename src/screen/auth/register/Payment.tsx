@@ -2,10 +2,8 @@
 /* eslint-disable react-native/no-inline-styles */
 import { useMutation, useQuery } from '@apollo/client/react';
 import { BY_ID, MEMBERSHIP_ID, SINCE_ID, STATUS_ID } from '@constants';
-import FastImage from '@d11/react-native-fast-image';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { setNavigation } from '@utils';
-import GroupCheckbox from 'components/GroupCheckbox';
 import Loader from 'components/Loader';
 import PaymentItem from 'components/PaymentItem';
 import PaymentMethod from 'components/PaymentMethod';
@@ -22,18 +20,11 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 
 const Payment: React.FC<any> = ({ navigation, route }) => {
   const type = route.params.type ?? '';
   const {
-    membership,
     erxesCustomerId,
     phone,
     email,
@@ -104,7 +95,7 @@ const Payment: React.FC<any> = ({ navigation, route }) => {
   });
 
   useLayoutEffect(() => {
-    setNavigation({ navigation, title: 'Vault Membership Form' });
+    setNavigation({ navigation, title: 'Membership Form' });
   }, [navigation]);
 
   useEffect(() => {
@@ -113,11 +104,10 @@ const Payment: React.FC<any> = ({ navigation, route }) => {
     const invoiceDetail = data?.invoiceDetail || {};
     const paidAmount = invoiceDetail?.amount;
 
-    console.log(data, 'ddd');
     if (invoiceDetail?.status === 'paid' && paidAmount >= 100) {
       if (type && type === 'register') {
         const today = dayjs();
-        const byDate = today.add(membership.duration, 'year');
+        const byDate = today.add(1, 'year');
 
         customerEdit({
           variables: {
@@ -141,7 +131,7 @@ const Payment: React.FC<any> = ({ navigation, route }) => {
             customFieldsData: [
               {
                 field: MEMBERSHIP_ID,
-                value: membership?.key,
+                value: 'ACTIVE',
               },
               {
                 field: STATUS_ID,
@@ -201,69 +191,13 @@ const Payment: React.FC<any> = ({ navigation, route }) => {
               <TextView fontSize={40} fontFamily="NewYork">
                 PAYMENT
               </TextView>
-              <View style={styles.member}>
-                <TextView
-                  fontFamily="Optician Sans"
-                  fontSize={14}
-                  color="#DEDEDE"
-                >
-                  Your Selected Membership Plan
-                </TextView>
-                <View style={styles.rowSpaceBetween}>
-                  <View style={{ flex: 1 }}>
-                    <GroupCheckbox
-                      item={membership}
-                      value={membership}
-                      label={{
-                        label: membership.name,
-                        subLabel: `${membership.price}/${
-                          membership.duration === 999
-                            ? '∞'
-                            : membership.duration
-                        } years`,
-                      }}
-                    />
-                  </View>
-                  <FastImage
-                    source={membership.image}
-                    style={styles.image}
-                    resizeMode="cover"
-                  />
-                </View>
-                <TextView
-                  fontSize={14}
-                  fontWeight={'500'}
-                  color="#444444"
-                  style={{ paddingHorizontal: 15 }}
-                >
-                  For more information on Membership types please{' '}
-                  <TouchableOpacity
-                    onPress={() => navigation.navigate('MembershipDetail')}
-                  >
-                    <TextView
-                      fontSize={14}
-                      fontWeight={'500'}
-                      color="#fff"
-                      style={{ textDecorationLine: 'underline' }}
-                    >
-                      click here.
-                    </TextView>
-                  </TouchableOpacity>
-                </TextView>
-              </View>
             </View>
             <View style={styles.line} />
             <View style={styles.memberDetail}>
-              <Info label="Membership type:" value={membership.name} />
-              <Info label="Price:" value={membership.price} />
-              <Info
-                label="Duration:"
-                value={membership.duration === 999 ? '∞' : membership.duration}
-              />
               <TextView fontSize={14} fontWeight={'500'} justify>
-                Elevate your VAULT experience with the exclusive VAULT Platinum
-                VISA Card by TransBank, designed for the elite member who values
-                privacy, luxury, and unparalleled access.
+                Elevate your Block experience with the exclusive Block
+                Membership VISA Card by TransBank, designed for the elite member
+                who values privacy, luxury, and unparalleled access.
               </TextView>
             </View>
             <View style={styles.method}>
@@ -282,17 +216,6 @@ const Payment: React.FC<any> = ({ navigation, route }) => {
         <PaymentMethod ref={bottomSheetRef} onChange={handleSheetChanges} />
       </SafeAreaView>
     </>
-  );
-};
-
-const Info: React.FC<any> = ({ label, value }) => {
-  return (
-    <View style={styles.rowSpace}>
-      <TextView fontFamily="Optician Sans" fontSize={14}>
-        {label}
-      </TextView>
-      <TextView fontSize={14}>{value}</TextView>
-    </View>
   );
 };
 

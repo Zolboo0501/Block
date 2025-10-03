@@ -6,7 +6,6 @@ interface IRegister {
   email: string;
   otp: any;
   password: string;
-  membership: any;
   title: any;
   forename: string;
   surname: string;
@@ -22,7 +21,6 @@ interface IRegisterState {
   email: string;
   otp: any;
   password: string;
-  membership: any;
   title: any;
   forename: string;
   surname: string;
@@ -37,7 +35,6 @@ interface IRegisterState {
       | 'email'
       | 'password'
       | 'otp'
-      | 'membership'
       | 'title'
       | 'forename'
       | 'surname'
@@ -86,7 +83,6 @@ const RegisterProvider: React.FC<any> = ({ children, value }) => {
     email: '',
     otp: [''],
     password: '',
-    membership: {},
     title: {},
     forename: '',
     surname: '',
@@ -103,7 +99,6 @@ const RegisterProvider: React.FC<any> = ({ children, value }) => {
       | 'email'
       | 'password'
       | 'otp'
-      | 'membership'
       | 'title'
       | 'forename'
       | 'surname'
@@ -123,7 +118,6 @@ const RegisterProvider: React.FC<any> = ({ children, value }) => {
     email: state.email,
     password: state.password,
     otp: state.otp,
-    membership: state.membership,
     title: state.title,
     forename: state.forename,
     surname: state.surname,
@@ -140,7 +134,6 @@ const RegisterProvider: React.FC<any> = ({ children, value }) => {
         | 'email'
         | 'password'
         | 'otp'
-        | 'membership'
         | 'title'
         | 'forename'
         | 'surname'

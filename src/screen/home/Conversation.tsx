@@ -2,7 +2,6 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable @typescript-eslint/no-shadow */
 import { useMutation, useQuery } from '@apollo/client/react';
-import { AUTOMATION_ID } from '@constants';
 import Loader from 'components/Loader';
 import messengerQL from 'graph/messengerQL';
 import useAlert from 'hooks/useAlert';
@@ -23,7 +22,6 @@ import {
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import Header from 'view/home/Header';
-import InstantMessage from 'view/home/InstantMessage';
 import MessageInput from 'view/home/MessageInput';
 import MessageList from 'view/home/MessageList';
 
@@ -41,15 +39,6 @@ const Conversation: React.FC<any> = ({ id, integrationId, autoText }) => {
       variables: {
         _id: id ? id : conversationId,
         integrationId,
-      },
-    },
-  );
-
-  const { data: messageAuto, loading: messageLoading } = useQuery<any>(
-    messengerQL.automationDetail,
-    {
-      variables: {
-        _id: AUTOMATION_ID,
       },
     },
   );
@@ -141,11 +130,9 @@ const Conversation: React.FC<any> = ({ id, integrationId, autoText }) => {
     ],
   );
 
-  if (loading || messageLoading) {
+  if (loading) {
     return <Loader />;
   }
-
-  const suggest = messageAuto?.automationDetail?.triggers?.slice(0, 3);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -156,8 +143,6 @@ const Conversation: React.FC<any> = ({ id, integrationId, autoText }) => {
       >
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
           <View style={styles.space}>
-            <InstantMessage data={suggest} onSend={onSend} />
-
             <MessageList
               data={data?.widgetsConversationDetail?.messages || []}
             />

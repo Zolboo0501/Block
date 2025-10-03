@@ -15,6 +15,7 @@ const wsLink = new GraphQLWsLink(
   createClient({
     url: `wss://${baseUrl}/graphql`,
     retryAttempts: 1000,
+    connectionParams: async () => ({}),
     retryWait: async () => new Promise(res => setTimeout(res, 5000)),
     on: {
       connected: () => console.log('✅ WebSocket connected'),

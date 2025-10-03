@@ -1,36 +1,36 @@
 import images from '@images';
 
-export const baseUrl = 'blackwater.app.erxes.io/gateway';
+export const baseUrl = 'blockhq.app.erxes.io/gateway';
 
 export const apiUrl = `https://${baseUrl}`;
-export const ClIENTPORTAL_ID = 'lVXMu28c3FdHCvDUh2uWw';
+export const ClIENTPORTAL_ID = 'iop0LHWvOyJFcbXZUPs85';
 
 export const ERXES_APP_TOKEN =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOnsibmFtZSI6Ik1vYmlsZSB0b2tlbiIsImNyZWF0ZWRBdCI6IjIwMjUtMDktMjVUMDE6MTc6MjcuMzQ2WiIsInVzZXJHcm91cElkIjoiNEVIeWRUREFpczJMZFFuWm4iLCJleHBpcmVEYXRlIjoiMjAyNS0xMC0yOVQwMTo0NDo0Ny4wMjFaIiwibm9FeHBpcmUiOnRydWUsImFsbG93QWxsUGVybWlzc2lvbiI6dHJ1ZSwiX2lkIjoiQ2NCOGNsQllIOHdsZWZaSkdZVWNuIiwiX192IjowfSwiaWF0IjoxNzU5MTEwMjk1fQ.uX8HEzpDNEk3iui3kiArniq8MH5bUG6mu_xl0x9Vl2I';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOnsibmFtZSI6Ik1vYmlsZSB0b2tlbiIsImNyZWF0ZWRBdCI6IjIwMjUtMTAtMDNUMDU6MjY6NDAuNDc3WiIsInVzZXJHcm91cElkIjoiNEVIeWRUREFpczJMZFFuWm4iLCJleHBpcmVEYXRlIjoiMjAyNS0xMS0wMlQxMzoxNzowOC4zNDFaIiwibm9FeHBpcmUiOnRydWUsImFsbG93QWxsUGVybWlzc2lvbiI6dHJ1ZSwiX2lkIjoiN1pQcnZGWjVkMGVRZHpJNnRmMFY2IiwiX192IjowfSwiaWF0IjoxNzU5NDk3NDM1fQ.jGAzyvf_lrKzLNFFF5tB1_qMUoTlVAG-pVyMDAgvz8k';
 
-export const MEMBERSHIP_ID = 'sB4QZwYtvF3vvzErPSc7y';
-export const STATUS_ID = 'ZneG0ueA_cyXkTpGMoxSx';
-export const SINCE_ID = 'qYPIouGEzKDbdmuGq0Lxo';
-export const BY_ID = '2KFu_MYJtA4recxaJbpiV';
+export const MEMBERSHIP_ID = 'GcDHsxJy3namJO4aW4cGB';
+
+export const STATUS_ID = '_-tAvxT5bb82XBGGi582W';
+export const SINCE_ID = '0IX2hOwXtYhRdLpB5Do-g';
+export const BY_ID = '5TZ7KLGo1xVRxIhsKfH4V';
 export const AUTOMATION_ID = '68c82ced0bb31c5a338ca0b8';
-export const CODE_PUSH_ID = 'nwbcnpkjdixemdxjhjom';
 export const MEMBERSHIP_DATA = [
   {
-    image: images.member3,
+    image: images.vaultLogo,
     name: 'ANNUAL',
     price: '$1000',
     key: 'ANNUAL',
     duration: 1,
   },
   {
-    image: images.member,
+    image: images.vaultLogo,
     name: 'PLATINUM',
     price: '‍$2,000',
     key: 'PLATINUM',
     duration: 4,
   },
   {
-    image: images.member2,
+    image: images.vaultLogo,
     name: 'LIFETIME',
     price: '‍$5,000',
     key: 'LIFETIME',

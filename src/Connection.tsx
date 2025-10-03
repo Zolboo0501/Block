@@ -55,6 +55,7 @@ const Connection: React.FC<any> = ({ route, navigation }) => {
     return <Loader />;
   }
 
+  console.log(conversation?.widgetsConversations?.[0]?._id);
   const updatedProps = {
     id: conversation?.widgetsConversations?.[0]?._id || '',
     integrationId: data?.integrations?.[0]?._id,

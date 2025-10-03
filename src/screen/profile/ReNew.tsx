@@ -2,17 +2,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 import { useMutation, useQuery } from '@apollo/client/react';
-import {
-  BY_ID,
-  MEMBERSHIP_DATA,
-  MEMBERSHIP_ID,
-  SINCE_ID,
-  STATUS_ID,
-} from '@constants';
-import FastImage from '@d11/react-native-fast-image';
+import { BY_ID, MEMBERSHIP_ID, SINCE_ID, STATUS_ID } from '@constants';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { setNavigation } from '@utils';
-import GroupCheckbox from 'components/GroupCheckbox';
 import Loader from 'components/Loader';
 import PaymentItem from 'components/PaymentItem';
 import PaymentMethod from 'components/PaymentMethod';
@@ -35,12 +27,10 @@ import {
   SafeAreaView,
   ScrollView,
   StyleSheet,
-  TouchableOpacity,
   View,
 } from 'react-native';
 
 const ReNew: React.FC<any> = ({ navigation }) => {
-  const [membership, setMembership] = useState<any>();
   const bottomSheetRef = useRef<BottomSheet>(null);
   const alert = useAlert();
   const { loggedUser } = useAuth();
@@ -57,7 +47,6 @@ const ReNew: React.FC<any> = ({ navigation }) => {
     variables: { id: invoice },
     fetchPolicy: 'network-only',
     pollInterval: cancelInterval ? 0 : 2000, // check every 2 seconds
-    skip: !membership?.key,
   });
 
   const [customerEdit] = useMutation(userQL.customerEdit, {
@@ -158,20 +147,20 @@ const ReNew: React.FC<any> = ({ navigation }) => {
       };
 
       if (dayjs(byDate).isValid() && dayjs(byDate).isAfter(dayjs())) {
-        const newByDate = dayjs(byDate).add(membership?.duration, 'year');
+        const newByDate = dayjs(byDate).add(1, 'year');
 
         variable.customFieldsData = [
-          { field: MEMBERSHIP_ID, value: membership?.key },
+          { field: MEMBERSHIP_ID, value: 'ACTIVE' },
           { field: STATUS_ID, value: 'ACTIVE' },
           { field: SINCE_ID, value: sinceDate },
           { field: BY_ID, value: newByDate.format('YYYY-MM-DD') },
         ];
       } else {
         const today = dayjs();
-        const newByDate = today.add(membership?.duration, 'year');
+        const newByDate = today.add(1, 'year');
 
         variable.customFieldsData = [
-          { field: MEMBERSHIP_ID, value: membership?.key },
+          { field: MEMBERSHIP_ID, value: 'ACTIVE' },
           { field: STATUS_ID, value: 'ACTIVE' },
           { field: SINCE_ID, value: today.format('YYYY-MM-DD') },
           { field: BY_ID, value: newByDate.format('YYYY-MM-DD') },
@@ -187,9 +176,6 @@ const ReNew: React.FC<any> = ({ navigation }) => {
   }
 
   const onPayment = (item: any) => {
-    if (!membership?.key) {
-      return alert.onError('Please select a membership option');
-    }
     Linking.openURL(item?.link).catch(() =>
       Alert.alert('Сонгогдсон апп сугаагүй эсвэл алдаа гарсан байна.'),
     );
@@ -208,86 +194,12 @@ const ReNew: React.FC<any> = ({ navigation }) => {
                 MEMBERSHIP
               </TextView>
             </View>
-            <View style={styles.column}>
-              <TextView
-                fontSize={14}
-                color="#DEDEDE"
-                fontFamily="Optician Sans"
-              >
-                Your Selected Membership Plan
-              </TextView>
-              {MEMBERSHIP_DATA.map((item: any, index: number) => (
-                <TouchableOpacity
-                  style={[styles.rowSpaceBetween, { paddingHorizontal: 10 }]}
-                  key={index}
-                  onPress={() => {
-                    setMembership(item);
-                  }}
-                >
-                  <View style={{ flex: 1 }}>
-                    <GroupCheckbox
-                      item={item}
-                      value={membership}
-                      label={{
-                        label: item.name,
-                        subLabel: `${item.price}/${
-                          item.duration === 999 ? '∞' : item.duration
-                        } years`,
-                      }}
-                    />
-                  </View>
-                  <FastImage
-                    source={item.image}
-                    style={styles.image}
-                    resizeMode="cover"
-                  />
-                </TouchableOpacity>
-              ))}
-              <TextView fontSize={14} fontWeight={'500'} color="#444444">
-                For more information on Membership types please{' '}
-                <TouchableOpacity
-                  onPress={() => navigation.navigate('MembershipDetail')}
-                >
-                  <TextView
-                    fontSize={14}
-                    fontWeight={'500'}
-                    color="#fff"
-                    style={{ textDecorationLine: 'underline' }}
-                  >
-                    click here.
-                  </TextView>
-                </TouchableOpacity>
-              </TextView>
-            </View>
+
             <View style={styles.line} />
             <View style={styles.column}>
-              <View style={styles.rowSpaceBetween}>
-                <TextView fontSize={14} fontFamily="Optician Sans">
-                  Membership type:
-                </TextView>
-                <TextView fontSize={14}>{membership?.name}</TextView>
-              </View>
-              <View style={styles.rowSpaceBetween}>
-                <TextView fontSize={14} fontFamily="Optician Sans">
-                  Price:
-                </TextView>
-                <TextView fontSize={14}>{membership?.price}</TextView>
-              </View>
-              <View style={styles.rowSpaceBetween}>
-                <TextView fontSize={14} fontFamily="Optician Sans">
-                  Duration:
-                </TextView>
-                <TextView fontSize={14}>
-                  {membership?.duration === 999
-                    ? '∞ years'
-                    : membership?.duration
-                    ? `${membership.duration} years`
-                    : ''}
-                </TextView>
-              </View>
               <TextView fontWeight={'500'} fontFamily="14">
-                Our lifetime membership is designed to enhance your experience
-                at our bar and to provide you with exclusive benefits and
+                Our 1 year membership is designed to enhance your experience at
+                our bar and to provide you with exclusive benefits and
                 privileges that are not available to the general public.
               </TextView>
               <View style={styles.method}>

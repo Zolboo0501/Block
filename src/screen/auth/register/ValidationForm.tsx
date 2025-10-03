@@ -13,7 +13,6 @@ import React, { useLayoutEffect, useState } from 'react';
 import { SafeAreaView, StyleSheet, View } from 'react-native';
 import { useMMKVBoolean } from 'react-native-mmkv';
 import Form from 'view/validationForm/Form';
-import Membership from 'view/validationForm/Membership';
 
 const ValidationForm: React.FC<any> = ({ navigation }) => {
   const alert = useAlert();
@@ -29,7 +28,6 @@ const ValidationForm: React.FC<any> = ({ navigation }) => {
     email,
     password,
     communication,
-    membership,
     onChange,
   } = useRegister();
 
@@ -57,10 +55,6 @@ const ValidationForm: React.FC<any> = ({ navigation }) => {
     email: {
       isEmpty: false,
       label: 'EMAIL',
-    },
-    membership: {
-      isEmpty: false,
-      label: 'MEMBERSHIP',
     },
     dateOfBirth: {
       isEmpty: false,
@@ -98,7 +92,6 @@ const ValidationForm: React.FC<any> = ({ navigation }) => {
   const [register, { loading }] = useMutation(userQL.register, {
     onCompleted(data: any) {
       const id = data?.clientPortalRegister;
-      console.log(data, 'data regoster');
       onChange('userId', id);
       getDetail({
         variables: { _id: id },
@@ -155,7 +148,6 @@ const ValidationForm: React.FC<any> = ({ navigation }) => {
       password,
       phone,
       dateOfBirth,
-      membership,
       communication,
       toggleCheckBox,
     };
@@ -261,7 +253,7 @@ const ValidationForm: React.FC<any> = ({ navigation }) => {
               FORM
             </TextView>
           </View>
-          <Membership isError={fieldErrors.membership?.isEmpty} />
+
           <Form
             fieldErrors={fieldErrors}
             toggleCheckBox={toggleCheckBox}

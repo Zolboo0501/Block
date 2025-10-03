@@ -11,7 +11,6 @@ import userQL from 'graph/userQL';
 import useAuth from 'hooks/useAuth';
 import React, { useLayoutEffect } from 'react';
 import { SafeAreaView, StyleSheet, TouchableOpacity, View } from 'react-native';
-import QRCodeStyled from 'react-native-qrcode-styled';
 
 const Profile: React.FC<any> = ({ navigation }) => {
   const { loggedUser } = useAuth();
@@ -85,35 +84,14 @@ const Profile: React.FC<any> = ({ navigation }) => {
               </TextView>
             </View>
           </View>
-          <View style={styles.center}>
-            <QRCodeStyled
-              data={customerData?._id}
-              style={styles.svg}
-              padding={20}
-              size={200}
-              color={'#fff'}
-              innerEyesOptions={{
-                color: '#fff',
-              }}
-              outerEyesOptions={{
-                borderRadius: '30%',
-                color: '#fff',
-              }}
+          <View style={{ marginTop: 20 }}>
+            <Button
+              title="RENEW MEMBERSHIP"
+              titleWeight={'500'}
+              titleSize={14}
+              onPress={() => navigation.navigate('ReNew')}
             />
-            {/* <QRCode getRef={qrRef} /> */}
-
-            <View style={{ width: '70%' }}>
-              <TextView fontSize={14} center color="#333333">
-                Scan this QR code to confirm your membership.
-              </TextView>
-            </View>
           </View>
-          <Button
-            title="RENEW MEMBERSHIP"
-            titleWeight={'500'}
-            titleSize={14}
-            onPress={() => navigation.navigate('ReNew')}
-          />
         </View>
       </View>
     </SafeAreaView>
@@ -144,6 +122,7 @@ const styles = StyleSheet.create({
     gap: 5,
   },
   center: {
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     gap: 14,
@@ -157,6 +136,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   column: {
+    flex: 1,
     gap: 24,
   },
 });
