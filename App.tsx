@@ -6,8 +6,6 @@
  */
 /* eslint-disable react-native/no-inline-styles */
 import { ApolloProvider } from '@apollo/client/react';
-import { CODE_PUSH_ID } from '@constants';
-import { getUpdateSource, HotUpdater } from '@hot-updater/react-native';
 import useBootSplash from 'hooks/useBootSplash';
 import useFirebase from 'hooks/useFirebase';
 import AlertProvider from 'provider/AlertProvider';
@@ -20,7 +18,6 @@ import {
   SafeAreaProvider,
 } from 'react-native-safe-area-context';
 import Routes from './src/routes';
-import Splash from './src/screen/splash/Splash';
 
 const App: React.FC<any> = () => {
   useBootSplash();
@@ -40,17 +37,4 @@ const App: React.FC<any> = () => {
   );
 };
 
-export default HotUpdater.wrap({
-  source: getUpdateSource(
-    `https://${CODE_PUSH_ID}.supabase.co/functions/v1/update-server`,
-    {
-      updateStrategy: 'appVersion', // or "fingerprint"
-    },
-  ),
-  requestHeaders: {
-    // if you want to use the request headers, you can add them here
-  },
-  fallbackComponent: ({ progress, status }) => (
-    <Splash progress={progress} status={status} />
-  ),
-})(App);
+export default App;
