@@ -119,6 +119,7 @@ const EventDetail: React.FC<any> = ({ route, navigation }) => {
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
+            onPress={() => navigation.goBack()}
             style={[styles.button, { borderWidth: 1, borderColor: '#0077FF' }]}
           >
             <TextView fontWeight={'600'} color="#0077FF">

@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import { ChevronLeft, Folder, LogoutIcon, Profile } from '@icons';
+import { ChevronLeft, EventIcon, LogoutIcon, Profile } from '@icons';
 import TextView from 'components/TextView';
 import useAuth from 'hooks/useAuth';
 import React from 'react';
@@ -11,7 +11,7 @@ const DrawerContent: React.FC<any> = ({ navigation }) => {
   const { signedOut } = useAuth();
   const folders = [
     {
-      icon: <Folder />,
+      icon: <EventIcon />,
       label: 'Event',
       onPress: () => {
         navigation.navigate('Event');
@@ -45,7 +45,7 @@ const DrawerContent: React.FC<any> = ({ navigation }) => {
             </TouchableOpacity>
             <View style={styles.folders}>
               <TextView fontWeight={'500'} fontSize={18} color="#666666">
-                Folders
+                Activities
               </TextView>
               {folders.map((item: any, index: number) => (
                 <TouchableOpacity

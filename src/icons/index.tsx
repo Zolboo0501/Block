@@ -24,6 +24,7 @@ import { FileIcon } from './icons';
 import { Location } from './icons';
 import { ArrowUp } from './icons';
 import { Clock } from './icons';
+import { EventIcon } from './icons';
 
 export {
   Face,
@@ -52,4 +53,5 @@ export {
   Location,
   ArrowUp,
   Clock,
+  EventIcon,
 };
