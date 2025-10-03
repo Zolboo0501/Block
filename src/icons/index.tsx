@@ -21,6 +21,9 @@ import { PdfIcon } from './icons';
 import { WordIcon } from './icons';
 import { ExcelIcon } from './icons';
 import { FileIcon } from './icons';
+import { Location } from './icons';
+import { ArrowUp } from './icons';
+import { Clock } from './icons';
 
 export {
   Face,
@@ -46,4 +49,7 @@ export {
   WordIcon,
   ExcelIcon,
   FileIcon,
+  Location,
+  ArrowUp,
+  Clock,
 };

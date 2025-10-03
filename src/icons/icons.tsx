@@ -1,4 +1,4 @@
-import Svg, { Circle, Path } from 'react-native-svg';
+import Svg, { Circle, ClipPath, Defs, G, Path } from 'react-native-svg';
 
 export const Face = () => {
   return (
@@ -11,6 +11,31 @@ export const Face = () => {
   );
 };
 
+export const ArrowUp = () => {
+  return (
+    <Svg width={24} height={24} viewBox="0 0 24 24" fill="none">
+      <Path
+        d="M20.498 5.978L2.476 24 0 21.524 18.022 3.502H2.99V0H24v21.011h-3.502V5.978z"
+        fill="#07F"
+      />
+    </Svg>
+  );
+};
+export const Location = () => {
+  return (
+    <Svg width={16} height={17} viewBox="0 0 16 17" fill="none">
+      <G clipPath="url(#clip0_14_36)" fill="#fff">
+        <Path d="M8.917 16.5H7.083l-.189-.165c-.227-.198-5.56-4.915-5.56-9.168a6.667 6.667 0 0113.333 0c0 4.253-5.334 8.97-5.561 9.168l-.189.165zm-1.326-1.333h.818c.91-.844 4.924-4.749 4.924-8a5.333 5.333 0 10-10.666 0c0 3.257 4.014 7.158 4.924 8z" />
+        <Path d="M8 10.5a3.333 3.333 0 110-6.667A3.333 3.333 0 018 10.5zm0-5.333a2 2 0 100 4 2 2 0 000-4z" />
+      </G>
+      <Defs>
+        <ClipPath id="clip0_14_36">
+          <Path fill="#fff" transform="translate(0 .5)" d="M0 0H16V16H0z" />
+        </ClipPath>
+      </Defs>
+    </Svg>
+  );
+};
 export const LogoutIcon = () => {
   return (
     <Svg width={24} height={24} viewBox="0 0 24 24" fill="none">
@@ -261,12 +286,36 @@ export const Plus = () => {
     </Svg>
   );
 };
-export const ArrowLeft = () => {
+export const Clock = () => {
   return (
-    <Svg width={24} height={24} viewBox="0 0 24 24" fill="none">
+    <Svg width={16} height={17} viewBox="0 0 16 17" fill="none">
+      <Path
+        d="M14.667 8.5A6.67 6.67 0 018 15.167 6.669 6.669 0 011.333 8.5 6.67 6.67 0 018 1.833 6.67 6.67 0 0114.667 8.5z"
+        stroke="#fff"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M10.473 10.62L8.407 9.387c-.36-.214-.654-.727-.654-1.147V5.507"
+        stroke="#fff"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+};
+export const ArrowLeft = ({
+  size = 24,
+  color = '#DEDEDE',
+}: {
+  size?: number;
+  color?: string;
+}) => {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
       <Path
         d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75"
-        stroke="#DEDEDE"
+        stroke={color}
         strokeWidth={1.5}
         strokeLinecap="round"
         strokeLinejoin="round"

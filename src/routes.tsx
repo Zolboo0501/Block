@@ -24,6 +24,8 @@ import EditProfile from './screen/profile/EditProfile';
 import Profile from './screen/profile/Profile';
 import ReNew from './screen/profile/ReNew';
 import Onboard from './screen/splash/Onboard';
+import Event from './screen/event/Event';
+import EventDetail from './screen/event/EventDetail';
 
 const Routes = () => {
   const Drawer = createDrawerNavigator();
@@ -86,7 +88,7 @@ const Routes = () => {
     return (
       <Stack.Navigator
         initialRouteName={splashShow ? 'Onboard' : 'Login'}
-        screenOptions={{ headerStyle: { backgroundColor: '#111111' } }}
+        screenOptions={{ headerStyle: { backgroundColor: '#000' } }}
       >
         <Stack.Screen
           name="Onboard"
@@ -181,7 +183,7 @@ const Routes = () => {
     return (
       <Stack.Navigator
         screenOptions={{
-          headerStyle: { backgroundColor: '#111111' },
+          headerStyle: { backgroundColor: '#000' },
           headerTintColor: '#fff',
         }}
       >
@@ -197,7 +199,7 @@ const Routes = () => {
           options={{
             headerShown: true,
             headerShadowVisible: false,
-            headerStyle: { backgroundColor: '#111111' },
+            headerStyle: { backgroundColor: '#000' },
             headerTintColor: '#fff',
           }}
           name="Profile"
@@ -207,7 +209,7 @@ const Routes = () => {
           options={{
             headerShown: true,
             headerShadowVisible: false,
-            headerStyle: { backgroundColor: '#111111' },
+            headerStyle: { backgroundColor: '#000' },
             headerTintColor: '#fff',
           }}
           name="ReNew"
@@ -226,6 +228,22 @@ const Routes = () => {
           component={EditProfile}
           options={{
             headerShown: true,
+            headerShadowVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="Event"
+          component={Event}
+          options={{
+            headerShown: true,
+            headerShadowVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="EventDetail"
+          component={EventDetail}
+          options={{
+            headerShown: false,
             headerShadowVisible: false,
           }}
         />

@@ -5,9 +5,7 @@ import useAuth from 'hooks/useAuth';
 import React, { useEffect, useLayoutEffect } from 'react';
 import Conversation from './screen/home/Conversation';
 
-const Connection: React.FC<any> = ({ route, navigation }) => {
-  const autoText = route?.params?.text;
-
+const Connection: React.FC<any> = ({ navigation }) => {
   const { loggedUser } = useAuth();
 
   const { data, loading } = useQuery<any>(messengerQL.integrations, {
@@ -59,7 +57,6 @@ const Connection: React.FC<any> = ({ route, navigation }) => {
   const updatedProps = {
     id: conversation?.widgetsConversations?.[0]?._id || '',
     integrationId: data?.integrations?.[0]?._id,
-    autoText,
   };
 
   return <Conversation {...updatedProps} />;

@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable @typescript-eslint/no-shadow */
 import { useMutation, useQuery } from '@apollo/client/react';
@@ -25,7 +24,7 @@ import Header from 'view/home/Header';
 import MessageInput from 'view/home/MessageInput';
 import MessageList from 'view/home/MessageList';
 
-const Conversation: React.FC<any> = ({ id, integrationId, autoText }) => {
+const Conversation: React.FC<any> = ({ id, integrationId }) => {
   const [conversationId, setConversationId] = useState('');
   const scrollRef = useRef<any>(null);
   const [text, setText] = useState('');
@@ -48,12 +47,6 @@ const Conversation: React.FC<any> = ({ id, integrationId, autoText }) => {
       setTimeout(() => scrollRef.current?.scrollToEnd({ animated: true }), 800);
     }
   }, [data?.widgetsConversationDetail?.messages?.length]);
-
-  useEffect(() => {
-    if (autoText) {
-      onSend(autoText);
-    }
-  }, [autoText]);
 
   const [insertMessage] = useMutation<any>(messengerQL.insertMessage, {
     onCompleted(data: any) {
@@ -104,31 +97,28 @@ const Conversation: React.FC<any> = ({ id, integrationId, autoText }) => {
     };
   }, [conversationId, id, subscribeToMore]);
 
-  const onSend = useCallback(
-    (hasText?: string) => {
-      if (hasText || text?.length > 0 || files?.length > 0) {
-        insertMessage({
-          variables: {
-            integrationId,
-            customerId: loggedUser?.erxesCustomerId,
-            conversationId: id || conversationId,
-            contentType: 'text',
-            message: hasText ? hasText : text,
-            attachments: [...files],
-          },
-        });
-      }
-    },
-    [
-      text,
-      files,
-      conversationId,
-      id,
-      integrationId,
-      loggedUser?.erxesCustomerId,
-      insertMessage,
-    ],
-  );
+  const onSend = useCallback(() => {
+    if (text?.length > 0 || files?.length > 0) {
+      insertMessage({
+        variables: {
+          integrationId,
+          customerId: loggedUser?.erxesCustomerId,
+          conversationId: id || conversationId,
+          contentType: 'text',
+          message: text,
+          attachments: [...files],
+        },
+      });
+    }
+  }, [
+    text,
+    files,
+    conversationId,
+    id,
+    integrationId,
+    loggedUser?.erxesCustomerId,
+    insertMessage,
+  ]);
 
   if (loading) {
     return <Loader />;

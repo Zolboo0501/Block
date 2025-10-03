@@ -71,7 +71,7 @@ const ProcessingLoader: React.FC<any> = ({ isVisible, onVisible }) => {
             width: '100%',
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: '#111111',
+            backgroundColor: '#000',
           }}
         >
           <View
@@ -87,11 +87,11 @@ const ProcessingLoader: React.FC<any> = ({ isVisible, onVisible }) => {
               <View style={{ padding: 20 }}>
                 <Animated.View style={{ transform: [{ rotate: spin }] }}>
                   <FastImage
-                    source={images.vaultLogo}
+                    source={images.logo45}
                     style={{
                       height: WIDTH * 0.5,
                       width: 300,
-                      backgroundColor: '#111111',
+                      backgroundColor: '#000',
                     }}
                     resizeMode="contain"
                   />
@@ -116,6 +116,6 @@ const styles = StyleSheet.create({
   dialogContainer: {
     flex: 1,
     width: '100%',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: '#000',
   },
 });

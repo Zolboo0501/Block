@@ -1,35 +1,25 @@
 /* eslint-disable react-native/no-inline-styles */
-import { useQuery } from '@apollo/client/react';
-import { AUTOMATION_ID } from '@constants';
 import { ChevronLeft, Folder, LogoutIcon, Profile } from '@icons';
-import Loader from 'components/Loader';
 import TextView from 'components/TextView';
-import messengerQL from 'graph/messengerQL';
 import useAuth from 'hooks/useAuth';
 import React from 'react';
 import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-const folders = [
-  { icon: <Folder />, label: 'Vault Rules', onPress: () => {} },
-  { icon: <Folder />, label: 'My Services', onPress: () => {} },
-  { icon: <Folder />, label: 'Membership History', onPress: () => {} },
-  { icon: <Folder />, label: 'Custom Drinks', onPress: () => {} },
-];
-
 const DrawerContent: React.FC<any> = ({ navigation }) => {
   const insets = useSafeAreaInsets();
   const { signedOut } = useAuth();
+  const folders = [
+    {
+      icon: <Folder />,
+      label: 'Event',
+      onPress: () => {
+        navigation.navigate('Event');
+      },
+    },
+  ];
 
   const { loggedUser } = useAuth();
-
-  const { data, loading } = useQuery<any>(messengerQL.automationDetail, {
-    variables: {
-      _id: AUTOMATION_ID,
-    },
-  });
-
-  const suggest = data?.automationDetail?.triggers;
 
   return (
     <View
@@ -58,40 +48,15 @@ const DrawerContent: React.FC<any> = ({ navigation }) => {
                 Folders
               </TextView>
               {folders.map((item: any, index: number) => (
-                <TouchableOpacity style={styles.row} key={index}>
+                <TouchableOpacity
+                  style={styles.row}
+                  key={index}
+                  onPress={item?.onPress}
+                >
                   {item.icon}
                   <TextView fontWeight={'500'}>{item.label}</TextView>
                 </TouchableOpacity>
               ))}
-            </View>
-            <View style={styles.chats}>
-              <TextView fontWeight={'500'} fontSize={18} color="#666666">
-                Chats
-              </TextView>
-              {loading ? (
-                <Loader />
-              ) : (
-                <View style={styles.gap}>
-                  {suggest?.map((item: any, index: number) => (
-                    <TouchableOpacity
-                      key={index}
-                      onPress={() =>
-                        navigation.navigate('Connection', {
-                          text: item?.config?.conditions?.[0]?.conditions?.[0]
-                            ?.keywords?.[0]?.text,
-                        })
-                      }
-                    >
-                      <TextView key={index} fontSize={18}>
-                        {
-                          item?.config?.conditions?.[0]?.conditions?.[0]
-                            ?.keywords?.[0]?.text
-                        }
-                      </TextView>
-                    </TouchableOpacity>
-                  ))}
-                </View>
-              )}
             </View>
           </View>
         </View>

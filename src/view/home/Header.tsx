@@ -16,7 +16,7 @@ const Header: React.FC<any> = () => {
         <Menu />
       </TouchableOpacity>
       <TextView fontWeight={'500'} color="#DEDEDE" center>
-        Vault Member
+        Block Member
       </TextView>
     </View>
   );
