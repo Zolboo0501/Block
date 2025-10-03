@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyBDr1jy8WY6_qLrof8gYP72dSoVQAaP-_w</string>
+	<string>AIzaSyADsVaU_Kc75mGjaecl5r5k98GEE-lnxh0</string>
 	<key>GCM_SENDER_ID</key>
-	<string>574759152580</string>
+	<string>905638833591</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.vault.mn</string>
+	<string>com.block.developers</string>
 	<key>PROJECT_ID</key>
-	<string>vault-60b27</string>
+	<string>block-club-a056a</string>
 	<key>STORAGE_BUCKET</key>
-	<string>vault-60b27.firebasestorage.app</string>
+	<string>block-club-a056a.firebasestorage.app</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:574759152580:ios:f991267adc2fae90a25291</string>
+	<string>1:905638833591:ios:726112f6964f43720fcc32</string>
 </dict>
 </plist>
