@@ -33,7 +33,7 @@ const Routes = () => {
     ...DefaultTheme,
     colors: {
       ...DefaultTheme.colors,
-      background: '#111111',
+      background: '#000',
     },
   };
 
