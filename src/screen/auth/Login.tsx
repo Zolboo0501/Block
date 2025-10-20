@@ -146,12 +146,12 @@ const styles = StyleSheet.create({
   container: { flex: 1 },
   space: { flex: 1, paddingHorizontal: 15 },
   image: {
-    marginTop: '30%',
-    width: 240,
-    height: 240,
+    width: '90%',
+    height: '20%',
+    minHeight: 150,
   },
   logo: {
-    flex: 2,
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },

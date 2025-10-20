@@ -25,6 +25,7 @@ import { Location } from './icons';
 import { ArrowUp } from './icons';
 import { Clock } from './icons';
 import { EventIcon } from './icons';
+import { DeleteAccount } from './icons';
 
 export {
   Face,
@@ -54,4 +55,5 @@ export {
   ArrowUp,
   Clock,
   EventIcon,
+  DeleteAccount,
 };

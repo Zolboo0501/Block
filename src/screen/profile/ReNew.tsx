@@ -96,7 +96,7 @@ const ReNew: React.FC<any> = ({ navigation }) => {
   });
 
   useLayoutEffect(() => {
-    setNavigation({ navigation, title: 'Vault Membership Form' });
+    setNavigation({ navigation, title: 'Membership Form' });
   }, [navigation]);
 
   useEffect(() => {

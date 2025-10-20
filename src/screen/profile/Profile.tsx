@@ -2,7 +2,7 @@
 import { useQuery } from '@apollo/client/react';
 import { BY_ID, MEMBERSHIP_ID } from '@constants';
 import { Edit } from '@icons';
-import { setNavigation } from '@utils';
+import { setNavigation, WIDTH } from '@utils';
 import Button from 'components/Button';
 import Loader from 'components/Loader';
 import TextView from 'components/TextView';

@@ -27,7 +27,7 @@ const Message: React.FC<any> = ({ item }) => {
           <Attachments item={item} />
         )}
 
-        {renderText()}
+        {item?.content && renderText()}
       </View>
     </View>
   );

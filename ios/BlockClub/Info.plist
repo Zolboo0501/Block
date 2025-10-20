@@ -34,7 +34,7 @@
 		<true/>
 	</dict>
 	<key>NSFaceIDUsageDescription</key>
-	<string>Vault App is functionality need to access.</string>
+	<string>Block Club App is functionality need to access.</string>
 	<key>RCTNewArchEnabled</key>
 	<true/>
 	<key>UIAppFonts</key>

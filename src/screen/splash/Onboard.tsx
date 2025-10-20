@@ -189,7 +189,7 @@ const Screen: React.FC<any> = () => {
         fontFamily="General Sans"
         center
       >
-        Vault Memberships
+        Block Club Memberships
       </TextView>
       <View style={styles.typeContainer}>
         {data.map((item: any, index: number) => (
@@ -267,11 +267,11 @@ const Screen2: React.FC<any> = () => {
   const data = [
     {
       definition: 'Visa Card:',
-      description: `VAULT VISA card by TransBank, designed for the elite member who values privacy, luxury, and unparalleled access.`,
+      description: `Block Club VISA card by TransBank, designed for the elite member who values privacy, luxury, and unparalleled access.`,
     },
     {
       definition: 'Cashback:',
-      description: `Enjoy a 10% cashback at VAULT Shangri-La and our select partner establishments, letting you earn while indulging in the best of what we offer.`,
+      description: `Enjoy a 10% cashback at Block Club Shangri-La and our select partner establishments, letting you earn while indulging in the best of what we offer.`,
     },
     {
       definition: 'Complimentary entry:',
@@ -291,7 +291,7 @@ const Screen2: React.FC<any> = () => {
     },
     {
       definition: 'Personalized service:',
-      description: `Our staff will provide you with personalized service, ensuring that your experience at VAULT is always exceptional.`,
+      description: `Our staff will provide you with personalized service, ensuring that your experience at Block Club is always exceptional.`,
     },
   ];
 

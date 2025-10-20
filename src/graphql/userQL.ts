@@ -363,6 +363,18 @@ const clientPortalLogout = gql`
   }
 `;
 
+const removeUser = gql`
+  mutation clientPortalUsersRemove($clientPortalUserIds: [String!]) {
+    clientPortalUsersRemove(clientPortalUserIds: $clientPortalUserIds)
+  }
+`;
+
+const removeCustomer = gql`
+  mutation customersRemove($customerIds: [String]) {
+    customersRemove(customerIds: $customerIds)
+  }
+`;
+
 export default {
   register,
   clientPortalLoginWithPhone,
@@ -376,4 +388,6 @@ export default {
   clienPortalResetPassword,
   customerDetail,
   clientPortalLogout,
+  removeUser,
+  removeCustomer
 };

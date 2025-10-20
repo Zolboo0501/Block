@@ -9,11 +9,11 @@ import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 const data = [
   {
     definition: 'Visa Card:',
-    description: `VAULT VISA card by TransBank, designed for the elite member who values privacy, luxury, and unparalleled access.`,
+    description: `Block Club VISA card by TransBank, designed for the elite member who values privacy, luxury, and unparalleled access.`,
   },
   {
     definition: 'Cashback:',
-    description: `Enjoy a 10% cashback at VAULT Shangri-La and our select partner establishments, letting you earn while indulging in the best of what we offer.`,
+    description: `Enjoy a 10% cashback at Block Club Shangri-La and our select partner establishments, letting you earn while indulging in the best of what we offer.`,
   },
   {
     definition: 'Complimentary entry:',
@@ -33,7 +33,7 @@ const data = [
   },
   {
     definition: 'Personalized service:',
-    description: `Our staff will provide you with personalized service, ensuring that your experience at VAULT is always exceptional.`,
+    description: `Our staff will provide you with personalized service, ensuring that your experience at Block Club is always exceptional.`,
   },
 ];
 
@@ -62,9 +62,9 @@ const MembershipDetail: React.FC<any> = ({ navigation }) => {
             />
           </View>
           <TextView fontWeight={'500'} fontSize={14} color="#DEDEDE">
-            Elevate your VAULT experience with the exclusive VAULT Platinum VISA
-            Card by TransBank, designed for the elite member who values privacy,
-            luxury, and unparalleled access.
+            Elevate your Block Club experience with the exclusive Block Club
+            Platinum VISA Card by TransBank, designed for the elite member who
+            values privacy, luxury, and unparalleled access.
           </TextView>
           <View style={{ gap: 5 }}>
             <TextView
@@ -76,11 +76,11 @@ const MembershipDetail: React.FC<any> = ({ navigation }) => {
               Price :{' '}
             </TextView>
             <TextView fontSize={14} color="#DEDEDE" fontWeight={'500'}>
-              The VAULT Platinum VISA Card is available for $2,000, granting 4
-              years of full membership benefits and exclusive privileges. This
-              one-time fee unlocks access to luxury perks, priority services,
-              and unique experiences designed to elevate every visit to VAULT
-              and our partner establishments.
+              The Block Club Platinum VISA Card is available for $2,000,
+              granting 4 years of full membership benefits and exclusive
+              privileges. This one-time fee unlocks access to luxury perks,
+              priority services, and unique experiences designed to elevate
+              every visit to Block Club and our partner establishments.
             </TextView>
           </View>
           <View style={{ gap: 5 }}>

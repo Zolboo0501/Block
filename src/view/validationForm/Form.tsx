@@ -184,7 +184,7 @@ const Form: React.FC<any> = ({
             style={{ textDecorationLine: 'underline' }}
             color="#DEDEDE"
           >
-            VAULT'S RULES?
+            BLOCK CLUB'S RULES?
           </TextView>
         </TouchableOpacity>
       </View>
@@ -192,7 +192,7 @@ const Form: React.FC<any> = ({
         <BouncyCheckbox
           size={22}
           fillColor={'#000'}
-          text="By continuing, you agree to our Vault Rules"
+          text="By continuing, you agree to our Rules"
           innerIconStyle={{
             borderRadius: 8,
             borderColor: fieldErrors?.rules?.isEmpty ? '#FF4648' : '#fff',

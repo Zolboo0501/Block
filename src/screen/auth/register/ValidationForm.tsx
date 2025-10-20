@@ -66,7 +66,7 @@ const ValidationForm: React.FC<any> = ({ navigation }) => {
     },
     rules: {
       isEmpty: false,
-      label: 'VAULT RULES',
+      label: 'BLOCK CLUB RULES',
     },
   });
 
@@ -136,7 +136,7 @@ const ValidationForm: React.FC<any> = ({ navigation }) => {
   });
 
   useLayoutEffect(() => {
-    setNavigation({ navigation, title: 'Vault Membership Form' });
+    setNavigation({ navigation, title: 'Membership Form' });
   }, [navigation]);
 
   const validationForm = () => {

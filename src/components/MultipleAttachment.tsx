@@ -25,7 +25,7 @@ const MultipleAttachment: React.FC<any> = ({ item }) => {
             styles.imagesContainer,
             {
               height: 150 + images?.length * 10,
-              marginTop: images?.length * 3,
+              marginTop: images?.length,
             },
           ]}
         >

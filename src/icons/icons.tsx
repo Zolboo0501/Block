@@ -286,6 +286,30 @@ export const Plus = () => {
     </Svg>
   );
 };
+
+export const DeleteAccount = ({
+  size = 24,
+  color = '#DEDEDE',
+}: {
+  size?: number;
+  color?: string;
+}) => {
+  return (
+    <Svg
+      width={size}
+      height={size}
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke={color}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <Path d="M13.5 10l4 4m0-4l-4 4m6.095 4.5H9.298a2 2 0 01-1.396-.568l-5.35-5.216a1 1 0 010-1.432l5.35-5.216A2 2 0 019.298 5.5h10.297c.95 0 2.223.541 2.223 1.625v9.75c0 1.084-1.273 1.625-2.223 1.625" />
+    </Svg>
+  );
+};
+
 export const Clock = () => {
   return (
     <Svg width={16} height={17} viewBox="0 0 16 17" fill="none">

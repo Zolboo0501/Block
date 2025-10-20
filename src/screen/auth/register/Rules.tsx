@@ -20,7 +20,7 @@ const Rules: React.FC<any> = ({ navigation }) => {
   const [more, setMore] = useState(false);
 
   useLayoutEffect(() => {
-    setNavigation({ navigation, title: 'Vault Rules' });
+    setNavigation({ navigation, title: 'Block Club Rules' });
   }, [navigation]);
 
   return (
@@ -58,14 +58,14 @@ const Rules: React.FC<any> = ({ navigation }) => {
                 numberOfLines={more ? undefined : 5}
                 fontSize={14}
               >
-                Respect Vault as if it were your home. No fights, brawls, or any
-                other indecent activities are allowed on the premises, this will
-                result in immediate termination of Membership. Vault is both a
-                place of relaxation and business, so please always be
-                considerate of Members indulging in either pursuit. A privacy
-                sticker will be applied on all phones during the entire stay at
-                VAULT. Members are welcome to bring three guests to Vault
-                without a reservation.
+                Respect Block Club as if it were your home. No fights, brawls,
+                or any other indecent activities are allowed on the premises,
+                this will result in immediate termination of Membership. Block
+                Club is both a place of relaxation and business, so please
+                always be considerate of Members indulging in either pursuit. A
+                privacy sticker will be applied on all phones during the entire
+                stay at Block Club. Members are welcome to bring three guests to
+                Block Club without a reservation.
               </TextView>
             </MaskedView>
             <TouchableOpacity
