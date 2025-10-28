@@ -30,13 +30,13 @@ const Profile: React.FC<any> = ({ navigation }) => {
     return <Loader />;
   }
 
-  const membership = customerData?.customFieldsData?.find(
-    (item: any) => item?.field === MEMBERSHIP_ID,
-  );
+  // const membership = customerData?.customFieldsData?.find(
+  //   (item: any) => item?.field === MEMBERSHIP_ID,
+  // );
 
-  const valid = customerData?.customFieldsData?.find(
-    (item: any) => item?.field === BY_ID,
-  );
+  // const valid = customerData?.customFieldsData?.find(
+  //   (item: any) => item?.field === BY_ID,
+  // );
 
   return (
     <SafeAreaView style={styles.container}>
@@ -62,7 +62,7 @@ const Profile: React.FC<any> = ({ navigation }) => {
               </TouchableOpacity>
             </View>
           </View>
-          <View style={styles.gap}>
+          {/* <View style={styles.gap}>
             <TextView fontFamily="Optician Sans" fontSize={14} color="#444444">
               Active membership type
             </TextView>
@@ -72,8 +72,8 @@ const Profile: React.FC<any> = ({ navigation }) => {
                 {membership?.value} Membership
               </TextView>
             </View>
-          </View>
-          <View style={styles.gap}>
+          </View> */}
+          {/* <View style={styles.gap}>
             <TextView fontFamily="Optician Sans" fontSize={14} color="#444444">
               Valid until
             </TextView>
@@ -83,15 +83,15 @@ const Profile: React.FC<any> = ({ navigation }) => {
                 {dayjs(valid?.value)?.format('MMM DD, YYYY')}
               </TextView>
             </View>
-          </View>
-          <View style={{ marginTop: 20 }}>
+          </View> */}
+          {/* <View style={{ marginTop: 20 }}>
             <Button
               title="RENEW MEMBERSHIP"
               titleWeight={'500'}
               titleSize={14}
               onPress={() => navigation.navigate('ReNew')}
             />
-          </View>
+          </View> */}
         </View>
       </View>
     </SafeAreaView>

@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import { useMutation } from '@apollo/client/react';
-import { emailRegex, selectData } from '@constants';
+import { ClIENTPORTAL_ID, emailRegex, selectData } from '@constants';
 import { isEmpty, setNavigation } from '@utils';
 import Button from 'components/Button';
 import Input from 'components/Input';
@@ -14,13 +14,13 @@ import React, { useLayoutEffect, useState } from 'react';
 import { SafeAreaView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import { Dropdown } from 'react-native-element-dropdown';
-import Communications from 'view/validationForm/Communications';
 
 const EditProfile: React.FC<any> = ({ navigation }) => {
   const { loggedUser } = useAuth();
 
   const alert = useAlert();
   const [value, setValue] = useState(null);
+
   const [profile, setProfile] = useState({
     title: loggedUser?.customer?.sex === 1 ? selectData[0] : selectData[1],
     forename: loggedUser?.firstName,
@@ -28,8 +28,8 @@ const EditProfile: React.FC<any> = ({ navigation }) => {
     nationality: '',
     dateOfBirth: new Date(loggedUser?.customer?.birthDate),
     email: loggedUser?.customer?.primaryEmail,
-    communication: '',
   });
+
   const [open, setOpen] = useState(false);
 
   const [fieldErrors, setFieldErrors] = useState({
@@ -53,22 +53,55 @@ const EditProfile: React.FC<any> = ({ navigation }) => {
       isEmpty: false,
       label: 'DATE OF BIRTH',
     },
-    communication: {
-      isEmpty: false,
-      label: 'COMMUNICATIONS',
+  });
+
+  const [onEditMutation, { loading }] = useMutation(userQL.userEdit, {
+    refetchQueries: [{ query: userQL.currentUser }, 'clientPortalCurrentUser'],
+    onCompleted() {
+      customerEdit({
+        variables: {
+          _id: loggedUser?.erxesCustomerId,
+          firstName: profile.forename,
+          lastName: profile.surname,
+          sex: value,
+          birthDate: profile.dateOfBirth,
+          emails: [
+            {
+              type: 'primary',
+              email: profile.email,
+            },
+          ],
+          phones: [
+            {
+              phone: loggedUser?.customer?.primaryPhone,
+              type: 'primary',
+            },
+          ],
+          customFieldsData: loggedUser?.customer?.customFieldsData,
+        },
+      });
+    },
+    onError(error) {
+      alert.onError(error.message);
+      console.log(error.message);
     },
   });
 
-  const [customerEdit] = useMutation(userQL.customerEdit, {
-    onCompleted() {
-      alert.onSuccess('Your information has been successfully updated');
-      navigation.goBack();
+  const [customerEdit, { loading: customerLoading }] = useMutation(
+    userQL.customerEdit,
+    {
+      onCompleted(data) {
+        console.log(data, 'oncomplete data');
+        alert.onSuccess('Your information has been successfully updated');
+
+        navigation.goBack();
+      },
+      onError(error) {
+        console.log(error.message);
+        alert.onError(error.message);
+      },
     },
-    onError(error) {
-      console.log(error.message);
-      alert.onError(error.message);
-    },
-  });
+  );
 
   const validationForm = () => {
     const fieldsToCheck = {
@@ -77,7 +110,6 @@ const EditProfile: React.FC<any> = ({ navigation }) => {
       surname: profile.surname,
       email: profile.email,
       dateOfBirth: profile.dateOfBirth,
-      communication: profile.communication,
     };
 
     let isError = false;
@@ -140,10 +172,25 @@ const EditProfile: React.FC<any> = ({ navigation }) => {
       | 'surname'
       | 'nationality'
       | 'dateOfBirth'
-      | 'email'
-      | 'communication',
+      | 'email',
   ) => {
     setProfile(prev => ({ ...prev, [type]: text }));
+  };
+
+  const onSave = () => {
+    if (validationForm()) {
+      onEditMutation({
+        variables: {
+          _id: loggedUser?._id,
+          phone: loggedUser?.customer?.primaryPhone,
+          email: profile.email,
+          clientPortalId: ClIENTPORTAL_ID,
+          username: loggedUser?.customer?.primaryPhone,
+          firstName: profile.forename,
+          lastName: profile.surname,
+        },
+      });
+    }
   };
 
   const renderItem = (item: any) => {
@@ -156,44 +203,6 @@ const EditProfile: React.FC<any> = ({ navigation }) => {
     );
   };
 
-  const onSave = () => {
-    if (validationForm()) {
-      console.log('valid');
-      customerEdit({
-        variables: {
-          _id: loggedUser?.erxesCustomerId,
-          firstName: profile.forename,
-          lastName: profile.surname,
-          sex: profile.title.value,
-          birthDate: profile.dateOfBirth,
-          emails: [
-            {
-              type: 'primary',
-              email: profile.email,
-            },
-          ],
-          phones: [
-            {
-              phone: loggedUser?.customer?.primaryPhone,
-              type: 'primary',
-            },
-          ],
-          customFieldsData: loggedUser?.customer?.customFieldsData,
-        },
-      });
-      // register({
-      //   variables: {
-      //     username: phone,
-      //     clientPortalId: ClIENTPORTAL_ID,
-      //     phone,
-      //     email,
-      //     firstName: forename,
-      //     lastName: surname,
-      //     password: password,
-      //   },
-      // });
-    }
-  };
   return (
     <>
       <SafeAreaView style={styles.container}>
@@ -225,6 +234,7 @@ const EditProfile: React.FC<any> = ({ navigation }) => {
                 ]}
                 data={selectData}
                 onChange={(item: any) => {
+                  console.log(item);
                   setValue(item.value);
                   onChange('title', item);
                 }}
@@ -272,7 +282,7 @@ const EditProfile: React.FC<any> = ({ navigation }) => {
                   style={styles.input}
                   onPress={() => setOpen(true)}
                 >
-                  <TextView>
+                  <TextView fontSize={16}>
                     {dayjs(profile.dateOfBirth).format('MMM DD, YYYY')}
                   </TextView>
                 </TouchableOpacity>
@@ -290,11 +300,12 @@ const EditProfile: React.FC<any> = ({ navigation }) => {
               onChangeText={(text: string) => onChange(text, 'email')}
               keyboardType="email-address"
             />
-            <Communications
-              value={profile.communication}
-              onChange={(value: any) => onChange(value, 'communication')}
+            <Button
+              title="SAVE"
+              titleWeight={'500'}
+              onPress={() => onSave()}
+              loading={loading || customerLoading}
             />
-            <Button title="SAVE" titleWeight={'500'} onPress={() => onSave()} />
           </View>
         </KeyboardContainer>
       </SafeAreaView>

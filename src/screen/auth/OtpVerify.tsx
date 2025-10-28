@@ -13,6 +13,8 @@ import useAlert from 'hooks/useAlert';
 import useRegister from 'hooks/useRegister';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { SafeAreaView, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { BY_ID, MEMBERSHIP_ID, SINCE_ID, STATUS_ID } from '@constants';
+import dayjs from 'dayjs';
 
 const OtpVerify: React.FC<any> = ({ navigation, route }) => {
   const type = route.params?.type || '';
@@ -26,7 +28,15 @@ const OtpVerify: React.FC<any> = ({ navigation, route }) => {
   const [time, setTime] = useState(120);
   const [isStop, setIsStop] = useState(false);
 
-  const { phone } = useRegister();
+  const {
+    erxesCustomerId,
+    phone,
+    email,
+    forename,
+    surname,
+    title,
+    dateOfBirth,
+  } = useRegister();
 
   const [forget] = useMutation(userQL.clientPortalForgotPassword, {
     onCompleted() {
@@ -52,11 +62,62 @@ const OtpVerify: React.FC<any> = ({ navigation, route }) => {
     },
   });
 
+  const [customerEdit] = useMutation(userQL.customerEdit, {
+    onCompleted() {
+      navigation.navigate('Biometric', { type: 'register' });
+    },
+    onError(error) {
+      console.log(error.message);
+      alert.onError(error.message);
+    },
+  });
+
   const [verifyOTPMutation, { loading }] = useMutation(
     userQL.clientPortalVerifyOTP,
     {
       onCompleted: () => {
-        navigation.navigate('Payment', { type: 'register' });
+        const today = dayjs();
+        const byDate = today.add(1, 'year');
+        customerEdit({
+          variables: {
+            _id: erxesCustomerId,
+            firstName: forename,
+            lastName: surname,
+            sex: title.value,
+            birthDate: dateOfBirth,
+            emails: [
+              {
+                type: 'primary',
+                email,
+              },
+            ],
+            phones: [
+              {
+                phone,
+                type: 'primary',
+              },
+            ],
+            customFieldsData: [
+              {
+                field: MEMBERSHIP_ID,
+                value: 'ACTIVE',
+              },
+              {
+                field: STATUS_ID,
+                value: 'ACTIVE',
+              },
+              {
+                field: SINCE_ID,
+                value: today.format('YYYY-MM-DD'),
+              },
+              {
+                field: BY_ID,
+                value: byDate.format('YYYY-MM-DD'),
+              },
+            ],
+          },
+        });
+        // navigation.navigate('Payment', { type: 'register' });
       },
       onError: err => {
         setErrorMessage(true);

@@ -83,8 +83,8 @@ const OTPInput: React.FC<OTPInputProps> = ({
             handleChange(text, index);
           }}
           onKeyPress={event => handleBackSpace(event, index)}
-          autoComplete="one-time-code"
-          textContentType={'oneTimeCode'}
+          // autoComplete="one-time-code"
+          // textContentType={'oneTimeCode'}
         />
       ))}
     </View>

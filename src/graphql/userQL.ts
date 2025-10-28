@@ -375,6 +375,37 @@ const removeCustomer = gql`
   }
 `;
 
+const userEdit = gql`
+  mutation clientPortalUsersEdit(
+    $_id: String!
+    $email: String
+    $firstName: String
+    $lastName: String
+    $phone: String
+    $type: String
+    $companyName: String
+    $companyRegistrationNumber: String
+    $password: String
+    $avatar: String
+  ) {
+    clientPortalUsersEdit(
+      _id: $_id
+      email: $email
+      firstName: $firstName
+      lastName: $lastName
+      phone: $phone
+      type: $type
+      companyName: $companyName
+      companyRegistrationNumber: $companyRegistrationNumber
+      password: $password
+      avatar: $avatar
+    ) {
+      _id
+      avatar
+    }
+  }
+`;
+
 export default {
   register,
   clientPortalLoginWithPhone,
@@ -389,5 +420,6 @@ export default {
   customerDetail,
   clientPortalLogout,
   removeUser,
-  removeCustomer
+  removeCustomer,
+  userEdit
 };

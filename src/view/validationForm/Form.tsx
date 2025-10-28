@@ -11,7 +11,6 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import DatePicker from 'react-native-date-picker';
 import { Dropdown } from 'react-native-element-dropdown';
-import Communications from './Communications';
 import { selectData } from '@constants';
 
 const Form: React.FC<any> = ({
@@ -33,7 +32,6 @@ const Form: React.FC<any> = ({
     email,
     onChange,
     password,
-    communication,
   } = useRegister();
 
   const navigation = useNavigation<any>();
@@ -104,7 +102,7 @@ const Form: React.FC<any> = ({
       <Input
         labelColor={'#DEDEDE'}
         labelFontFamily="Optician Sans"
-        label="NATIONALITY"
+        label="NATIONALITY (OPTIONAL)"
         value={nationality}
         onChangeText={(text: string) => onChange('nationality', text)}
       />
@@ -168,11 +166,11 @@ const Form: React.FC<any> = ({
         secureTextEntry
         isError={fieldErrors?.password?.isEmpty}
       />
-      <Communications
+      {/* <Communications
         value={communication}
         onChange={(value: any) => onChange('communication', value)}
         isError={fieldErrors?.communication?.isEmpty}
-      />
+      /> */}
       <View style={styles.rules}>
         <TextView fontFamily="Optician Sans" fontSize={14} color="#DEDEDE">
           Do you Accept

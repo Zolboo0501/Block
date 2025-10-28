@@ -27,7 +27,6 @@ const ValidationForm: React.FC<any> = ({ navigation }) => {
     phone,
     email,
     password,
-    communication,
     onChange,
   } = useRegister();
 
@@ -60,10 +59,10 @@ const ValidationForm: React.FC<any> = ({ navigation }) => {
       isEmpty: false,
       label: 'DATE OF BIRTH',
     },
-    communication: {
-      isEmpty: false,
-      label: 'COMMUNICATIONS',
-    },
+    // communication: {
+    //   isEmpty: false,
+    //   label: 'COMMUNICATIONS',
+    // },
     rules: {
       isEmpty: false,
       label: 'BLOCK CLUB RULES',
@@ -148,7 +147,6 @@ const ValidationForm: React.FC<any> = ({ navigation }) => {
       password,
       phone,
       dateOfBirth,
-      communication,
       toggleCheckBox,
     };
 
