@@ -5,6 +5,7 @@ import images from '@images';
 import { HEIGHT, WIDTH } from '@utils';
 import TextView from 'components/TextView';
 import dayjs from 'dayjs';
+import useAlert from 'hooks/useAlert';
 import React from 'react';
 import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
@@ -13,6 +14,8 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 const EventDetail: React.FC<any> = ({ route, navigation }) => {
   const data = route?.params?.data;
   const insets = useSafeAreaInsets();
+  const alert = useAlert();
+
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <View
@@ -128,6 +131,9 @@ const EventDetail: React.FC<any> = ({ route, navigation }) => {
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.button, { backgroundColor: '#0077FF' }]}
+            onPress={() =>
+              alert.onSuccess('You have successfully enrolled for the event.')
+            }
           >
             <TextView fontWeight={'600'}>Yes / Going</TextView>
           </TouchableOpacity>
